@@ -4,10 +4,10 @@ services:
     image: client:latest
     stdin_open: true
     volumes:
-      - "/client/node_modules"
-      - "./:/app"
+      - "/myapp/node_modules"
+      - "./:/myapp"
     build: 
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "8080:8080"
+      - "3000:3000"
