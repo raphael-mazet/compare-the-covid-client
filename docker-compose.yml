@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  client:
+    image: client:latest
+    stdin_open: true
+    volumes:
+      - "/client/node_modules"
+      - "./:/app"
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
