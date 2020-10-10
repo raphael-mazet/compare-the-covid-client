@@ -7,8 +7,8 @@ function Router({ isLoggedin }: RouterProps ): JSX.Element {
   return (
     <Switch>
       <PrivateRoute path="/" isAuthenticated={isLoggedin} exact component={null}/>
-      <PrivateRoute path="/home" isAuthenticated={isLoggedin}  component={null}/>
-      <PrivateRoute path="/locations" isAuthenticated={isLoggedin}  component={null} />
+      <PrivateRoute path="/home" isAuthenticated={isLoggedin} component={null}/>
+      <PrivateRoute path="/locations" isAuthenticated={isLoggedin} component={null} />
       <Route path="/404" component={() => { return null;}}/>
       <Route path="*">
         <Redirect to="/404"/>
@@ -20,5 +20,3 @@ function Router({ isLoggedin }: RouterProps ): JSX.Element {
 }
 
 export default Router;
-
-
