@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import { User, QueryData } from '../../interfaces/query.interface'
 
 const GET_USER_BY_ID = gql `
   query GetUserbyId ($id: Int!) {
@@ -25,17 +26,6 @@ const CREATE_USER = gql `
   }
 }
 `
-
-interface User {
-  id: number | null;
-  username: string;
-  email: string;
-  password: string
-}
-
-interface QueryData {
-  getUserbyId: User
-}
 
 export default function TestContainer(): JSX.Element {
   const [newUser, setNewUser] = useState<User>({
