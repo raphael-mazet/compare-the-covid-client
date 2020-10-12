@@ -1,0 +1,16 @@
+.navbar_container {
+  width: calc(100% - 40px);
+  height: 60px;
+  padding: 5px 20px;
+  background-color: #25BE8B;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.navbar_title {
+  color: #23052E;
+  font-size: 30px;
+  margin: auto;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 interface PrivateRouteProps {
-  component: any
+  component: React.FunctionComponent
   isAuthenticated?: boolean
   exact?: boolean
   path: string

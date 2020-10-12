@@ -1,22 +1,75 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import RouterProps from './index.interface';
 import PrivateRoute from './PrivateRoute';
+import Layout from '../Navigation/Layout';
+import routesDefined from './routes';
 
-function Router({ isLoggedin }: RouterProps ): JSX.Element {
+type RouteType = {
+  Component: React.FunctionComponent;
+  to: string;
+  exact: boolean;
+  isPrivate: boolean;
+  title: string;
+}
+
+
+const Router: React.FC = () => {
+  const [routes, setRoutes] = useState<RouteType[]>([]);
+
+  useEffect(() => {
+    importRoutes();
+  }, []);
+  
+  const importRoutes = async () => {
+    const importPromises = routesDefined.map(item =>
+      import(`../../containers/${item.component}`).then(module => (
+          setRoutes((routes) => [...routes, {
+            to: item.to,
+            title: item.title,
+            isPrivate: item.isPrivate,
+            exact: item.exact,
+            Component: module.default
+          }])
+      ))
+    );
+    await Promise.all(importPromises);
+  }
+  
   return (
-    <Switch>
-      <PrivateRoute path="/" isAuthenticated={isLoggedin} exact component={null}/>
-      <PrivateRoute path="/home" isAuthenticated={isLoggedin} component={null}/>
-      <PrivateRoute path="/locations" isAuthenticated={isLoggedin} component={null} />
-      <Route path="/404" component={() => { return null;}}/>
-      <Route path="*">
-        <Redirect to="/404"/>
-      </Route>
-      <Route path="/login" component={() => { return null; }}/>
-      <Route path="/signup" component={() => { return null; }}/>
-    </Switch>
+    <Route 
+      render={({ location }) => (
+        <Layout location={location}>
+          <Switch location={location}>
+            {routes &&
+              <>
+              {routes.map((route: RouteType) => {
+                if (route.isPrivate) {
+                  return (
+                    <PrivateRoute
+                      key={`${route.to}-${route.title}`}
+                      path={route.to}
+                      exact={route.exact}
+                      component={route.Component} />
+                  );
+                } else if (!route.isPrivate) {
+                  return (
+                    <Route
+                      key={`${route.to}-${route.title}`}
+                      path={route.to}
+                      component={route.Component} />
+                  );
+                }
+              })}
+              {/* <Route path="*">
+                <Redirect to='/404-not-found' />
+              </Route> */}
+            </>
+            }
+          </Switch>
+        </Layout>
+      )}
+    />
   );
 }
 
-export default Router;
+export { Router } ;
