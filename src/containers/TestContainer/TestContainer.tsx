@@ -1,31 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { User, QueryData } from '../../interfaces/query.interface'
-
-const GET_USER_BY_ID = gql `
-  query GetUserbyId ($id: Int!) {
-    getUserbyId(id: $id) {
-      id
-      username
-      email
-      password
-    }
-  }
-`
-
-const CREATE_USER = gql `
-  mutation CreateUser($username: String!, $email: String!, $password: String!) {
-	  createUser(
-      username:$username,
-      password: $password,
-      email:$email
-      ) {
-      username
-      id
-  }
-}
-`
+import { GET_USER_BY_ID } from '../../apis/graphQL/queries/getUsers'
+import { CREATE_USER } from '../../apis/graphQL/mutations/createUser'
 
 export default function TestContainer(): JSX.Element {
   const [newUser, setNewUser] = useState<User>({
@@ -37,7 +14,7 @@ export default function TestContainer(): JSX.Element {
 
   const {data: userData, loading, error: userDataError} = useQuery<QueryData>(GET_USER_BY_ID, {
     variables: {
-      id:4
+      id:3
     }
   })
   const [saveUser, { data: savedUserData, error: saveUserError }] = useMutation<{createUser: User}>(
