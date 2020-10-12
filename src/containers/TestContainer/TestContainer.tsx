@@ -2,70 +2,81 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import gql from 'graphql-tag';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
-const testQuery = gql `
-  query getRaph {
-    getUserbyId(id:4) {
+const GET_USER_BY_ID = gql `
+  query GetUserbyId ($id: Int!) {
+    getUserbyId(id: $id) {
+      id
       username
+      email
+      password
     }
   }
 `
-
-interface queryData {
-  getUserbyId: {
-    id: number;
-    username: string;
-    password: string;
-    email: string
-  }
-}
-
-interface newUser {
-  id: number;
-  username: string;
-  password: string;
-  email: string
-}
 
 const CREATE_USER = gql `
-mutation CreateUser($username: String!, $email: String!, $password: String!) {
-	createUser(username:$username, password: $password, email:$email ) {
-    username
+  mutation CreateUser($username: String!, $email: String!, $password: String!) {
+	  createUser(
+      username:$username,
+      password: $password,
+      email:$email
+      ) {
+      username
+      id
   }
 }
 `
 
+interface User {
+  id: number | null;
+  username: string;
+  email: string;
+  password: string
+}
+
+interface QueryData {
+  getUserbyId: User
+}
+
 export default function TestContainer(): JSX.Element {
-  const [newUser, setNewUser] = useState<newUser | undefined>(undefined);
-  const {data: userData, loading, error: userDataError} = useQuery<queryData>(testQuery)
-  const [saveUser, { data: savedUserData, error: saveUserError }] = useMutation<
-    {createUser: newUser},
-    {
-      username: string | undefined,
-      password: string | undefined,
-      email: string | undefined
+  const [newUser, setNewUser] = useState<User>({
+    id: null,
+    username: '',
+    email: '',
+    password: ''
+  });
+
+  const {data: userData, loading, error: userDataError} = useQuery<QueryData>(GET_USER_BY_ID, {
+    variables: {
+      id:4
     }
-  >(CREATE_USER, {
+  })
+  const [saveUser, { data: savedUserData, error: saveUserError }] = useMutation<{createUser: User}>(
+    CREATE_USER, {
     variables: {
       username: newUser?.username,
       password: newUser?.password,
       email: newUser?.email
     }
-
   })
 
-  //install ts lint? extension 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     e.persist();
-    setNewUser((newUser: any) => (
-      {...newUser, [e.target.id]: e.target.value}
+    setNewUser(prevState => (
+      {...prevState, [e.target.id]: e.target.value}
     ))
   }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     saveUser()
+    setNewUser({
+      id: null,
+      username: '',
+      email: '',
+      password: ''
+    })
   }
-  
+
   return (
   <>
     <div>
@@ -81,7 +92,7 @@ export default function TestContainer(): JSX.Element {
       <button type="submit">Submit</button>
     </form>
     <div>
-      {savedUserData && <p>You have created {userData?.getUserbyId.username}</p> }
+  {savedUserData && <p>You have created {savedUserData?.createUser.username}, id:{savedUserData?.createUser.id}</p> }
     </div>
 
   </>
