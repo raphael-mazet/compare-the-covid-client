@@ -1,21 +1,39 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
-import propsInterface from './index.interface';
+import {ILayoutProps, routeData} from './index.interface';
 import routes from '../../Router/routes';
 import './index.style.scss';
+import currentLocationData from '../../../helpers/locationChecker';
 
-const Layout: React.FC<propsInterface> = (props: propsInterface) => {
+const initialRoute = {
+  to: '',
+  title: '',
+  exact: false,
+  footerActions: [],
+  isPrivate: false,
+  component: '',
+};
+
+const Layout: React.FC<ILayoutProps> = (props: ILayoutProps) => {
+  const [currentRoute, setCurrentRoute] = useState<routeData>(initialRoute);
+
+  useEffect(() => {
+    const routeData = currentLocationData(props.location, routes)
+    setCurrentRoute(routeData)
+  },[])
+  
   return (
     <div className='container'>
       <Navbar
-        location={props.location}
-        availableRoutes={routes}
+        route={currentRoute}
       />
       <div className='layout_page_container'>
         {props.children}
       </div>
-      <Footer/> 
+      <Footer
+        route={currentRoute}
+      /> 
     </div>
   )
 }

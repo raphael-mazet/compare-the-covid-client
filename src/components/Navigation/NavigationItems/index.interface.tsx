@@ -1,9 +1,5 @@
-interface Route {
-  title: string,
-  to: string,
-  exact?: boolean
-}
+import { routeData } from '../Layout/index.interface';
 
 export default interface navItemsProps {
-  availableRoutes: Route[];
+  availableRoutes: routeData[];
 }

@@ -38,35 +38,36 @@ const Router: React.FC = () => {
   return (
     <Route 
       render={({ location }) => (
-        <Layout location={location}>
-          <Switch location={location}>
+          <Switch>
             {routes &&
-              <>
-              {routes.map((route: RouteType) => {
+              routes.map((route: RouteType) => {
                 if (route.isPrivate) {
                   return (
                     <PrivateRoute
                       key={`${route.to}-${route.title}`}
                       path={route.to}
                       exact={route.exact}
-                      component={route.Component} />
+                      render={() => (
+                        <Layout location={location}>
+                          <route.Component />
+                        </Layout>
+                      )} />
                   );
                 } else if (!route.isPrivate) {
                   return (
                     <Route
                       key={`${route.to}-${route.title}`}
                       path={route.to}
-                      component={route.Component} />
+                      render={() => (
+                        <Layout location={location}>
+                          <route.Component />
+                        </Layout>
+                      )} />
                   );
                 }
-              })}
-              {/* <Route path="*">
-                <Redirect to='/404-not-found' />
-              </Route> */}
-            </>
+              })
             }
           </Switch>
-        </Layout>
       )}
     />
   );
