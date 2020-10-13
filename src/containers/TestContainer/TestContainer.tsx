@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { User, QueryData } from '../../interfaces/query.interface'
-import { GET_USER_BY_ID } from '../../apis/graphQL/queries/getUsers'
-import { CREATE_USER } from '../../apis/graphQL/mutations/createUser'
+import { GET_USER_BY_ID } from '../../apis/graphQL/queries'
+import { CREATE_USER } from '../../apis/graphQL/mutations'
 import client from '../../client'
 
 export default function TestContainer(): JSX.Element {
