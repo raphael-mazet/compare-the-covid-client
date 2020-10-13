@@ -17,16 +17,17 @@ export default function TestContainer(): JSX.Element {
       id:3
     }
   })
-  const [saveUser, { data: savedUserData, error: saveUserError }] = useMutation<{createUser: User}>(
+  const [saveUser, { data: savedUserData, error: savedUserError }] = useMutation<{createUser: User}>(
     CREATE_USER, {
     variables: {
       username: newUser?.username,
       password: newUser?.password,
       email: newUser?.email
+    //NOTE: update(cache,...) also comes here
     }
   })
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+  function handleChange(e: ChangeEvent<HTMLInputElement>){
     e.persist();
     setNewUser(prevState => (
       {...prevState, [e.target.id]: e.target.value}
@@ -60,6 +61,7 @@ export default function TestContainer(): JSX.Element {
     </form>
     <div>
   {savedUserData && <p>You have created {savedUserData?.createUser.username}, id:{savedUserData?.createUser.id}</p> }
+  {savedUserError && <p>Error: {savedUserError.message}</p>}
     </div>
 
   </>
