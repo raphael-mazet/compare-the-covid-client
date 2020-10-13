@@ -1,0 +1,70 @@
+.button {
+  color: #46AF8F;
+  background-color: transparent;
+  border-radius: 20px;
+  border: 2px solid #46AF8F;
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: unset;
+  text-transform: capitalize;
+
+  &:hover {
+    color: #296654;
+    border: 2px solid #2F7560;
+    background-color: transparent;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: grey;
+    color: grey;
+  }
+
+  &.cancel {
+    color: white;
+    background-color: #F94144;
+    border: unset;
+
+    &:hover {
+      background-color:  #9E0507;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: grey;
+      color: grey;
+    }
+  }
+
+  &.confirm{
+    color: white;
+    background-color: #46AF8F;
+    border: unset;
+
+    &:hover {
+      background-color: #2F7560;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: grey;
+      color: grey;
+    }
+  }
+
+  &.back{
+    color: white;
+    background-color: #5D7A98;
+    border: unset;
+
+    &:hover {
+      background-color: #313E49;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: grey;
+      color: grey;
+    }
+  }
+}

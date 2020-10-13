@@ -5,7 +5,7 @@ import {
   // NormalizedCacheObject,
 } from '@apollo/client';
 
-const link = new HttpLink({uri: 'http://localhost:4000/'})
+const link = new HttpLink({ uri: 'https://compare-the-covid-server.herokuapp.com/'})
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
