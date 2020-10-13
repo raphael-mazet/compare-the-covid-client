@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+
+//TODO: add an update event mutation
 const CREATE_EVENT = gql `
   mutation CreateEvent (
     $alertType: String!,

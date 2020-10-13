@@ -4,7 +4,7 @@ const CREATE_SAVED_LOCATION = gql `
   mutation CreateSavedLocation (
     $user_id: Int!,
     $location_id: Int!,
-    $selection_date: String!,
+    $selection_date: DateScalar!,
   ) {
     createSavedLocation (
       user_id: $user_id,
@@ -43,7 +43,7 @@ const UPDATE_SAVED_LOCATION_SELECTION_DATE = gql `
   mutation UpdateSavedLocationSelectionDate (
     $user_id: Int!,
     $location_id: Int!,
-    $selection_date: String!,
+    $selection_date: DateScalar!,
   ) {
     updateSavedLocationSelectionDate (
       user_id: $user_id,
