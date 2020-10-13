@@ -12,7 +12,12 @@ const routes = [
     to: '/login',
     exact: false,
     isPrivate: false,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'Sign Up',
+        action: '/sign-up'
+      }
+    ],
     component: 'Login'
   },
   {
@@ -20,7 +25,12 @@ const routes = [
     to: '/sign-up',
     exact: false,
     isPrivate: false,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'Login',
+        action: '/login'
+      }
+    ],
     component: 'Register'
   },
   {
@@ -28,7 +38,12 @@ const routes = [
     to: '/locations',
     exact: false,
     isPrivate: true,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'Home',
+        action: '/home'
+      }
+    ],
     component: 'Locations'
   },
   {
@@ -36,7 +51,12 @@ const routes = [
     to: '/alerts',
     exact: true,
     isPrivate: true,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'Home',
+        action: '/home'
+      }
+    ],
     component: 'Alerts'
   },
   {
@@ -44,7 +64,12 @@ const routes = [
     to: '/log-case',
     exact: true,
     isPrivate: true,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'Home',
+        action: '/home'
+      }
+    ],
     component: 'Logger'
   },
   {
@@ -52,7 +77,12 @@ const routes = [
     to: '/404-not-found',
     exact: true,
     isPrivate: false,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'Home',
+        action: '/home'
+      }
+    ],
     component: '404'
   }
 ]
