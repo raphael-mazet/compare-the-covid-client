@@ -1,17 +1,39 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Button } from '@storybook/react/demo';
+import Button from './index.tsx';
 
 export default {
-  title: 'Test inner',
+  title: 'Components/Button',
+  component: Button
 };
 
-export const text = () => <Button onClick={action('clicked')}>Hello Button</Button>;
+export const Normal = () => (
+  <Button
+    onClick={action('clicked')}
+    content="text button"
+  />
+);
 
-export const emoji = () => (
-  <Button onClick={action('clicked')}>
-    <span role="img" aria-label="so cool">
-      😀 😎 👍 💯
-    </span>
-  </Button>
+export const Cancel = () => (
+  <Button
+    onClick={action('clicked')}
+    content="text button"
+    buttonType="cancel"
+  />
+);
+
+export const Confirm = () => (
+  <Button
+    onClick={action('clicked')}
+    content="text button"
+    buttonType="confirm"
+  />
+);
+
+export const Back = () => (
+  <Button
+    onClick={action('clicked')}
+    content="text button"
+    buttonType="back"
+  />
 );
