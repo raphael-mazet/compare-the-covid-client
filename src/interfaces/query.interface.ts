@@ -1,15 +1,33 @@
 interface User {
   id: number | null;
   username: string;
-  email: string;
-  password: string
+  firstName: string;
+  lastName: string
 }
 
-interface QueryData {
-  getUserbyId: User
+interface Location {
+  id: number | null;
+  name: string;
+  country: string;
+  googlemap_URL: string;
+  location_type: string;
+  longitude: number;
+  latitude: number
 }
+
+interface SavedLocations {
+  user_id: User;
+  location_id: Location
+}
+
+type GetUserbyId = User
+
+type SavedLocationsArray = SavedLocations[]
 
 export type {
   User,
-  QueryData
+  // SavedLocationData,
+  SavedLocations,
+  GetUserbyId,
+  SavedLocationsArray
 }

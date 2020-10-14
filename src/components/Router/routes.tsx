@@ -84,6 +84,19 @@ const routes = [
       }
     ],
     component: '404'
+  },
+  {
+    title: 'Test login',
+    to: '/test-login',
+    exact: true,
+    isPrivate: false,
+    footerActions: [
+      {
+        title: 'Home',
+        action: '/home'
+      }
+    ],
+    component: 'TestLogin'
   }
 ]
 
