@@ -35,7 +35,6 @@ const GET_EVENTS_BY_LOCATION_ID = gql`
   }
 `;
 
-<<<<<<< HEAD
 const GET_EVENTS_BY_MULTIPLE_LOCATION_IDS = gql `
   query getLocationsByMultipleLocationIds($location_ids: [Int]) {
   getEventsbyMultipleLocationIds(location_ids: $location_ids){
@@ -63,6 +62,3 @@ export {
   GET_EVENTS_BY_LOCATION_ID,
   GET_EVENTS_BY_MULTIPLE_LOCATION_IDS
 }
-=======
-export { GET_EVENTS_BY_ALERT_TYPE, GET_EVENTS_BY_LOCATION_ID };
->>>>>>> b6c0f386b83e6445832797ea7e82e457a49a1392

@@ -1,21 +1,8 @@
-<<<<<<< HEAD
 
 import { GET_USER_BY_ID, GET_USER_BY_USERNAME_AND_PASSWORD } from './userQueries';
 import { GET_EVENTS_BY_ALERT_TYPE, GET_EVENTS_BY_LOCATION_ID,GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from './eventQueries';
 import { GET_LOCATION_BY_URL, GET_LOCATION_BY_ID } from './locationQueries';
 import { GET_SAVED_LOCATION_BY_USER_ID } from './savedLocationQueries';
-=======
-import {
-  GET_USER_BY_ID,
-  GET_USER_BY_USERNAME_AND_PASSWORD,
-} from "./userQueries";
-import {
-  GET_EVENTS_BY_ALERT_TYPE,
-  GET_EVENTS_BY_LOCATION_ID,
-} from "./eventQueries";
-import { GET_LOCATION_BY_URL, GET_LOCATION_BY_ID } from "./locationQueries";
-import { GET_SAVED_LOCATION_BY_USER_ID } from "./savedLocationQueries";
->>>>>>> b6c0f386b83e6445832797ea7e82e457a49a1392
 
 //ASK: wrap queries in functions to specify returned fields?
 //NOTE: important to try to always return id

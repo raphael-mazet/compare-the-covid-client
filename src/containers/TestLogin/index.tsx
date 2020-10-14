@@ -3,6 +3,7 @@ import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { User, SavedLocations, SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import { GET_USER_BY_ID, GET_SAVED_LOCATION_BY_USER_ID, GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from '../../apis/graphQL/queries/index';
 import client from '../../client';
+import Input from '../../components/Forms/Input';
 
 
 const TestLogin: React.FunctionComponent = () => {
@@ -20,7 +21,7 @@ useQuery<{getSavedLocationbyUser_Id: SavedLocationsArray}>(GET_SAVED_LOCATION_BY
   onCompleted: getLocationEvents
 })
 
-const [getEvents, {data: eventData}] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS)
+const [getEvents, {data: eventData, loading: eventLoading}] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS)
 
 function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
   const locationIds: (number | null)[] = [];
@@ -45,9 +46,6 @@ function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocat
 // })
 // console.log('sessionUser --->', sessionUser);
 
-console.log('eventData -->', eventData);
-
-
 // getEvents({
 //   variables: {
 //     location_ids: [1,2]
@@ -65,7 +63,8 @@ console.log('eventData -->', eventData);
 
 
 return (
-  <>Hello</>
+  <>Hello
+  </>
   )
   
 }
