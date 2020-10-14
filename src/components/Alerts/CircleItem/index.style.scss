@@ -7,7 +7,7 @@
 
   &:hover {
     color: #296654;
-    border: 2px solid #2F7560;
+    border: 2px solid #2f7560;
     background-color: transparent;
   }
 }
@@ -26,15 +26,15 @@
 
 .confirmedStyles {
   background-color: #c71f1f;
-  @extend %styles-shared
+  @extend %styles-shared;
 }
 
 .suspectedStyles {
   background-color: #d8db1e;
-  @extend %styles-shared
+  @extend %styles-shared;
 }
 
 .safeStyles {
-  background-color: #3BCEAC;
-  @extend %styles-shared
+  background-color: #3bceac;
+  @extend %styles-shared;
 }

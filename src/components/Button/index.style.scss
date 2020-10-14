@@ -1,8 +1,8 @@
 .button {
-  color: #46AF8F;
+  color: #46af8f;
   background-color: transparent;
   border-radius: 20px;
-  border: 2px solid #46AF8F;
+  border: 2px solid #46af8f;
   padding: 10px 20px;
   cursor: pointer;
   outline: unset;
@@ -10,7 +10,7 @@
 
   &:hover {
     color: #296654;
-    border: 2px solid #2F7560;
+    border: 2px solid #2f7560;
     background-color: transparent;
   }
 
@@ -22,11 +22,11 @@
 
   &.cancel {
     color: white;
-    background-color: #F94144;
+    background-color: #f94144;
     border: unset;
 
     &:hover {
-      background-color:  #9E0507;
+      background-color: #9e0507;
     }
 
     &:disabled {
@@ -36,13 +36,13 @@
     }
   }
 
-  &.confirm{
+  &.confirm {
     color: white;
-    background-color: #46AF8F;
+    background-color: #46af8f;
     border: unset;
 
     &:hover {
-      background-color: #2F7560;
+      background-color: #2f7560;
     }
 
     &:disabled {
@@ -52,13 +52,13 @@
     }
   }
 
-  &.back{
+  &.back {
     color: white;
-    background-color: #5D7A98;
+    background-color: #5d7a98;
     border: unset;
 
     &:hover {
-      background-color: #313E49;
+      background-color: #313e49;
     }
 
     &:disabled {

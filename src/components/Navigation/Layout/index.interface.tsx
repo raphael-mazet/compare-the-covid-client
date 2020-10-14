@@ -8,7 +8,7 @@ export interface ILayoutProps {
 type actionFooter = {
   title: string;
   action: string;
-}
+};
 
 export interface routeData {
   to: string;

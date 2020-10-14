@@ -1,28 +1,26 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 //ASK: username not email?
-const CREATE_USER = gql `
+const CREATE_USER = gql`
   mutation CreateUser(
-    $username: String!,
-    $password: String!,
-    $firstName: String!,
+    $username: String!
+    $password: String!
+    $firstName: String!
     $lastName: String!
-    ) {
-	  createUser(
-      username:$username,
-      password: $password,
-      firstName: $firstName,
+  ) {
+    createUser(
+      username: $username
+      password: $password
+      firstName: $firstName
       lastName: $lastName
     ) {
-        id,
-        username,
-        password,
-        firstName,
-        lastName
-      }
+      id
+      username
+      password
+      firstName
+      lastName
+    }
   }
-`
+`;
 
-export {
-  CREATE_USER
-}
+export { CREATE_USER };

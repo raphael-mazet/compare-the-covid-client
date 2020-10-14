@@ -1,3 +1,3 @@
 export default interface RouterProps {
-  isLoggedin?: boolean
+  isLoggedin?: boolean;
 }

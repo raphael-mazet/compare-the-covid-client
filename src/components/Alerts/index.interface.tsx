@@ -3,4 +3,3 @@ export default interface alertsProps {
   suspectedCases: number;
   safeCases: number;
 }
-

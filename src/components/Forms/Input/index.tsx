@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.style.scss';
+import React from "react";
+import "./index.style.scss";
 
 type propTypes = {
   label: string;
@@ -10,7 +10,7 @@ type propTypes = {
   id: string;
   autoComplete: string;
   error: string;
-}
+};
 
 const Input = (props: propTypes): JSX.Element => {
   const {
@@ -21,26 +21,21 @@ const Input = (props: propTypes): JSX.Element => {
     inLineLabel,
     id,
     autoComplete,
-    error
+    error,
   } = props;
 
   const inLineClass: string = inLineLabel ? "inLine" : "";
   const errorClass: string = error ? "error" : "";
   return (
     <div className={["inputSt", inLineClass].join(" ")}>
-      {label && 
+      {label && (
         <span className="label">
           {label}
-          {required
-            ? <span style={{ color: 'red' }}>*</span>
-            : null
-          }:
+          {required ? <span style={{ color: "red" }}>*</span> : null}:
         </span>
-      }
+      )}
       <input className={errorClass} value={value} onChange={onChange} />
-      {error &&
-        <span className='errorText'>{error}</span>
-      }
+      {error && <span className="errorText">{error}</span>}
     </div>
   );
 };

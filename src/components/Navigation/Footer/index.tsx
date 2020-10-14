@@ -1,7 +1,7 @@
-import React from 'react';
-import './index.style.scss';
-import { routeData } from '../Layout/index.interface';
-import { RouteComponentProps,withRouter } from 'react-router-dom';
+import React from "react";
+import "./index.style.scss";
+import { routeData } from "../Layout/index.interface";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 interface propsType {
   route: routeData;
@@ -10,16 +10,21 @@ interface propsType {
   };
 }
 
-const Footer: React.FunctionComponent<propsType & RouteComponentProps> = (props) => {
-  let footer = (<> </>);
-  console.log(props.history)
+const Footer: React.FunctionComponent<propsType & RouteComponentProps> = (
+  props
+) => {
+  let footer = <> </>;
+  console.log(props.history);
   if (props.route.footerActions.length) {
     footer = (
-      <div className='footer_container' >
-        <div style={{ margin: 'auto' }}>
+      <div className="footer_container">
+        <div style={{ margin: "auto" }}>
           {props.route.footerActions.map((item, index) => {
             return (
-              <button key={`${index}-${props.route.title}`} onClick={()=> props.history.push(item.action)}>
+              <button
+                key={`${index}-${props.route.title}`}
+                onClick={() => props.history.push(item.action)}
+              >
                 {item.title}
               </button>
             );
