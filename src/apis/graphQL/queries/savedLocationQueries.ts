@@ -1,8 +1,8 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-const GET_SAVED_LOCATION_BY_USER_ID = gql `
-  query GetSavedLocationbyUser_Id ($user_id: Int!){
-    getSavedLocationbyUser_Id (user_id: $user_id) {
+const GET_SAVED_LOCATION_BY_USER_ID = gql`
+  query GetSavedLocationbyUser_Id($user_id: Int!) {
+    getSavedLocationbyUser_Id(user_id: $user_id) {
       user_id {
         id
         username
@@ -22,8 +22,6 @@ const GET_SAVED_LOCATION_BY_USER_ID = gql `
       selection_date
     }
   }
-`
+`;
 
-export {
-  GET_SAVED_LOCATION_BY_USER_ID
-}
+export { GET_SAVED_LOCATION_BY_USER_ID };

@@ -1,0 +1,42 @@
+@mixin OpaqueBackground($alpha, $color) {
+  background-color: rgba(red($color), green($color), blue($color), $alpha);
+}
+
+.inputSt {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+  justify-content: center;
+
+  input {
+    padding: 5px 5px;
+    padding-left: 15px;
+    border-radius: 20px;
+    font-size: 20px;
+    outline: none;
+    border: 2px solid #5d7a98;
+
+    &.error {
+      border: 2px solid #f94144;
+      @include OpaqueBackground(0.3, #f94144);
+    }
+  }
+
+  &.inLine {
+    flex-direction: row;
+  }
+}
+
+.label {
+  text-transform: uppercase;
+  padding: 5px;
+  margin: auto 1px;
+  padding-left: 20px;
+}
+
+.errorText {
+  margin: 3px auto;
+  color: #f94144;
+  width: max-content;
+}
