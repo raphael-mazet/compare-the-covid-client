@@ -1,44 +1,44 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import Input from './index.tsx';
+import React from "react";
+import { action } from "@storybook/addon-actions";
+import Input from "./index.tsx";
 
 export default {
-  title: 'Components/Input',
-  component: Input
+  title: "Components/Input",
+  component: Input,
 };
 
 export const NormalWithLabel = () => (
   <Input
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     error={false}
   />
 );
 
 export const WithInLineLabel = () => (
   <Input
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     inLineLabel={true}
   />
 );
 
 export const NormalRequired = () => (
   <Input
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     required={true}
   />
 );
 
 export const NormalWithError = () => (
   <Input
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
-    error='there is an error'
+    value={""}
+    error="there is an error"
   />
 );

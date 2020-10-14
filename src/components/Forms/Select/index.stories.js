@@ -1,79 +1,89 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import Select from './index.tsx';
+import React from "react";
+import { action } from "@storybook/addon-actions";
+import Select from "./index.tsx";
 
 export default {
-  title: 'Components/Select',
-  component: Select
+  title: "Components/Select",
+  component: Select,
 };
 
 export const NormalWithLabel = () => (
   <Select
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     error={false}
-    options={[{
-      id: 'test',
-      value: 'test',
-      option: 'test text'
-    }]}
+    options={[
+      {
+        id: "test",
+        value: "test",
+        option: "test text",
+      },
+    ]}
   />
 );
 
 export const NormalWithDefault = () => (
   <Select
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     hasDefaultValue={true}
-    placeholder='-- this is default -- '
-    options={[{
-      id: 'test',
-      value: 'test',
-      option: 'test text'
-    }]}
+    placeholder="-- this is default -- "
+    options={[
+      {
+        id: "test",
+        value: "test",
+        option: "test text",
+      },
+    ]}
   />
 );
 
 export const WithInLineLabel = () => (
   <Select
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     inLineLabel={true}
-    options={[{
-      id: 'test',
-      value: 'test',
-      option: 'test text'
-    }]}
+    options={[
+      {
+        id: "test",
+        value: "test",
+        option: "test text",
+      },
+    ]}
   />
 );
 
 export const NormalRequired = () => (
   <Select
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
+    value={""}
     required={true}
-    options={[{
-      id: 'test',
-      value: 'test',
-      option: 'test text'
-    }]}
+    options={[
+      {
+        id: "test",
+        value: "test",
+        option: "test text",
+      },
+    ]}
   />
 );
 
 export const NormalWithError = () => (
   <Select
-    onChange={action('clicked')}
+    onChange={action("clicked")}
     label="With Label"
-    value={''}
-    error='there is an error'
-    options={[{
-      id: 'test',
-      value: 'test',
-      option: 'test text'
-    }]}
+    value={""}
+    error="there is an error"
+    options={[
+      {
+        id: "test",
+        value: "test",
+        option: "test text",
+      },
+    ]}
   />
 );

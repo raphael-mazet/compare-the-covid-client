@@ -3,14 +3,16 @@ import {
   InMemoryCache,
   HttpLink,
   // NormalizedCacheObject,
-} from '@apollo/client';
+} from "@apollo/client";
 
-const link = new HttpLink({ uri: 'https://compare-the-covid-server.herokuapp.com/'})
+const link = new HttpLink({
+  uri: "https://compare-the-covid-server.herokuapp.com/",
+});
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  link, cache
+  link,
+  cache,
 });
-
 
 export default client;

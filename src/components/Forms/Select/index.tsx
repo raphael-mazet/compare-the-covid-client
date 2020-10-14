@@ -1,12 +1,11 @@
-import React from 'react';
-import './index.style.scss';
+import React from "react";
+import "./index.style.scss";
 
 type option = {
   id?: string;
   value: string;
   option: string;
-}
-
+};
 
 interface propTypes {
   label: string;
@@ -30,13 +29,13 @@ const SelectInput = (props: propTypes): JSX.Element => {
     inLineLabel,
     options,
     hasDefaultValue,
-    placeholder
+    placeholder,
   } = props;
 
   const inLineClass: string = inLineLabel ? "inLine" : "";
   const errorClass: string = error ? "error" : "";
 
-  const optionItems = options.map(option => (
+  const optionItems = options.map((option) => (
     <option key={option.id || option.value} value={option.value}>
       {option.option}
     </option>
@@ -46,30 +45,24 @@ const SelectInput = (props: propTypes): JSX.Element => {
     optionItems.unshift(
       <option key="default" value="default">
         {placeholder}
-      </option>,
+      </option>
     );
-  };
-
+  }
 
   return (
     <div className={["inputSt", inLineClass].join(" ")}>
-      {label &&
+      {label && (
         <span className="label">
           {label}
-          {required
-            ? <span style={{ color: 'red' }}>*</span>
-            : null
-          }:
+          {required ? <span style={{ color: "red" }}>*</span> : null}:
         </span>
-      }
+      )}
       <select className={errorClass} value={value} onChange={onChange}>
         {optionItems}
       </select>
-      {error &&
-        <span className='errorText'>{error}</span>
-      }
+      {error && <span className="errorText">{error}</span>}
     </div>
   );
-}
+};
 
 export default SelectInput;

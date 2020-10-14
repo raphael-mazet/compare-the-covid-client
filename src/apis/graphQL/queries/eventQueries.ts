@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-const GET_EVENTS_BY_ALERT_TYPE = gql `
-  query GetEventsbyAlertType($alertType: String!){
+const GET_EVENTS_BY_ALERT_TYPE = gql`
+  query GetEventsbyAlertType($alertType: String!) {
     getEventsbyAlertType(alertType: $alertType) {
       id
       alertType
@@ -20,10 +20,10 @@ const GET_EVENTS_BY_ALERT_TYPE = gql `
       expires_on
     }
   }
-`
+`;
 
-const GET_EVENTS_BY_LOCATION_ID = gql `
-  query GetEventsbyLocation_Id ($location_id: Int!) {
+const GET_EVENTS_BY_LOCATION_ID = gql`
+  query GetEventsbyLocation_Id($location_id: Int!) {
     getEventsbyLocation_Id(location_id: $location_id) {
       id
       alertType
@@ -33,9 +33,6 @@ const GET_EVENTS_BY_LOCATION_ID = gql `
       expires_on
     }
   }
-`
+`;
 
-export {
-  GET_EVENTS_BY_ALERT_TYPE,
-  GET_EVENTS_BY_LOCATION_ID
-}
+export { GET_EVENTS_BY_ALERT_TYPE, GET_EVENTS_BY_LOCATION_ID };

@@ -1,4 +1,4 @@
-@mixin OpaqueBackground($alpha,$color) {
+@mixin OpaqueBackground($alpha, $color) {
   background-color: rgba(red($color), green($color), blue($color), $alpha);
 }
 
@@ -15,18 +15,17 @@
     border-radius: 20px;
     font-size: 20px;
     outline: none;
-    border: 2px solid #5D7A98;
+    border: 2px solid #5d7a98;
 
     &.error {
-      border: 2px solid #F94144;
-      @include OpaqueBackground(0.3, #F94144)
+      border: 2px solid #f94144;
+      @include OpaqueBackground(0.3, #f94144);
     }
   }
 
   &.inLine {
     flex-direction: row;
   }
-
 }
 
 .label {
@@ -38,6 +37,6 @@
 
 .errorText {
   margin: 3px auto;
-  color: #F94144;
+  color: #f94144;
   width: max-content;
 }
