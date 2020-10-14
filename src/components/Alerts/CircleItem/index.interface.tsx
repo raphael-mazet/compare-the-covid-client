@@ -3,5 +3,4 @@ export default interface circleItemProps {
   styleProps: string;
   textProps: string;
   displayProps: boolean;
-  clickFunction: () => any;
 }
