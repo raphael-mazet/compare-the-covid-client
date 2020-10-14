@@ -1,7 +1,7 @@
 interface User {
   id: number | null;
   username: string;
-<<<<<<< HEAD
+  password: string;
   firstName: string;
   lastName: string
 }
@@ -41,14 +41,3 @@ export type {
   SavedLocationsArray,
   Event
 }
-=======
-  email: string;
-  password: string;
-}
-
-interface QueryData {
-  getUserbyId: User;
-}
-
-export type { User, QueryData };
->>>>>>> b6c0f386b83e6445832797ea7e82e457a49a1392
