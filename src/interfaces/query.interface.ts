@@ -24,10 +24,19 @@ type GetUserbyId = User
 
 type SavedLocationsArray = SavedLocations[]
 
+interface Event {
+  id: number | null;
+  alertType: string;
+  alertDate: string;
+  alertScore: number;
+  created_at: string;
+  expires_on: string;
+}
+
 export type {
   User,
-  // SavedLocationData,
   SavedLocations,
   GetUserbyId,
-  SavedLocationsArray
+  SavedLocationsArray,
+  Event
 }

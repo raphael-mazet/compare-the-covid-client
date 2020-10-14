@@ -1,54 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { SavedLocations, SavedLocationsArray } from '../../interfaces/query.interface';
-import { GET_SAVED_LOCATION_BY_USER_ID } from '../../apis/graphQL/queries/index';
-// import client from '../../client';
+import React, { useState } from 'react';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { User, SavedLocations, SavedLocationsArray, Event } from '../../interfaces/query.interface';
+import { GET_USER_BY_ID, GET_SAVED_LOCATION_BY_USER_ID, GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from '../../apis/graphQL/queries/index';
+
 
 const TestLogin: React.FunctionComponent = () => {
   
-const [userLocationsLoaded, setUserLocationsLoaded] = useState<boolean>(false);
-const [userLocations, setUserLocations] = useState<(number | null)[]>([])
+const [userLocations, setUserLocations] = useState<(number | null)[]>([]);
 
-// let locations = {data: {}, loading: false, error: {}}
+const {data: userData} = useQuery<{getUserbyId: User}>(GET_USER_BY_ID, {
+  variables: {
+    id:1
+  }
+})
 
-// useEffect(() => {
-//   if (userLocationsLoaded) {
-//     locations
-//   }
-// }, [userLocationsLoaded])
-
-const {data: locationData, loading: locationLoading, error: locationDataError} = useQuery<{getSavedLocationbyUser_Id: SavedLocationsArray}>(GET_SAVED_LOCATION_BY_USER_ID, {
+useQuery<{getSavedLocationbyUser_Id: SavedLocationsArray}>(GET_SAVED_LOCATION_BY_USER_ID, {
   variables: {
     user_id:1
   },
-  onCompleted: setLocations
+  onCompleted: getLocationEvents
 })
 
-function setLocations (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
-  const tempArray: (number | null)[] = [];
+const [getEvents, {data: eventData}] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS)
+
+function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
+  const locationIds: (number | null)[] = [];
   locationData?.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
-    tempArray.push(location.location_id.id)
+    locationIds.push(location.location_id.id)
   })
-  setUserLocations(tempArray)
+  setUserLocations(locationIds)
+  getEvents({
+    variables: {
+      location_ids: locationIds
+    }
+  })
 }
 
 console.log('userLocations --> ', userLocations)
-
+console.log('userData ---> ', userData)
+console.log('userEvents --->', eventData)
 
 return (
   <>Hello</>
   )
   
-  
-  // function setExpiry (date: Date) {
-    //   const expiryDate = new Date(date)
-    //   expiryDate.setDate(date.getDate() + 14);
-    //   return expiryDate
-    // }
-    
-    // const creationDate = new Date();
-    // const expiryDate = setExpiry(creationDate);
-    
-  }
-  
+}
+
 export default TestLogin;
