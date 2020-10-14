@@ -45,6 +45,25 @@ function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocat
 // })
 // console.log('sessionUser --->', sessionUser);
 
+console.log('eventData -->', eventData);
+
+
+// getEvents({
+//   variables: {
+//     location_ids: [1,2]
+//   }
+// })
+
+// const sessionEvents = client.readQuery({
+//   query: GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
+//   variables: {
+//     id: [1,2],
+//   },
+// })
+// console.log('sessionEvents --->', sessionEvents);
+
+
+
 return (
   <>Hello</>
   )
