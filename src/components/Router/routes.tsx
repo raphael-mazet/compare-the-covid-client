@@ -83,8 +83,27 @@ const routes = [
         action: "/home",
       },
     ],
+<<<<<<< HEAD
+    component: '404'
+  },
+  {
+    title: 'Test login',
+    to: '/test-login',
+    exact: true,
+    isPrivate: false,
+    footerActions: [
+      {
+        title: 'Home',
+        action: '/home'
+      }
+    ],
+    component: 'TestLogin'
+  }
+]
+=======
     component: "404",
   },
 ];
+>>>>>>> b6c0f386b83e6445832797ea7e82e457a49a1392
 
 export default routes;

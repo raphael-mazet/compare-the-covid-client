@@ -7,6 +7,8 @@ const GET_SAVED_LOCATION_BY_USER_ID = gql`
         id
         username
         password
+        firstName
+        lastName
       }
       location_id {
         id
