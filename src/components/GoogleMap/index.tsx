@@ -12,8 +12,7 @@ const AnyReactComponent = ({text}: any) => <div>{text}</div>;
 const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
 
   // const googleMapURL=`https://maps.googleapis.com/maps/api/js?key=${process.env.API_KEY}&libraries=places`;
-  const googleMapKey = 'AIzaSyBnQCOZ8iMqtqBFAqpF7w-YdlaOBfeD3lA'
-  console.log(googleMapKey)
+  const googleMapKey = ''
   const [center, setCenter] = useState({lat: 11.0168, lng: 76.9558 });
   const [zoom, setZoom] = useState(11);
 
