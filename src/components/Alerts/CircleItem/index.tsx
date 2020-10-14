@@ -3,7 +3,7 @@ import CircleItemProps from './index.interface';
 import './index.style.scss';
 import { Link } from 'react-router-dom';
 
-const circleItem = ( { caseProps, styleProps, textProps, displayProps, clickFunction }: CircleItemProps): JSX.Element | null => {
+const circleItem = ( { caseProps, styleProps, textProps, displayProps}: CircleItemProps): JSX.Element | null => {
   
   const displayText = `You have new ${textProps} cases`;
 
@@ -11,7 +11,7 @@ const circleItem = ( { caseProps, styleProps, textProps, displayProps, clickFunc
     return (
       <div className='container'>
         <Link to ='/alerts'>
-          <div className={styleProps} onClick={clickFunction}>
+          <div className={styleProps}>
             <p className='number'>{caseProps}</p>
           </div>
         </Link>
