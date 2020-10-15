@@ -37,7 +37,7 @@ const routes = [
     title: "My Locations",
     to: "/locations",
     exact: false,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [
       {
         title: "Home",
