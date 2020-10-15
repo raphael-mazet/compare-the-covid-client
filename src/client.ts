@@ -1,8 +1,6 @@
 import {
   ApolloClient,
-  InMemoryCache,
   HttpLink,
-  makeVar,
 } from "@apollo/client";
 import { resolvers, typeDefs } from './apis/graphQL/resolvers';
 import { gql } from '@apollo/client';
@@ -18,7 +16,6 @@ const client = new ApolloClient({
   typeDefs,
   resolvers
 });
-
 
 //TODO: delete hard-coded id
 const myQuery = gql `

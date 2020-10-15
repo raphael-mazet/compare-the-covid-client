@@ -1,8 +1,5 @@
 import { InMemoryCache } from "@apollo/client";
-import { 
-  userSearchDataVar,
-  userAlertsVar
- } from './makevar'
+import * as makeVar from './makevar'
 
 export const cache: InMemoryCache = new InMemoryCache({
   typePolicies: {
@@ -10,12 +7,12 @@ export const cache: InMemoryCache = new InMemoryCache({
       fields: {
         searchdata: {
           read () {
-            return userSearchDataVar();
+            return makeVar.userSearchDataVar();
           }
         },
         useralerts: {
           read () {
-            return userAlertsVar();
+            return makeVar.userAlertsVar();
           }
         },
       }
