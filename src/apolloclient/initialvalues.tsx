@@ -1,4 +1,4 @@
-import * as interfaces from './interfaces'
+import * as interfaces from './localstateinterfaces'
 
 export const userSearchDataInitialValue: interfaces.UserSearchData = 
   {
@@ -9,7 +9,7 @@ export const userSearchDataInitialValue: interfaces.UserSearchData =
 
 export const UserAlertsInitialValue: interfaces.UserAlerts = 
   {
-    confirmed: 3,
+    confirmed: 0,
     suspected: 0,
     safe: 0,
   }
