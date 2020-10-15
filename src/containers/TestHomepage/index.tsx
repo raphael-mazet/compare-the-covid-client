@@ -1,62 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery } from '@apollo/client';
 import client from '../../client';
-import { GET_USER_BY_ID, GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from '../../apis/graphQL/queries/index';
+import { GET_USER_BY_ID, GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, USER_ALERTS, GET_LOGGED_USER_ID } from '../../apis/graphQL/queries/index';
 import { User, Event } from '../../interfaces/query.interface';
 
 const Homepage: React.FunctionComponent = () => {
 
-  const [sessionUser, setSessionUser] = useState<User>({
-    id: null,
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: ''
-  })
+const {data: idData} = useQuery<any>(GET_LOGGED_USER_ID);
+console.log('logged user id', idData)
 
-  const [sessionEvents, setSessionEvents] = useState<any>({
-    green: [],
-    yellow: [],
-    red: []
-  })
+const {data: userData} = useQuery<{getUserbyId: User}>(GET_USER_BY_ID, {
+  variables: {
+    id: idData.loggedUserId
+  }
+})
+console.log('userData', userData)
 
-  useEffect (() => {
-  const user = client.readQuery({
-    query: GET_USER_BY_ID,
-    variables: {
-      id: 1,
-    },
+  const userAlerts = client.readQuery({
+    query: USER_ALERTS,
   })
-  setSessionUser(user.getUserbyId);
-
-  const events = client.readQuery({
-    query: GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
-    variables: {
-      location_ids: [1,2,3,4],
-    },
-  })
-
-    const tempEvents: any = {
-      green: [],
-      yellow: [],
-      red: []
-    }
-  events.getEventsbyMultipleLocationIds.forEach((event: Event) => {
-    if (event.alertType === 'confirmed') {
-      tempEvents.red.push(event)
-    } else if (event.alertType === 'suspected') {
-      tempEvents.yellow.push(event)
-    } else if (event.alertType === 'safe') {
-      tempEvents.green.push(event)
-    }
-  })
-  setSessionEvents(tempEvents)
-  }, [])
+  console.log('userAlerts ->', userAlerts)
 
   return (
     <>
-      <p> Hello{sessionUser.id ? ` ${sessionUser.firstName}` : ''} </p>
-      <p>You have {`${sessionEvents.green.length} green, ${sessionEvents.yellow.length} yellow, ${sessionEvents.red.length} red`}</p>
+      <p> Hello{userData ? ` ${userData.getUserbyId.firstName}` : ''} </p>
+      <p>You have {`${userAlerts.greenAlerts.length} green, ${userAlerts.yellowAlerts.length} yellow, ${userAlerts.redAlerts.length} red`}</p>
     </>
   );
 };
