@@ -24,7 +24,7 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
     else setnoNewAlerts(true);
   }, []);
 
-  // style names ened to correspond with styles in ./circleitem/index.style.scss
+  // style names need to correspond with styles in ./circleitem/index.style.scss
   const stylesPickerForCircles = {
     confirmedStyles: "confirmedStyles",
     suspectedStyles: "suspectedStyles",
@@ -32,7 +32,7 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className='alertContainer'>
       <div>
         <h2> Covid Alerts</h2>
       </div>

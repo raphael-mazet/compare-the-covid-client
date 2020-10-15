@@ -49,6 +49,8 @@ const Homepage: React.FunctionComponent = () => {
   return (
     <div className='container'>
 
+      <Alerts/>
+
       <Button
         content='Save a Location'
         onClick={locationRouter}

@@ -50,7 +50,7 @@ const routes = [
     title: "My Alerts",
     to: "/alerts",
     exact: true,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [
       {
         title: "Home",

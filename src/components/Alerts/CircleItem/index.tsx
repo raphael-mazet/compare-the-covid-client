@@ -13,7 +13,7 @@ const circleItem = ({
 
   if (displayProps) {
     return (
-      <div className="container">
+      <div className="circleContainer">
         <Link to="/alerts">
           <div className={styleProps}>
             <p className="number">{caseProps}</p>
