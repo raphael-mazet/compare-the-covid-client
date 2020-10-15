@@ -20,9 +20,9 @@ export function setAlerts (eventData: any) {
   })
 
   const data = {
-    confirmed: tempEvents.green,
+    confirmed: tempEvents.red,
     suspected: tempEvents.yellow,
-    safe: tempEvents.red,
+    safe: tempEvents.green,
   }
 
   userAlertsVar(data);
