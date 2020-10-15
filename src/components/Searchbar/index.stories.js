@@ -1,5 +1,4 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
+import React, {useState} from "react";
 import Searchbar from "./index.tsx";
 
 
@@ -8,11 +7,16 @@ export default {
   component: Searchbar,
 };
 
-export const Normal = () => (
-  <Searchbar
-    onChange={action("clicked")}
-    value={""}
-    error={false}
-    placeholder='placeholder'
-  />
-);
+export const Normal = () => {
+  const [queryMaps, setQueryMaps] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
+  return (
+    <Searchbar
+    placeholder="Search a location"
+    inputAction={setQueryMaps}
+    searchValue={searchValue}
+    setSearch={setSearchValue}
+    />
+  )
+};

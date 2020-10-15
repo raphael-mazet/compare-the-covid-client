@@ -29,7 +29,7 @@ const SearchBar = (props: propTypes): JSX.Element => {
     const addressObject = autoComplete.getPlace();
     const query = addressObject;
     inputAction(query);
-    setSearch(query.name)
+    setSearch(`${query.name}, ${query.formatted_address}`);
   }
 
   const initMap = () => {
@@ -38,7 +38,7 @@ const SearchBar = (props: propTypes): JSX.Element => {
         autoCompleteRef.current,
         { types: ['establishment'] }
       );
-      autoComplete.setFields(["geometry", "name", "place_id"]);
+      autoComplete.setFields(["geometry", "name", "place_id", "formatted_address"]);
       autoComplete.addListener("place_changed", () =>
         handlePlaceSelect()
       );
