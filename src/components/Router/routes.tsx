@@ -3,7 +3,7 @@ const routes = [
     title: "Home",
     to: "/home",
     exact: true,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [],
     component: "Homepage",
   },

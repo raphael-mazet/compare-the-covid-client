@@ -34,7 +34,7 @@ const [getEvents] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_
 
 function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
   const locationIds: (number | null)[] = [];
-  locationData?.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
+  locationData.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
     locationIds.push(location.location_id.id)
   })
   getEvents({
