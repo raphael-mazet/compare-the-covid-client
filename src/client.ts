@@ -16,8 +16,8 @@ interface UserSearchData {
 const userSearchDataInitialValue: UserSearchData = 
   {
     id: 0,
-    latitude: 500,
-    longitude: 600,
+    latitude: 48.8477397,
+    longitude: 2.2579683,
   }
 
 export const userSearchDataVar = makeVar<UserSearchData>(

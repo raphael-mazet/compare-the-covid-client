@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import "./index.style.scss";
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
+import { userSearchDataVar } from '../../client'
 
 type GoogleMapProps = {
   placeName: string;
 };
 
 const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
+
+  const data2 = userSearchDataVar();
+  let lat = data2.latitude;
+  let lng = data2.longitude;
 
   const mockData = [
     {
@@ -30,7 +35,7 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
   // https://developers.google.com/maps/documentation/javascript/examples/event-click-latlng
 
   const googleMapKey = 'AIzaSyBnQCOZ8iMqtqBFAqpF7w-YdlaOBfeD3lA'
-  const [center, setCenter] = useState({lat: 48.8477397, lng: 2.2651683 });
+  const [center, setCenter] = useState({lat: lat, lng: lng });
   const [zoom, setZoom] = useState(13);
 
   const createMapOptions = (maps: any) => {
@@ -53,6 +58,7 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
       >
         {mockData.map(location =>
           <MapMarker
+            key={location.name}
             lat={location.lat}
             lng={location.lng}
             text={location.name}
