@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import CircleItem from "./CircleItem/index";
 import "./index.style.scss";
-import AlertsProps from "./index.interface";
+import { userAlertsVar } from '../../apolloclient/makevar'
 
-const Alerts: React.FunctionComponent<AlertsProps> = ({
-  confirmedCases,
-  suspectedCases,
-  safeCases,
-}: AlertsProps): JSX.Element => {
-  const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(
-    false
-  );
-  const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(
-    false
-  );
+
+const Alerts: React.FunctionComponent = (): JSX.Element => {
+  
+  const data = userAlertsVar();
+
+  const confirmedCases = data.confirmed;
+  const suspectedCases = data.suspected;
+  const safeCases = data.safe;
+
+  const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(false);
+  const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(false);
   const [showSafeCircle, setShowSafeCircle] = useState<boolean>(false);
   const [noNewAlerts, setnoNewAlerts] = useState<boolean>(false);
 
@@ -24,7 +24,7 @@ const Alerts: React.FunctionComponent<AlertsProps> = ({
     else setnoNewAlerts(true);
   }, []);
 
-  // style names ened to correspond with styles in ./circleitem/index.style.scss
+  // style names need to correspond with styles in ./circleitem/index.style.scss
   const stylesPickerForCircles = {
     confirmedStyles: "confirmedStyles",
     suspectedStyles: "suspectedStyles",
@@ -32,7 +32,7 @@ const Alerts: React.FunctionComponent<AlertsProps> = ({
   };
 
   return (
-    <div className="container">
+    <div className='alertContainer'>
       <div>
         <h2> Covid Alerts</h2>
       </div>

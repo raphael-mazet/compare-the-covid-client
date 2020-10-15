@@ -3,7 +3,7 @@ const routes = [
     title: "Home",
     to: "/home",
     exact: true,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [],
     component: "Homepage",
   },
@@ -50,7 +50,7 @@ const routes = [
     title: "My Alerts",
     to: "/alerts",
     exact: true,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [
       {
         title: "Home",
@@ -63,7 +63,7 @@ const routes = [
     title: "Log a Covid",
     to: "/log-case",
     exact: true,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [
       {
         title: "Home",
