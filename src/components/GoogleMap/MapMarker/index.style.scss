@@ -1,0 +1,39 @@
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+  background-color: green;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    z-index: 1;
+    background-color: blue;
+    animation: bounce 1s;
+  };
+}
+
+.text {
+  margin-top: 10px;
+}
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-5px);
+		transform: translateY(-5px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-2px);
+		transform: translateY(-2px);
+	}
+}
