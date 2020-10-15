@@ -9,7 +9,7 @@ export const userSearchDataInitialValue: interfaces.UserSearchData =
 
 export const UserAlertsInitialValue: interfaces.UserAlerts = 
   {
-    confirmed: 0,
-    suspected: 0,
-    safe: 0,
+    confirmed: [],
+    suspected: [],
+    safe: [],
   }

@@ -2,11 +2,7 @@ import React, {useState} from "react";
 import Searchbar from '../../components/Searchbar'
 import Button from '../../components/Button'
 import Alerts from '../../components/Alerts'
-
 import { useHistory } from 'react-router-dom';
-
-import { gql } from '@apollo/client';
-import { useQuery } from '@apollo/client'
 import { userSearchDataVar } from '../../apolloclient/makevar'
 
 const Homepage: React.FunctionComponent = () => {

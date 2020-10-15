@@ -8,9 +8,9 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
   
   const data = userAlertsVar();
 
-  const confirmedCases = data.confirmed;
-  const suspectedCases = data.suspected;
-  const safeCases = data.safe;
+  const confirmedCases = data.confirmed.length;
+  const suspectedCases = data.suspected.length;
+  const safeCases = data.safe.length;
 
   const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(false);
   const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(false);

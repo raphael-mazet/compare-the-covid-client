@@ -5,7 +5,7 @@ export interface UserSearchData {
 }
 
 export interface UserAlerts {
-  confirmed: number,
-  suspected: number,
-  safe: number,
+  confirmed: any[],
+  suspected: any[],
+  safe: any[],
 }
