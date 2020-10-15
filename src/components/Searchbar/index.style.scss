@@ -1,0 +1,26 @@
+.searchBar {
+  width: 100%;
+  max-width: 500px;
+  padding: 5px 5px;
+  appearance: none;
+  background-color: transparent;
+  border-radius: 20px;
+  font-size: 20px;
+  outline: none;
+  border: 2px solid #5d7a98;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: row;
+
+}
+.searchInput {
+  width: calc(100% - 30px);
+  padding-left: 15px;
+  padding-right: 30px;
+  outline: none;
+  border: unset;
+}
+
+.submitButton {
+  
+}

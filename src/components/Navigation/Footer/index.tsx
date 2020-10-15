@@ -14,7 +14,6 @@ const Footer: React.FunctionComponent<propsType & RouteComponentProps> = (
   props
 ) => {
   let footer = <> </>;
-  console.log(props.history);
   if (props.route.footerActions.length) {
     footer = (
       <div className="footer_container">
