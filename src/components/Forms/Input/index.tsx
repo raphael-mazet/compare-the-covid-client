@@ -5,7 +5,7 @@ type propTypes = {
   label: string;
   required: boolean;
   value: string;
-  onChange: () => any;
+  onChange: (e: any) => void;
   inLineLabel: boolean;
   id: string;
   autoComplete: string;
@@ -34,7 +34,7 @@ const Input = (props: propTypes): JSX.Element => {
           {required ? <span style={{ color: "red" }}>*</span> : null}:
         </span>
       )}
-      <input className={errorClass} value={value} onChange={onChange} />
+      <input className={errorClass} id={id} value={value} onChange={onChange} />
       {error && <span className="errorText">{error}</span>}
     </div>
   );

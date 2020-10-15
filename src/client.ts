@@ -19,18 +19,4 @@ const client = new ApolloClient({
   resolvers
 });
 
-//TODO: delete hard-coded id
-const myQuery = gql `
-  query LoggedUserId {
-    loggedUserId @client
-  }
-`;
-
-cache.writeQuery({
-  query: myQuery,
-  data: {
-    loggedUserId: 1,
-  } 
-});
-
 export default client;
