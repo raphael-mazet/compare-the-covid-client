@@ -1,10 +1,10 @@
 import gql from "graphql-tag";
 
-const CREATE_SAVED_LOCATION = gql`
-  mutation CreateSavedLocation(
-    $user_id: Int!
-    $location_id: Int!
-    $selection_date: String!
+const CREATE_SAVED_LOCATION = gql `
+  mutation CreateSavedLocation (
+    $user_id: Int!,
+    $location_id: Int!,
+    $selection_date: DateScalar!,
   ) {
     createSavedLocation(
       user_id: $user_id
@@ -32,11 +32,11 @@ const DELETE_SAVED_LOCATION = gql`
   }
 `;
 
-const UPDATE_SAVED_LOCATION_SELECTION_DATE = gql`
-  mutation UpdateSavedLocationSelectionDate(
-    $user_id: Int!
-    $location_id: Int!
-    $selection_date: String!
+const UPDATE_SAVED_LOCATION_SELECTION_DATE = gql `
+  mutation UpdateSavedLocationSelectionDate (
+    $user_id: Int!,
+    $location_id: Int!,
+    $selection_date: DateScalar!,
   ) {
     updateSavedLocationSelectionDate(
       user_id: $user_id

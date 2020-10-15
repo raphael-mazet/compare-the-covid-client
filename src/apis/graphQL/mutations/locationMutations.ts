@@ -1,13 +1,13 @@
 import gql from "graphql-tag";
 
-const CREATE_LOCATION = gql`
-  mutation CreateLocation(
-    $name: String!
-    $country: String!
-    $googlemap_URL: String!
-    $location_type: String!
-    $longitude: Int!
-    $latitude: Int!
+const CREATE_LOCATION = gql `
+  mutation CreateLocation (
+    $name: String!, 
+    $country: String!,
+    $googlemap_URL: String!,
+    $location_type: String!,
+    $longitude: Float!,
+    $latitude: Float!,
   ) {
     createLocation(
       name: $name
