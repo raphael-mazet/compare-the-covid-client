@@ -3,7 +3,6 @@ import {
   HttpLink,
 } from "@apollo/client";
 import { resolvers, typeDefs } from './apis/graphQL/resolvers';
-import { gql } from '@apollo/client';
 import { cache } from './apolloclient/memorycache'
 
 const link = new HttpLink({
@@ -16,3 +15,5 @@ const client = new ApolloClient({
   typeDefs,
   resolvers
 });
+
+export default client;

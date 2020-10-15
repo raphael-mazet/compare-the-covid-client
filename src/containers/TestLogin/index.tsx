@@ -15,6 +15,8 @@ const TestLogin: React.FunctionComponent = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  console.log('xxx',username)
+
   const [getUser, {data: userData}] = useLazyQuery<{getUserbyUsernameAndPassword: User}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
     onCompleted: searchLocations
   });
