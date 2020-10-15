@@ -2,7 +2,7 @@ import { gql, ApolloCache, Resolvers } from '@apollo/client';
 
 export const typeDefs = gql`
   extend type Query {
-    loggedUser: String!
+    loggedUserId: Number
   }
 
   extend type User {
@@ -26,7 +26,29 @@ interface ResolverMap {
   [field: string]: ResolverFn;
 }
 
-interface AppResolvers extends Resolvers {
-}
+//TODO: add to interfaces
+// interface AppResolvers extends Resolvers {
+// }
 
-export const resolvers = {};
+export const resolvers = {
+
+  
+};
+
+
+// const myQuery = gql `
+// query loggedUserId {
+// loggedUserId @client
+// }
+// `
+// const {data: whatevs} = useQuery(myQuery)
+// if (whatevs) console.log(whatevs);
+
+
+// const myQuery = gql `
+// query loggedUserId {
+//   loggedUserId @client
+// }
+// `
+
+

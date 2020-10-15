@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { gql, useQuery } from '@apollo/client';
 import client from '../../client';
 import { GET_USER_BY_ID, GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from '../../apis/graphQL/queries/index';
 import { User, Event } from '../../interfaces/query.interface';
@@ -35,7 +36,6 @@ const Homepage: React.FunctionComponent = () => {
     },
   })
 
-  
     const tempEvents: any = {
       green: [],
       yellow: [],
