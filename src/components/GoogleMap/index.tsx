@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./index.style.scss";
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
-import { userSearchDataVar } from '../../client'
+import { userSearchDataVar } from '../../apolloclient/makevar'
 
 type GoogleMapProps = {
   placeName: string;
@@ -67,5 +67,6 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
     </div>
   );
 };
+
 
 export default GoogleMap;

@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client'
-import { userSearchDataVar } from '../../client'
+import { userSearchDataVar } from '../../apolloclient/makevar'
 
 const Homepage: React.FunctionComponent = () => {
 
@@ -23,24 +23,11 @@ const Homepage: React.FunctionComponent = () => {
   if (queryMaps.geometry !== undefined) lng = queryMaps.geometry.location.lng();
 
   const obj = {
-    id: 1,
     latitude: lat,
     longitude: lng,
   };
   
   userSearchDataVar(obj);
-
-  const userSearchDataQuery = gql `
-    query GetUserSearchData {
-      searchdata @client { 
-        id
-        latitude
-        longitude
-      }
-    }
-  `;
-
-  const { data } = useQuery(userSearchDataQuery); 
 
   const history = useHistory();
   const locationRouter = () => history.push('/locations');
@@ -68,9 +55,6 @@ const Homepage: React.FunctionComponent = () => {
         setSearch={setSearchValue}
       />
       <div>
-        <p>{data.searchdata.id}</p>
-        <p>{data.searchdata.latitude}</p>
-        <p>{data.searchdata.longitude}</p>
         <p>{data2.latitude}</p>
         <p>{data2.longitude}</p>
       </div>  

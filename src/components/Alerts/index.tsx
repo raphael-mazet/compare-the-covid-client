@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import CircleItem from "./CircleItem/index";
 import "./index.style.scss";
+import { userAlertsVar } from '../../apolloclient/makevar'
+
 
 const Alerts: React.FunctionComponent = (): JSX.Element => {
   
-  const confirmedCases = 1;
-  const suspectedCases = 0;
-  const safeCases = 0;
+  const data = userAlertsVar();
 
-  const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(
-    false
-  );
-  const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(
-    false
-  );
+  const confirmedCases = data.confirmed;
+  const suspectedCases = data.suspected;
+  const safeCases = data.safe;
+
+  const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(false);
+  const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(false);
   const [showSafeCircle, setShowSafeCircle] = useState<boolean>(false);
   const [noNewAlerts, setnoNewAlerts] = useState<boolean>(false);
 
   useEffect(() => {
-    if (confirmedCases === 1) setShowConfirmedCircle(true);
+    if (confirmedCases !== 0) setShowConfirmedCircle(true);
     else if (suspectedCases !== 0) setShowSuspectedCircle(true);
     else if (safeCases !== 0) setShowSafeCircle(true);
     else setnoNewAlerts(true);

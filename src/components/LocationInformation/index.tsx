@@ -1,7 +1,6 @@
 import React from 'react';
 import "./index.style.scss";
-
-import { userSearchDataVar } from '../../client'
+import { userSearchDataVar } from '../../apolloclient/makevar'
 
 interface LocationInfoProps {
   name: string;
