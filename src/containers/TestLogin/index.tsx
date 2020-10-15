@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
+import React from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { User, SavedLocations, SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import {
   GET_USER_BY_ID,
@@ -9,15 +9,11 @@ import {
   USER_ALERTS
 } from '../../apis/graphQL/queries/index';
 import client from '../../client';
-import Input from '../../components/Forms/Input';
-import { SuspectedAlerts } from '../../components/Alerts/index.stories';
-
 
 const TestLogin: React.FunctionComponent = () => {
 
 //TODO: typescript
 const {data: idData} = useQuery<any>(GET_LOGGED_USER_ID);
-console.log('logged user id', idData)
 
 const {data: userData} = useQuery<{getUserbyId: User}>(GET_USER_BY_ID, {
   variables: {
@@ -32,7 +28,7 @@ useQuery<{getSavedLocationbyUser_Id: SavedLocationsArray}>(GET_SAVED_LOCATION_BY
   onCompleted: getLocationEvents
 })
 
-const [getEvents, {data: eventData, loading: eventLoading}] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
+const [getEvents] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
   onCompleted: setAlerts
 })
 
@@ -65,8 +61,6 @@ function setAlerts (eventData: any) {
       tempEvents.green.push(event)
     }
   })
-
-  console.log('tempEvents.red', tempEvents.red)
 
   client.writeQuery({
     query: USER_ALERTS,

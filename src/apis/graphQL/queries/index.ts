@@ -1,4 +1,3 @@
-
 import { GET_USER_BY_ID, GET_USER_BY_USERNAME_AND_PASSWORD } from './userQueries';
 import { GET_EVENTS_BY_ALERT_TYPE, GET_EVENTS_BY_LOCATION_ID,GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from './eventQueries';
 import { GET_LOCATION_BY_URL, GET_LOCATION_BY_ID } from './locationQueries';

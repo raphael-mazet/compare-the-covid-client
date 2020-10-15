@@ -19,6 +19,7 @@ const client = new ApolloClient({
   resolvers
 });
 
+//TODO: delete hard-coded id
 const myQuery = gql `
   query LoggedUserId {
     loggedUserId @client
