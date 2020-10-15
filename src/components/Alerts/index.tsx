@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import CircleItem from "./CircleItem/index";
 import "./index.style.scss";
-import AlertsProps from "./index.interface";
 
-const Alerts: React.FunctionComponent<AlertsProps> = ({
-  confirmedCases,
-  suspectedCases,
-  safeCases,
-}: AlertsProps): JSX.Element => {
+const Alerts: React.FunctionComponent = (): JSX.Element => {
+  
+  const confirmedCases = 1;
+  const suspectedCases = 0;
+  const safeCases = 0;
+
   const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(
     false
   );
@@ -18,7 +18,7 @@ const Alerts: React.FunctionComponent<AlertsProps> = ({
   const [noNewAlerts, setnoNewAlerts] = useState<boolean>(false);
 
   useEffect(() => {
-    if (confirmedCases !== 0) setShowConfirmedCircle(true);
+    if (confirmedCases === 1) setShowConfirmedCircle(true);
     else if (suspectedCases !== 0) setShowSuspectedCircle(true);
     else if (safeCases !== 0) setShowSafeCircle(true);
     else setnoNewAlerts(true);
@@ -32,7 +32,7 @@ const Alerts: React.FunctionComponent<AlertsProps> = ({
   };
 
   return (
-    <div className="container">
+    <div>
       <div>
         <h2> Covid Alerts</h2>
       </div>

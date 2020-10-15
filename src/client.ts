@@ -7,21 +7,21 @@ import {
 import { resolvers, typeDefs } from './apis/graphQL/resolvers';
 import { gql } from '@apollo/client';
 
-interface Geometry {
+interface UserSearchData {
   id?: number,
   latitude: number,
   longitude: number,
 }
 
-const geometrysInitialValue: Geometry = 
+const userSearchDataInitialValue: UserSearchData = 
   {
     id: 0,
     latitude: 500,
     longitude: 600,
   }
 
-export const geometrysVar = makeVar<Geometry>(
-  geometrysInitialValue
+export const userSearchDataVar = makeVar<UserSearchData>(
+  userSearchDataInitialValue
 )
 
 export const cache: InMemoryCache = new InMemoryCache({
@@ -30,7 +30,7 @@ export const cache: InMemoryCache = new InMemoryCache({
       fields: {
         searchdata: {
           read () {
-            return geometrysVar();
+            return userSearchDataVar();
           }
         }
       }

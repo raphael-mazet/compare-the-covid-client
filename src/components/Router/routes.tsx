@@ -63,7 +63,7 @@ const routes = [
     title: "Log a Covid",
     to: "/log-case",
     exact: true,
-    isPrivate: true,
+    isPrivate: false,
     footerActions: [
       {
         title: "Home",
