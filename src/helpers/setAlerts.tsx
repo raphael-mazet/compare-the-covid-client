@@ -3,7 +3,7 @@ import client from '../client';
 import { Event } from '../interfaces/query.interface';
 import { userAlertsVar } from '../apolloclient/makevar';
 
-export function setAlerts (eventData: any) {
+export function setAlerts (eventData: any, callback: ()=>void) {
   const tempEvents: any = {
     green: [],
     yellow: [],
@@ -26,7 +26,7 @@ export function setAlerts (eventData: any) {
   }
 
   userAlertsVar(data);
-
+  console.log('data ->', data)
   client.writeQuery({
     query: USER_ALERTS,
     data: {
@@ -35,4 +35,6 @@ export function setAlerts (eventData: any) {
       redAlerts: tempEvents.red
     } 
   });
+
+  callback();
 }

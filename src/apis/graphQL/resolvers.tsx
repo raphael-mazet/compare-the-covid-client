@@ -1,12 +1,17 @@
 import { gql, ApolloCache, Resolvers } from '@apollo/client';
 
+// type AuthenticatedUser = {
+//   id: number;
+//   token: string;
+// }
+
 export const typeDefs = gql`
   extend type Query {
     loggedUserId: Number,
     greenAlerts: any
     yellowAlerts: any
     redAlerts: any
-
+    authenticatedUser: AuthenticatedUser
   }
 
   extend type Mutation {

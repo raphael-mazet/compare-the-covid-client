@@ -14,11 +14,15 @@ const GET_USER_BY_ID = gql`
 const GET_USER_BY_USERNAME_AND_PASSWORD = gql`
   query GetUserbyUsernameAndPassword($username: String!, $password: String!) {
     getUserbyUsernameAndPassword(username: $username, password: $password) {
-      id
-      username
-      password
-      firstName
-      lastName
+      message,
+      token,
+      status,
+      userData {
+        id,
+        username,
+        firstName,
+        lastName
+      }
     }
   }
 `;

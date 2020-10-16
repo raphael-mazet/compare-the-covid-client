@@ -9,3 +9,7 @@ export const userSearchDataVar = makeVar<interfaces.UserSearchData>(
 export const userAlertsVar = makeVar<interfaces.UserAlerts>(
   initialvalues.UserAlertsInitialValue
 );
+
+export const authenticatedUserVar = makeVar<interfaces.AuthenticatedUser>(
+  initialvalues.authenticatedUserInitialValue
+)

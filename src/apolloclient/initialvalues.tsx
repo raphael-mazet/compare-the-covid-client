@@ -13,3 +13,9 @@ export const UserAlertsInitialValue: interfaces.UserAlerts =
     suspected: [],
     safe: [],
   }
+
+  export const authenticatedUserInitialValue: interfaces.AuthenticatedUser =
+  {
+    id: 3,
+    token: 'hello'
+  }

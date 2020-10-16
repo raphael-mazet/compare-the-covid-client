@@ -15,6 +15,11 @@ export const cache: InMemoryCache = new InMemoryCache({
             return makeVar.userAlertsVar();
           }
         },
+        authenticatedUser: {
+          read() {
+            return makeVar.authenticatedUserVar()
+          }
+        }
       }
     }
   }
