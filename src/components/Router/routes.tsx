@@ -92,7 +92,7 @@ const routes = [
         action: "/home",
       },
     ],
-    component: '404'
+    component: 'SavedLocations'
   },
   {
     title: "Page Not Found",

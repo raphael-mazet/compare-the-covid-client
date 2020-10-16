@@ -14,7 +14,7 @@ const SavedLocationItem = (): JSX.Element => {
 
   const user_id = authenticatedUserVar()
 
-  console.log(user_id)
+  console.log('userid',  user_id)
 
   return (  
     <div className='container'>

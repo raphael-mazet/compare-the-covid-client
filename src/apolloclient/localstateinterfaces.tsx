@@ -15,6 +15,6 @@ export interface UserAlerts {
 }
 
 export interface AuthenticatedUser {
-  id?: number,
+  id?: number | null | undefined,
   token?: string,
 }

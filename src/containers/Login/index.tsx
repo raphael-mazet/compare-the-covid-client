@@ -10,6 +10,7 @@ import Input from '../../components/Forms/Input';
 import Button from '../../components/Button';
 import { setAlerts } from '../../helpers/setAlerts'
 import { useHistory } from 'react-router-dom';
+import { authenticatedUserVar } from "../../apolloclient/makevar";
 
 type userData = { 
   status: number;
@@ -39,9 +40,13 @@ const TestLogin: React.FunctionComponent = (props: any) => {
 
   const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
     console.log('checkauth',response);
-    const {status, message, token } = response.getUserbyUsernameAndPassword;
-    
+    const {status, message, token, userData } = response.getUserbyUsernameAndPassword;
     if (status === 200 && token) {
+      const userInfo = {
+        id: userData?.id,
+        token: token,
+      }
+      authenticatedUserVar(userInfo)
       searchLocations();
       setError(null);
     } else if (status === 404) {
