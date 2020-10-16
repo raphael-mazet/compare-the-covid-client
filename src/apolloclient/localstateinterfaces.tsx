@@ -13,3 +13,8 @@ export interface UserAlerts {
   suspected: any[],
   safe: any[],
 }
+
+export interface AuthenticatedUser {
+  id?: number,
+  token?: string,
+}

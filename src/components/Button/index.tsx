@@ -3,7 +3,7 @@ import "./index.style.scss";
 
 type propTypes = {
   content: string;
-  onClick: () => any;
+  onClick: (e:any) => void;
   buttonType?: string;
 };
 
