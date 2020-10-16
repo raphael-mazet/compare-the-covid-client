@@ -1,20 +1,15 @@
 import { gql, ApolloCache, Resolvers } from '@apollo/client';
 
 export const typeDefs = gql`
-  extend type Query {
-    loggedUserId: Number,
-    greenAlerts: any
-    yellowAlerts: any
-    redAlerts: any
-    authenticatedUser: AuthenticatedUser
-  }
-
-  # extend type Location {
-  #   events: 
+  # extend type Query {
+  #   # greenAlerts: any
+  #   # yellowAlerts: any
+  #   # redAlerts: any
+  #   # authenticatedUser: AuthenticatedUser
   # }
 
-  extend type Mutation {
-    addAlerts(green: any, yellow: any, red: any): any
+  extend type Location {
+    events: [Events]
   }
 `
 
@@ -28,9 +23,9 @@ interface ResolverMap {
   [field: string]: ResolverFn;
 }
 
-//TODO: add to resolver interface for typescript
-// interface AppResolvers extends Resolvers {
-// }
+interface AppResolvers extends Resolvers {
+  // We will update this with our app's resolvers later
+}
 
 export const resolvers = {
 //NOTE: add client-side resolvers if needed

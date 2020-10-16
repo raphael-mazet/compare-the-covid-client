@@ -40,7 +40,6 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   }
 
   const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
-    console.log('checkauth',response);
     const {status, message, token, userData } = response.getUserbyUsernameAndPassword;
     if (status === 200 && token) {
       const userInfo = {

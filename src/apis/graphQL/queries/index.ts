@@ -4,11 +4,6 @@ import { GET_LOCATION_BY_URL, GET_LOCATION_BY_ID } from './locationQueries';
 import { GET_SAVED_LOCATION_BY_USER_ID } from './savedLocationQueries';
 import { GET_LOGGED_USER_ID, USER_ALERTS } from './clientSideQueries';
 
-//ASK: wrap queries in functions to specify returned fields?
-//NOTE: important to try to always return id
-//NOTE: and return same fields with mutations
-//NOTE: if not Apollo cache won't auto update
-
 export {
   GET_USER_BY_ID,
   GET_USER_BY_USERNAME_AND_PASSWORD,
