@@ -74,6 +74,11 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
         center={center}
         defaultZoom={zoom}
       >
+        <MapMarker
+          lat={center.lat}
+          lng={center.lng}
+          text='Current location'
+        />
         {mockData.map(location =>
           <MapMarker
             key={location.name}
