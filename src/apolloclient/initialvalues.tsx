@@ -24,7 +24,4 @@ export const UserAlertsInitialValue: interfaces.UserAlerts =
     token: 'hello'
   }
 
-  export const savedLocationsInitialValue: interfaces.SavedLocations =
-  {
-    locations: 0,
-  }
+  export const savedLocationsInitialValue: interfaces.SavedLocations = []

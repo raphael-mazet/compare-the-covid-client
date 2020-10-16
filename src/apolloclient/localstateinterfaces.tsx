@@ -19,5 +19,4 @@ export interface AuthenticatedUser {
   token?: string,
 }
 
-export interface SavedLocations {
-}[]
+export type SavedLocations = (number | null) [];
