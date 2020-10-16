@@ -1,3 +1,5 @@
+import { Location } from '../interfaces/query.interface'
+
 export interface UserSearchData {
   id?: number,
   name?: string,
@@ -19,4 +21,4 @@ export interface AuthenticatedUser {
   token?: string,
 }
 
-export type SavedLocations = (number | null) [];
+export type SavedLocations = Location[];
