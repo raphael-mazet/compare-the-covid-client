@@ -7,6 +7,11 @@ import { userSearchDataVar } from '../../apolloclient/makevar'
 
 const Homepage: React.FunctionComponent = () => {
 
+  navigator.geolocation.getCurrentPosition((position) => {
+    console.log('longitude', position.coords.longitude);
+    console.log('latitude',position.coords.latitude)
+  });
+
   const data2 = userSearchDataVar();
 
   const [queryMaps, setQueryMaps] = useState<any | (() => any)>("");

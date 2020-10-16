@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./index.style.scss";
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
 import { userSearchDataVar } from '../../apolloclient/makevar'
+import { useReactiveVar } from '@apollo/client';
 
 type GoogleMapProps = {
   placeName: string;
@@ -10,11 +11,30 @@ type GoogleMapProps = {
 
 const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
 
-  const data2 = userSearchDataVar();
-  let lat = data2.latitude;
-  let lng = data2.longitude;
+  const [center, setCenter] = useState({lat: 0, lng: 0});
+  const [zoom, setZoom] = useState(13);
 
-  const mockData = [
+  useEffect(() => {
+    const data = userSearchDataVar()
+ 
+    const centerObj = {
+      lat: data.latitude,
+      lng: data.longitude,
+    }
+
+    setCenter(centerObj)
+  }, []);
+
+  const data2 = useReactiveVar(userSearchDataVar)
+  const centerObj = {
+    lat: data2.latitude,
+    lng: data2.longitude,
+  }
+  
+  if (centerObj.lat !== center.lat) setCenter(centerObj);
+  else if (centerObj.lng !== center.lng) setCenter(centerObj);
+  
+   const mockData = [
     {
       name: 'waitrose',
       lat: 48.8477397, 
@@ -35,8 +55,6 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
   // https://developers.google.com/maps/documentation/javascript/examples/event-click-latlng
 
   const googleMapKey = 'AIzaSyBnQCOZ8iMqtqBFAqpF7w-YdlaOBfeD3lA'
-  const [center, setCenter] = useState({lat: lat, lng: lng });
-  const [zoom, setZoom] = useState(13);
 
   const createMapOptions = (maps: any) => {
     return {
@@ -53,7 +71,7 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
       <GoogleMapReact
         options={createMapOptions}
         bootstrapURLKeys={{ key: String(googleMapKey) }}
-        defaultCenter={center}
+        center={center}
         defaultZoom={zoom}
       >
         {mockData.map(location =>
