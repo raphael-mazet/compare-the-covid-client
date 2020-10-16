@@ -18,3 +18,6 @@ export interface AuthenticatedUser {
   id?: number | null | undefined,
   token?: string,
 }
+
+export interface SavedLocations {
+}[]

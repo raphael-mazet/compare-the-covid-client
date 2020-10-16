@@ -23,3 +23,8 @@ export const UserAlertsInitialValue: interfaces.UserAlerts =
     id: 3,
     token: 'hello'
   }
+
+  export const savedLocationsInitialValue: interfaces.SavedLocations =
+  {
+    locations: 0,
+  }
