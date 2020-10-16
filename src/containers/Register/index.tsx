@@ -114,7 +114,7 @@ const Register: React.FunctionComponent = () => {
         />
 
         <Button
-          onClick={() => {}}
+          onClick={(e) => handleSubmit(e)}
           content="Submit"
         />
       </form>

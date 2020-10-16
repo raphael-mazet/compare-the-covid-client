@@ -4,7 +4,12 @@ const routes = [
     to: "/home",
     exact: true,
     isPrivate: false,
-    footerActions: [],
+    footerActions: [
+      {
+        title: "Saved Locations",
+        action: "/saved-locations",
+      }
+    ],
     component: "Homepage",
   },
   {
@@ -75,6 +80,19 @@ const routes = [
       },
     ],
     component: "Logger",
+  },
+  {
+    title: "Saved Locations",
+    to: "/saved-locations",
+    exact: true,
+    isPrivate: false,
+    footerActions: [
+      {
+        title: "Home",
+        action: "/home",
+      },
+    ],
+    component: '404'
   },
   {
     title: "Page Not Found",
