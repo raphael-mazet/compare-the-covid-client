@@ -17,6 +17,10 @@ const routes = [
         title: "Sign Up",
         action: "/sign-up",
       },
+      {
+        title: "Home",
+        action: "/home",
+      },
     ],
     component: "Login",
   },
@@ -84,32 +88,6 @@ const routes = [
       },
     ],
     component: '404'
-  },
-  {
-    title: 'Test login',
-    to: '/test-login',
-    exact: true,
-    isPrivate: false,
-    footerActions: [
-      {
-        title: 'Homepage',
-        action: '/test-homepage'
-      }
-    ],
-    component: 'TestLogin'
-  },
-  {
-    title: 'Test homepage',
-    to: '/test-homepage',
-    exact: true,
-    isPrivate: false,
-    footerActions: [
-      {
-        title: 'Home',
-        action: '/home'
-      }
-    ],
-    component: 'TestHomepage'
   }
 ]
 
