@@ -6,8 +6,8 @@ const CREATE_LOCATION = gql `
     $country: String!,
     $googlemap_URL: String!,
     $location_type: String!,
-    $longitude: Float!,
-    $latitude: Float!,
+    $longitude: String!,
+    $latitude: String!,
   ) {
     createLocation(
       name: $name
