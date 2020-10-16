@@ -10,13 +10,44 @@ import Input from '../../components/Forms/Input';
 import Button from '../../components/Button';
 import { setAlerts } from '../../helpers/setAlerts'
 
-const TestLogin: React.FunctionComponent = () => {
+type userData = {
+  status: number;
+  message: string;
+  token?: string;
+  userData?: User;
+}
+
+const TestLogin: React.FunctionComponent = (props: any) => {
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>();
 
-  const [getUser, {data: userData}] = useLazyQuery<{getUserbyUsernameAndPassword: User}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
-    onCompleted: searchLocations
+  function searchLocations() {
+    getSavedLocations({
+      variables: {
+        user_id: userData?.getUserbyUsernameAndPassword?.userData?.id
+      }
+    })
+  }
+
+  const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
+    const {status, message, token } = response.getUserbyUsernameAndPassword;
+    console.log(response)
+    if (status === 200 && token) {
+      searchLocations();
+      setError(null);
+    } else if (status === 404) {
+      setError(message);
+    }
+  } 
+
+  const startSetAlerts = (data: { getEventsbyMulitpleLocationIds: [Event] }) => {
+    setAlerts(data, ()=> props.history.push('home'));
+  }
+  
+  const [getUser, {data: userData}] = useLazyQuery<{getUserbyUsernameAndPassword: userData}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
+    onCompleted: checkAuth
   });
 
   const [getSavedLocations] = useLazyQuery<{getSavedLocationbyUser_Id: SavedLocationsArray}>(GET_SAVED_LOCATION_BY_USER_ID, {
@@ -24,29 +55,22 @@ const TestLogin: React.FunctionComponent = () => {
   });
 
   const [getEvents] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
-    onCompleted: setAlerts
+    onCompleted: startSetAlerts
   })
 
-  function searchLocations() {
-    getSavedLocations({
+
+  function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
+    const locationIds: (number | null)[] = [];
+    locationData.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
+      locationIds.push(location.location_id.id)
+    })
+    getEvents({
       variables: {
-        user_id: userData?.getUserbyUsernameAndPassword?.id
+        location_ids: locationIds
       }
     })
   }
-
-function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
-  const locationIds: (number | null)[] = [];
-  locationData.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
-    locationIds.push(location.location_id.id)
-  })
-  getEvents({
-    variables: {
-      location_ids: locationIds
-    }
-  })
-}
-  
+    
   function handleChange (e: ChangeEvent<HTMLInputElement>) {
     if (e.target.id === 'email') setUsername(e.target.value)
     else setPassword(e.target.value)
@@ -65,19 +89,19 @@ function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocat
     <>
       <h1>Log in</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <Input
-        label="email"
-        required={true}
-        value={username}
-        onChange={handleChange}
-        inLineLabel={true}
-        id='email'
-        autoComplete=''
-        error=''
-      />
+          label="email"
+          required={true}
+          value={username}
+          onChange={handleChange}
+          inLineLabel={true}
+          id='email'
+          autoComplete=''
+          error=''
+        />
 
-      <Input
+        <Input
           label="password"
           required={true}
           value={password}
@@ -87,12 +111,14 @@ function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocat
           autoComplete=''
           error=''
         />
-
+      </form>
+      {error && 
+        <span style={{ color: 'red'}} > {error}</span>
+      }
       <Button
-        onClick={() => handleSubmit}
+        onClick={(e: any) => handleSubmit(e)}
         content="Submit"
       />
-      </form>
     </>
   )
 }

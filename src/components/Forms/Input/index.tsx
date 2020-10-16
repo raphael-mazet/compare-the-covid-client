@@ -4,7 +4,7 @@ import "./index.style.scss";
 type propTypes = {
   label: string;
   required: boolean;
-  value: string;
+  value?: string;
   onChange: (e: any) => void;
   inLineLabel: boolean;
   id: string;

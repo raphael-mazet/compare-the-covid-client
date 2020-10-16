@@ -5,8 +5,16 @@ import Button from '../../components/Button';
 import { CREATE_USER } from '../../apis/graphQL/mutations';
 import { User } from '../../interfaces/query.interface';
 
+type userForm = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+}
+
 const Register: React.FunctionComponent = () => {
-  const [formData, setFormData] = useState<User>();
+  const [formData, setFormData] = useState<userForm>();
 
   const checkAuth = (responseData: any) => {
     //logic for authentication
@@ -39,7 +47,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="email"
           required={true}
-          value={}
+          value={formData?.email}
           onChange={(e)=>handleChange(e.target.value, 'email')}
           inLineLabel={true}
           id='email'
@@ -49,7 +57,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="first name"
           required={true}
-          value={}
+          value={formData?.firstName}
           onChange={(e) => handleChange(e.target.value, 'firstName')}
           inLineLabel={true}
           id='email'
@@ -59,7 +67,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="last name"
           required={true}
-          value={}
+          value={formData?.lastName}
           onChange={(e) => handleChange(e.target.value, 'lastName')}
           inLineLabel={true}
           id='email'
@@ -70,7 +78,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="password"
           required={true}
-          value={}
+          value={formData?.password}
           onChange={(e) => handleChange(e.target.value, 'password')}
           inLineLabel={true}
           id='password'
@@ -81,7 +89,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="confirm password"
           required={true}
-          value={}
+          value={formData?.confirmPassword}
           onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
           inLineLabel={true}
           id='password'
