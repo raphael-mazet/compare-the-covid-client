@@ -1,0 +1,33 @@
+.form-container {
+  width: 100%;
+  height: 50%;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.form-wrapper {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  height: 80%;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  height: 100%; 
+  width: 100%;
+  overflow-y: auto;
+  min-height: 300px;
+}
+
+.button-container {
+  margin: auto; 
+  margin-top: 20px;
+  width: 200px;
+}

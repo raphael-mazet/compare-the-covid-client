@@ -1,0 +1,27 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-evenly;
+  // vertical-align: ;
+  padding: 0;
+  height: 100%; 
+  width: 100%;
+  overflow-y: auto;
+  min-height: 300px;
+  position: relative;
+}
+
+.button-container {
+  margin: auto; 
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.actions_container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: absolute;
+  bottom: 15%;
+}

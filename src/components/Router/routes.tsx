@@ -4,7 +4,12 @@ const routes = [
     to: "/home",
     exact: true,
     isPrivate: false,
-    footerActions: [],
+    footerActions: [
+      {
+        title: 'My Locations',
+        action: ''
+      }
+    ],
     component: "Homepage",
   },
   {
@@ -16,11 +21,7 @@ const routes = [
       {
         title: "Sign Up",
         action: "/sign-up",
-      },
-      {
-        title: "Home",
-        action: "/home",
-      },
+      }
     ],
     component: "Login",
   },
@@ -47,6 +48,10 @@ const routes = [
         title: "Home",
         action: "/home",
       },
+      {
+        title: "Log a Case",
+        action: "/log-case"
+      }
     ],
     component: "Locations",
   },

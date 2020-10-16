@@ -2,11 +2,12 @@
   width: calc(100% - 40px);
   height: 60px;
   padding: 5px 20px;
-  background-color: #25be8b;
+  background-color: #46AF8F;
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  z-index:3;
 }
 
 .navbar_title {

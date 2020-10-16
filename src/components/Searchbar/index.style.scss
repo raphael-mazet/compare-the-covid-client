@@ -1,5 +1,5 @@
 .searchBar {
-  width: 100%;
+  width: calc(100% - 25px);
   max-width: 500px;
   padding: 5px 5px;
   appearance: none;
@@ -11,7 +11,7 @@
   padding-right: 15px;
   display: flex;
   flex-direction: row;
-
+  margin: 2px auto;
 }
 .searchInput {
   width: calc(100% - 30px);

@@ -10,6 +10,8 @@ import Input from '../../components/Forms/Input';
 import Button from '../../components/Button';
 import { setAlerts } from '../../helpers/setAlerts'
 import { useHistory } from 'react-router-dom';
+import useWindowSize from '../../helpers/getWindowSize';
+import './index.style.scss';
 
 type userData = { 
   status: number;
@@ -28,6 +30,7 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   // const locationRouter = () => history.push("/locations");
   // const caseRouter = () => history.push("/log-case");
 
+  const window = useWindowSize();
 
   function searchLocations() {
     getSavedLocations({
@@ -38,7 +41,6 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   }
 
   const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
-    console.log('checkauth',response);
     const {status, message, token } = response.getUserbyUsernameAndPassword;
     
     if (status === 200 && token) {
@@ -93,40 +95,41 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   }
   
   return (
-    <>
-      <h1>Log in</h1>
-
-      <form>
-        <Input
-          label="email"
-          required={true}
-          value={username}
-          onChange={handleChange}
-          inLineLabel={true}
-          id='email'
-          autoComplete=''
-          error=''
-        />
-
-        <Input
-          label="password"
-          required={true}
-          value={password}
-          onChange={handleChange}
-          inLineLabel={true}
-          id='password'
-          autoComplete=''
-          error=''
-        />
-      </form>
-      {error && 
-        <span style={{ color: 'red'}} > {error}</span>
-      }
-      <Button
-        onClick={(e: any) => handleSubmit(e)}
-        content="Submit"
-      />
-    </>
+    <div className='page-wrapper' >
+      <div className='form-wrapper'>
+        <form className='form-container' onSubmit={(e)=> handleSubmit(e)}>
+          <Input
+            label="email"
+            required={true}
+            value={username}
+            onChange={handleChange}
+            inLineLabel={window.width > 375 ? true : false}
+            id='email'
+            autoComplete=''
+            error=''
+          />
+          <Input
+            label="password"
+            required={true}
+            value={password}
+            onChange={handleChange}
+            inLineLabel={window.width > 375 ? true : false}
+            id='password'
+            autoComplete=''
+            error=''
+          />
+        </form>
+        {error && 
+          <span style={{ color: 'red'}}> {error}</span>
+        }
+        <div className='button-container'>
+          <Button
+            onClick={(e: any) => handleSubmit(e)}
+            content="Submit"
+          />
+        </div>
+      </div>
+    </div>
   )
 }
 

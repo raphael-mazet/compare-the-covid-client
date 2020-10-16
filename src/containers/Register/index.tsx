@@ -6,6 +6,8 @@ import { CREATE_USER } from '../../apis/graphQL/mutations';
 import { User } from '../../interfaces/query.interface';
 import client from '../../client';
 import { authenticatedUserVar } from "../../apolloclient/makevar";
+import useWindowSize from '../../helpers/getWindowSize';
+import './index.style.scss';
 
 type userForm = {
   email: string;
@@ -17,6 +19,10 @@ type userForm = {
 
 const Register: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<userForm>();
+
+
+  const window = useWindowSize();
+
 
   const checkAuth = (responseData: any) => {
     //logic for authentication
@@ -58,67 +64,71 @@ const Register: React.FunctionComponent = () => {
   }
 
   return (
-    <>
-      <form>
-        <Input
-          label="email"
-          required={true}
-          value={formData?.email}
-          onChange={(e)=>handleChange(e.target.value, 'email')}
-          inLineLabel={true}
-          id='email'
-          autoComplete=''
-          error=''
-        />
-        <Input
-          label="first name"
-          required={true}
-          value={formData?.firstName}
-          onChange={(e) => handleChange(e.target.value, 'firstName')}
-          inLineLabel={true}
-          id='email'
-          autoComplete=''
-          error=''
-        />
-        <Input
-          label="last name"
-          required={true}
-          value={formData?.lastName}
-          onChange={(e) => handleChange(e.target.value, 'lastName')}
-          inLineLabel={true}
-          id='email'
-          autoComplete=''
-          error=''
-        />
+    <div className='page-wrapper'>
+      <div className='form-wrapper'>
+        <form className='form-container' onSubmit={(e)=>handleSubmit(e)}>
+          <Input
+            label="email"
+            required={true}
+            value={formData?.email}
+            onChange={(e)=>handleChange(e.target.value, 'email')}
+            inLineLabel={ window.width > 375 ? true : false }
+            id='email'
+            autoComplete=''
+            error=''
+          />
+          <Input
+            label="first name"
+            required={true}
+            value={formData?.firstName}
+            onChange={(e) => handleChange(e.target.value, 'firstName')}
+            inLineLabel={ window.width > 375 ? true : false }
+            id='email'
+            autoComplete=''
+            error=''
+          />
+          <Input
+            label="last name"
+            required={true}
+            value={formData?.lastName}
+            onChange={(e) => handleChange(e.target.value, 'lastName')}
+            inLineLabel={ window.width > 375 ? true : false }
+            id='email'
+            autoComplete=''
+            error=''
+          />
 
-        <Input
-          label="password"
-          required={true}
-          value={formData?.password}
-          onChange={(e) => handleChange(e.target.value, 'password')}
-          inLineLabel={true}
-          id='password'
-          autoComplete=''
-          error=''
-        />
+          <Input
+            label="password"
+            required={true}
+            value={formData?.password}
+            onChange={(e) => handleChange(e.target.value, 'password')}
+            inLineLabel={ window.width > 375 ? true : false }
+            id='password'
+            autoComplete=''
+            error=''
+          />
 
-        <Input
-          label="confirm password"
-          required={true}
-          value={formData?.confirmPassword}
-          onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
-          inLineLabel={true}
-          id='password'
-          autoComplete=''
-          error=''
-        />
+          <Input
+            label="confirm password"
+            required={true}
+            value={formData?.confirmPassword}
+            onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
+            inLineLabel={ window.width > 375 ? true : false }
+            id='password'
+            autoComplete=''
+            error=''
+          />
 
+        </form>
+      </div>
+      <div className='button-container'>
         <Button
-          onClick={() => {}}
+          onClick={(e)=>handleSubmit(e)}
           content="Submit"
         />
-      </form>
-    </>
+      </div>
+    </div>
   );
 };
 

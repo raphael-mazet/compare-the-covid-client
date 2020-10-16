@@ -5,6 +5,7 @@ import Alerts from '../../components/Alerts'
 import { useHistory } from 'react-router-dom';
 import { userSearchDataVar } from '../../apolloclient/makevar'
 import { geolocate } from '../../helpers/geolocate'
+import './index.style.scss';
 
 const Homepage: React.FunctionComponent = () => {
 
@@ -17,8 +18,6 @@ const Homepage: React.FunctionComponent = () => {
   let place_id = data2.googlemap_URL;
   let lat = data2.latitude;
   let lng = data2.longitude;
-  
-  console.log(queryMaps)
 
   if (queryMaps.name !== undefined) name = queryMaps.name;
   if (queryMaps.place_id !== undefined) place_id = queryMaps.place_id;
@@ -42,26 +41,32 @@ const Homepage: React.FunctionComponent = () => {
   const caseRouter = () => history.push('/log-case');
 
   return (
-    <div className='container'>
-
-      <Alerts/>
-
-      <Button
-        content='Save a Location'
-        onClick={locationRouter}
-      />
-
-      <Button
-        content='Log a Covid'
-        onClick={caseRouter}
-      />
-      
-      <Searchbar 
-        placeholder="Search a location"
-        inputAction={setQueryMaps}
-        searchValue={searchValue}
-        setSearch={setSearchValue}
-      />
+    <div className='page-wrapper'>
+      <div style={{ width: '100%', margin: 'auto', marginTop:'10px', position: 'absolute', top: '10%'}}>
+        <Alerts />  
+      </div>
+      <div style={{width: '100%', position: 'absolute', top: '50%'}}>
+        <Searchbar
+          placeholder="Search a location"
+          inputAction={setQueryMaps}
+          searchValue={searchValue}
+          setSearch={setSearchValue}
+        />
+      </div>
+      <div className='actions_container'>
+        <div className='button-container'>
+          <Button
+            content='Save a Location'
+            onClick={locationRouter}
+          />
+        </div>
+        <div className='button-container'>
+          <Button
+            content='Log a Covid'
+            onClick={caseRouter}
+          />
+        </div>
+      </div>
     </div>
   );
 };
