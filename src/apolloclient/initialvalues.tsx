@@ -3,8 +3,12 @@ import * as interfaces from './localstateinterfaces'
 export const userSearchDataInitialValue: interfaces.UserSearchData = 
   {
     id: 0,
-    latitude: 48.8477397,
-    longitude: 2.2579683,
+    name: 'test',
+    country: 'France',
+    googlemap_URL: 'unique@id',
+    location_type: 'test',
+    latitude: 0,
+    longitude: 0,
   }
 
 export const UserAlertsInitialValue: interfaces.UserAlerts = 

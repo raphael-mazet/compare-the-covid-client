@@ -1,19 +1,18 @@
 import React from 'react';
 import "./index.style.scss";
 import { userSearchDataVar } from '../../apolloclient/makevar'
+import { useReactiveVar } from '@apollo/client';
 
-interface LocationInfoProps {
-  name: string;
-  alerts: {}[];
-  lastAlert: string;
-  lastVisited: string;
-}
+// interface LocationInfoProps {
+//   name: string;
+//   alerts: {}[];
+//   lastAlert: string;
+//   lastVisited: string;
+// }
 
-const LocationInfo = ({ name, alerts, lastAlert, lastVisited }: LocationInfoProps): JSX.Element => {
+const LocationInfo = (): JSX.Element => {
 
-  const data2 = userSearchDataVar();
-  let lat = data2.latitude;
-  let lng = data2.longitude;
+  const data = useReactiveVar(userSearchDataVar)
 
   return (  
     <div className='container'>
@@ -21,12 +20,12 @@ const LocationInfo = ({ name, alerts, lastAlert, lastVisited }: LocationInfoProp
         <h1>Location Information</h1>
       </div>
       <div>
-        <p>Name of location: <span>{name}</span></p>
-        <p>Covid alerts: <span>{'test'}</span></p>
-        <p>Date of last alert: <span>{lastAlert}</span></p>
-        <p>Last visited: <span>{lastVisited}</span></p>
-        <p>Longitude: <span>{lng}</span></p>
-        <p>Latitude: <span>{lat}</span></p>
+        <p>Name of location: <span>{data.name}</span></p>
+        <p>Covid alerts: <span>{'static'}</span></p>
+        <p>Date of last alert: <span>{'static'}</span></p>
+        <p>Last visited: <span>{'static'}</span></p>
+        <p>Longitude: <span>{data.longitude}</span></p>
+        <p>Latitude: <span>{data.latitude}</span></p>
       </div>
     </div>
   );

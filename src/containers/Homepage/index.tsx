@@ -4,26 +4,30 @@ import Button from '../../components/Button'
 import Alerts from '../../components/Alerts'
 import { useHistory } from 'react-router-dom';
 import { userSearchDataVar } from '../../apolloclient/makevar'
+import { geolocate } from '../../helpers/geolocate'
 
 const Homepage: React.FunctionComponent = () => {
-
-  navigator.geolocation.getCurrentPosition((position) => {
-    console.log('longitude', position.coords.longitude);
-    console.log('latitude',position.coords.latitude)
-  });
 
   const data2 = userSearchDataVar();
 
   const [queryMaps, setQueryMaps] = useState<any | (() => any)>("");
   const [searchValue, setSearchValue] = useState<any | (() => any)>("");
 
+  let name = data2.name;
+  let place_id = data2.googlemap_URL;
   let lat = data2.latitude;
   let lng = data2.longitude;
+  
+  console.log(queryMaps)
 
+  if (queryMaps.name !== undefined) name = queryMaps.name;
+  if (queryMaps.place_id !== undefined) place_id = queryMaps.place_id;
   if (queryMaps.geometry !== undefined) lat = queryMaps.geometry.location.lat();
   if (queryMaps.geometry !== undefined) lng = queryMaps.geometry.location.lng();
 
   const obj = {
+    name: name,
+    googlemap_URL: place_id,
     latitude: lat,
     longitude: lng,
   };
@@ -31,7 +35,10 @@ const Homepage: React.FunctionComponent = () => {
   userSearchDataVar(obj);
 
   const history = useHistory();
-  const locationRouter = () => history.push('/locations');
+  const locationRouter = async () => {
+    await geolocate()
+    history.push('/locations');
+  } 
   const caseRouter = () => history.push('/log-case');
 
   return (
@@ -55,10 +62,6 @@ const Homepage: React.FunctionComponent = () => {
         searchValue={searchValue}
         setSearch={setSearchValue}
       />
-      <div>
-        <p>{data2.latitude}</p>
-        <p>{data2.longitude}</p>
-      </div>  
     </div>
   );
 };
