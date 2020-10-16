@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 import { setAlerts } from '../../helpers/setAlerts'
 import { useHistory } from 'react-router-dom';
 import { authenticatedUserVar } from "../../apolloclient/makevar";
-import { savedLocationsVar } from "../../apolloclient/makevar";
+import saveLocationsToCache from '../../helpers/saveLocationsToCache'
 
 type userData = { 
   status: number;
@@ -73,12 +73,11 @@ const TestLogin: React.FunctionComponent = (props: any) => {
 
 
   function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
+    saveLocationsToCache(locationData)
     const locationIds: (number | null)[] = [];
-    locationData.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
+    locationData.getSavedLocationbyUser_Id.forEach((location: any) => {
       locationIds.push(location.location_id.id)
     })
-    console.log('locations',locationIds)
-    savedLocationsVar(locationIds)
     getEvents({
       variables: {
         location_ids: locationIds

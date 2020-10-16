@@ -39,5 +39,6 @@ export type {
   SavedLocations,
   GetUserbyId,
   SavedLocationsArray,
+  Location,
   Event
 }
