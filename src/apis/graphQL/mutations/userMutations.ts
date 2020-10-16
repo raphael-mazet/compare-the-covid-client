@@ -14,11 +14,15 @@ const CREATE_USER = gql`
       firstName: $firstName
       lastName: $lastName
     ) {
-      id
-      username
-      password
-      firstName
-      lastName
+      message
+      token
+      status
+      userData {
+        id
+        username
+        firstName
+        lastName
+      }
     }
   }
 `;

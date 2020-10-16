@@ -9,8 +9,9 @@ import {
 import Input from '../../components/Forms/Input';
 import Button from '../../components/Button';
 import { setAlerts } from '../../helpers/setAlerts'
+import { useHistory } from 'react-router-dom';
 
-type userData = {
+type userData = { 
   status: number;
   message: string;
   token?: string;
@@ -23,6 +24,11 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>();
 
+  const history = useHistory();
+  // const locationRouter = () => history.push("/locations");
+  // const caseRouter = () => history.push("/log-case");
+
+
   function searchLocations() {
     getSavedLocations({
       variables: {
@@ -32,8 +38,9 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   }
 
   const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
+    console.log('checkauth',response);
     const {status, message, token } = response.getUserbyUsernameAndPassword;
-    console.log(response)
+    
     if (status === 200 && token) {
       searchLocations();
       setError(null);
@@ -43,7 +50,7 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   } 
 
   const startSetAlerts = (data: { getEventsbyMulitpleLocationIds: [Event] }) => {
-    setAlerts(data, ()=> props.history.push('home'));
+    setAlerts(data, ()=> history.push('home'));
   }
   
   const [getUser, {data: userData}] = useLazyQuery<{getUserbyUsernameAndPassword: userData}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
