@@ -39,7 +39,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="email"
           required={true}
-          value={}
+          value={''}
           onChange={(e)=>handleChange(e.target.value, 'email')}
           inLineLabel={true}
           id='email'
@@ -49,7 +49,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="first name"
           required={true}
-          value={}
+          value={''}
           onChange={(e) => handleChange(e.target.value, 'firstName')}
           inLineLabel={true}
           id='email'
@@ -59,7 +59,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="last name"
           required={true}
-          value={}
+          value={''}
           onChange={(e) => handleChange(e.target.value, 'lastName')}
           inLineLabel={true}
           id='email'
@@ -70,7 +70,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="password"
           required={true}
-          value={}
+          value={''}
           onChange={(e) => handleChange(e.target.value, 'password')}
           inLineLabel={true}
           id='password'
@@ -81,7 +81,7 @@ const Register: React.FunctionComponent = () => {
         <Input
           label="confirm password"
           required={true}
-          value={}
+          value={''}
           onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
           inLineLabel={true}
           id='password'
@@ -90,7 +90,7 @@ const Register: React.FunctionComponent = () => {
         />
 
         <Button
-          onClick={(e) => handleSubmit(e)}
+          onClick={() => {}}
           content="Submit"
         />
       </form>
