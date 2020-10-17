@@ -20,12 +20,15 @@ const SavedLocations: React.FunctionComponent = () => {
       //   }
       // })
   let savedLocations = savedLocationsVar();
-
+  const locationIds = savedLocations.map(location => location.id);
   const {data: mulitpleFromDB} = useQuery(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
     variables: {
-      location_ids: [1]
+      location_ids: locationIds
     }
   })
+
+  console.log('savedLocations', savedLocations)
+  console.log('locationIds',locationIds )
   console.log('mulitpleFromDB', mulitpleFromDB)
 
 
@@ -75,30 +78,30 @@ const SavedLocations: React.FunctionComponent = () => {
   // console.log('locationIdFromCache', locationIdFromCache)
   
 
-  useEffect(() => {
-    // getEventsFromDB({
-    //   variables: {
-    //     location_ids: [1]
-    //   }
-    // })
-    // savedLocations.forEach(
-    //   (location: Location)=>{
-        // const res = client.readQuery({
-        //   query: GET_EVENTS_BY_LOCATION_ID,
-        //   variables: {
-        //     location_id: location.id
-        //   }
-        // })
-        // console.log('res', res)
-    //   }
-    // )
-    //   getLocationEvents({
-    //     variables: {
-    //       location_id: location.id,
-    //     }
-    //   })
-    // })
-  }, [])
+  // useEffect(() => {
+  //   // getEventsFromDB({
+  //   //   variables: {
+  //   //     location_ids: [1]
+  //   //   }
+  //   // })
+  //   // savedLocations.forEach(
+  //   //   (location: Location)=>{
+  //       // const res = client.readQuery({
+  //       //   query: GET_EVENTS_BY_LOCATION_ID,
+  //       //   variables: {
+  //       //     location_id: location.id
+  //       //   }
+  //       // })
+  //       // console.log('res', res)
+  //   //   }
+  //   // )
+  //   //   getLocationEvents({
+  //   //     variables: {
+  //   //       location_id: location.id,
+  //   //     }
+  //   //   })
+  //   // })
+  // }, [])
 
   return (
     <div className='container'>
