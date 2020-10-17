@@ -10,10 +10,20 @@ type propTypes = {
 
 const SavedLocationItem = (props: propTypes): JSX.Element => {
 
-  // const user_id = authenticatedUserVar()
+  function findLatest (eventsArr: any) {
+    let res: any = {};
+    eventsArr.forEach((event: any) => {
+      if (res.created_at) {
+        if (event.created_at >= res.created_at) {
+          res = event
+        }
+      }
+      else res = event
+    })
+    return res;
+  }
 
-  // console.log('userid',  user_id)
-  console.log('props', props)
+  const latestEvent = findLatest(props.location.events)
 
   return (  
     <div className='container'>
@@ -22,8 +32,8 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
       </div>
       <div>
         <p>Name of location: <span>{props.location.name}</span></p>
-        {/* <p>Covid alerts: <span>{'static'}</span></p> */}
-        {/* <p>Date of last alert: <span>{'static'}</span></p> */}
+        <p>Total covid alerts: {props.location.events?.length}</p>
+        <p>Date of last alert: {latestEvent.created_at}</p>
         {/* <p>Last visited: <span>{'static'}</span></p> */}
         <p>Longitude: <span>{props.location.longitude}</span></p>
         <p>Latitude: <span>{props.location.latitude}</span></p>
