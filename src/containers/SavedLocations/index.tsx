@@ -14,11 +14,12 @@ const SavedLocations: React.FunctionComponent = () => {
   // GET_EVENTS_BY_MULTIPLE_LOCATION_IDS
 
   // const locationIdFromCache = client.readQuery({
-  //   query: GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
-  //   variables: {
-  //     location_id: 1
-  //   }
-  // })
+    //   query: GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
+    //   variables: {
+      //     location_id: 1
+      //   }
+      // })
+  let savedLocations = savedLocationsVar();
 
   const {data: mulitpleFromDB} = useQuery(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
     variables: {
@@ -27,9 +28,12 @@ const SavedLocations: React.FunctionComponent = () => {
   })
   console.log('mulitpleFromDB', mulitpleFromDB)
 
-  const [getEventsFromDB, {data: getMultipleEventData}] = useLazyQuery<{getEventsbyMultipleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS)
 
-  console.log('getMultipleEventData', getMultipleEventData)
+
+
+  // const [getEventsFromDB, {data: getMultipleEventData}] = useLazyQuery<{getEventsbyMultipleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS)
+
+  // console.log('getMultipleEventData', getMultipleEventData)
 
   // console.log('mulitpleFromDB', mulitpleFromDB)
 
@@ -42,7 +46,6 @@ const SavedLocations: React.FunctionComponent = () => {
 
   // console.log('res', res)
   
-  let savedLocations = savedLocationsVar();
   
   // const[locationsWithEvents, setLocationsWithEvents] = useState(savedLocations)
   // const [getLocationEvents, eventData] = useLazyQuery(GET_EVENTS_BY_LOCATION_ID, {
@@ -73,11 +76,11 @@ const SavedLocations: React.FunctionComponent = () => {
   
 
   useEffect(() => {
-    getEventsFromDB({
-      variables: {
-        location_ids: [1]
-      }
-    })
+    // getEventsFromDB({
+    //   variables: {
+    //     location_ids: [1]
+    //   }
+    // })
     // savedLocations.forEach(
     //   (location: Location)=>{
         // const res = client.readQuery({
