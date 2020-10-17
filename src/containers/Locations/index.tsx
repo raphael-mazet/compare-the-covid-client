@@ -12,17 +12,37 @@ const Locations: React.FunctionComponent = () => {
   
   const data = userSearchDataVar();
 
-  const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION);
-  
-  const location_id = createLocationResponse.createLocation.id
-  const user_id = authenticatedUserVar().id
-  
-  const [addSavedLocation] = useMutation(CREATE_SAVED_LOCATION, {
-    variables: {
-      user_id,
-      location_id,
-    }
-  })
+  const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION,
+    {onCompleted: addSavedLocationHelper});
+
+  const [addSavedLocation] = useMutation(CREATE_SAVED_LOCATION);
+
+  function addSavedLocationHelper (locationResponse: any) {
+    const location_id = locationResponse.createLocation.id
+    const user_id = authenticatedUserVar().id
+
+    addSavedLocation(
+      { variables: {
+        user_id,
+        location_id,
+        selection_date: Date.now().toString()
+      }
+    });
+  }
+
+  const clickHandler = () => {
+    addLocation(
+      { variables: {
+        name: data.name,
+        country: 'test',
+        googlemap_URL: data.googlemap_URL,
+        location_type: 'test',
+        longitude: data.longitude.toString(),
+        latitude: data.latitude.toString(),
+      }
+    });
+  }
+
   // also use the same location_id alongside the user_id for this session to send createsavedlocation query to DB
   // response from usemutation, save location_id to savedlocations makevar
 
@@ -31,17 +51,7 @@ const Locations: React.FunctionComponent = () => {
       <LocationInfo/>
       <Button
         content='Save a location'
-        onClick={()=>addLocation(
-          {variables: {
-            name: data.name,
-            country: 'test',
-            googlemap_URL: data.googlemap_URL,
-            location_type: 'test',
-            longitude: data.longitude.toString(),
-            latitude: data.latitude.toString(),
-          }
-        }
-        )}
+        onClick={clickHandler}
       />
       <Button
         content='Geolocation'
