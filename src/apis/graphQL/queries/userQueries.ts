@@ -8,6 +8,9 @@ const GET_USER_BY_ID = gql`
       password
       firstName
       lastName
+      email
+      last_loggedin
+      last_checkedEvents
     }
   }
 `;
@@ -21,7 +24,10 @@ const GET_USER_BY_USERNAME_AND_PASSWORD = gql`
         id,
         username,
         firstName,
-        lastName
+        lastName,
+        email,
+        last_loggedin,
+        last_checkedEvents
       }
     }
   }

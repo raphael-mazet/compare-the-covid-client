@@ -8,7 +8,7 @@ import client from '../../client';
 import { authenticatedUserVar } from "../../apolloclient/makevar";
 
 type userForm = {
-  email: string;
+  username: string;
   password: string;
   confirmPassword: string;
   firstName: string;
@@ -47,7 +47,7 @@ const Register: React.FunctionComponent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const registrationData = {
-      username: formData?.email,
+      username: formData?.username,
       password: formData?.password,
       firstName: formData?.firstName,
       lastName: formData?.lastName,
@@ -61,12 +61,12 @@ const Register: React.FunctionComponent = () => {
     <>
       <form>
         <Input
-          label="email"
+          label="username"
           required={true}
-          value={formData?.email}
-          onChange={(e)=>handleChange(e.target.value, 'email')}
+          value={formData?.username}
+          onChange={(e)=>handleChange(e.target.value, 'username')}
           inLineLabel={true}
-          id='email'
+          id='username'
           autoComplete=''
           error=''
         />

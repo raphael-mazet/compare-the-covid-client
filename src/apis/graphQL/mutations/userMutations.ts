@@ -7,12 +7,14 @@ const CREATE_USER = gql`
     $password: String!
     $firstName: String!
     $lastName: String!
+    $email: String
   ) {
     createUser(
       username: $username
       password: $password
       firstName: $firstName
       lastName: $lastName
+      email: $email
     ) {
       message
       token
@@ -22,6 +24,9 @@ const CREATE_USER = gql`
         username
         firstName
         lastName
+        email
+        last_loggedin
+        last_checkedEvents
       }
     }
   }

@@ -3,7 +3,10 @@ interface User {
   username: string;
   password: string;
   firstName: string;
-  lastName: string
+  lastName: string;
+  email: string;
+  last_loggedin: string;
+  last_checkedEvents: string;
 }
 
 interface Event {
