@@ -25,7 +25,7 @@ const Locations: React.FunctionComponent = () => {
       { variables: {
         user_id,
         location_id,
-        selection_date: Date.now().toString()
+        selection_date: new Date().toISOString()
       }
     });
   }
