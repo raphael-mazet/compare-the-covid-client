@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SavedLocationItem from '../../components/SavedLocationItem';
 import { savedLocationsVar } from "../../apolloclient/makevar";
-import { useLazyQuery, useQuery } from "@apollo/react-hooks";
-import { GET_EVENTS_BY_LOCATION_ID, GET_USER_BY_ID, GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from "../../apis/graphQL/queries";
-import { Event, Location } from '../../interfaces/query.interface'
-import { Console } from "console";
-import client from "../../client";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from "../../apis/graphQL/queries";
 
 const SavedLocations: React.FunctionComponent = () => {
   
