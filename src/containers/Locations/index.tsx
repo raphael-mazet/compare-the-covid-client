@@ -4,18 +4,27 @@ import LocationInfo from '../../components/LocationInformation'
 import Button from '../../components/Button'
 import { geolocate } from '../../helpers/geolocate'
 // import { addLocation } from '../../helpers/addLocation'
-import { userSearchDataVar } from '../../apolloclient/makevar'
-import { CREATE_LOCATION } from '../../apis/graphQL/mutations';
+import { userSearchDataVar, authenticatedUserVar } from '../../apolloclient/makevar'
+import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 import { useMutation } from '@apollo/client';
 
 const Locations: React.FunctionComponent = () => {
   
   const data = userSearchDataVar();
 
-  const [addLocation] = useMutation(CREATE_LOCATION);
-
-  console.log('stringtosend',data.longitude.toString())
-  console.log('xxx',typeof data.longitude.toString())
+  const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION);
+  
+  const location_id = createLocationResponse.createLocation.id
+  const user_id = authenticatedUserVar().id
+  
+  const [addSavedLocation] = useMutation(CREATE_SAVED_LOCATION, {
+    variables: {
+      user_id,
+      location_id,
+    }
+  })
+  // also use the same location_id alongside the user_id for this session to send createsavedlocation query to DB
+  // response from usemutation, save location_id to savedlocations makevar
 
   return (
     <div className='container'>
