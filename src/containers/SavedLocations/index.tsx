@@ -23,7 +23,7 @@ const SavedLocations: React.FunctionComponent = () => {
   allUserEvents.getEventsbyMultipleLocationIds.forEach((event:any )=> {
     savedLocationsWithEvents.forEach(location => {
       if(location.id === event.location_id.id) {
-        location?.events?.push(event)
+        location.events.push(event)
       }
     })
   })
@@ -31,7 +31,7 @@ console.log('savedLocationsAfterLoop', savedLocationsWithEvents)
 
   return (
     <div className='container'>
-      {savedLocations.map(location=>
+      {savedLocationsWithEvents.map(location=>
       <SavedLocationItem key={location.id} location={location}/>
       )}
     </div>
