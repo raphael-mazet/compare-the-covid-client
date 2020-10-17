@@ -10,10 +10,6 @@ type propTypes = {
 
 const SavedLocationItem = (props: propTypes): JSX.Element => {
 
-  // previous: 2020-09-10T19:38:33.912Z / starbucks(id1)
-
-
-
   function findLatest (eventsArr: any) {
     let res: any = {};
     eventsArr.forEach((event: any) => {
@@ -28,11 +24,6 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
   }
 
   const latestEvent = findLatest(props.location.events)
-  // const user_id = authenticatedUserVar()
-
-  // console.log('userid',  user_id)
-  // console.log('props', props)
-  // console.log
 
   return (  
     <div className='container'>
