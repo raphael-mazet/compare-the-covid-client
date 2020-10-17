@@ -95,6 +95,19 @@ const routes = [
     component: 'SavedLocations'
   },
   {
+    title: "Location Specific Alerts",
+    to: "/locationalerts",
+    exact: true,
+    isPrivate: false,
+    footerActions: [
+      {
+        title: "Home",
+        action: "/home",
+      },
+    ],
+    component: "LocationAlerts",
+  },
+  {
     title: "Page Not Found",
     to: "/404-not-found",
     exact: true,

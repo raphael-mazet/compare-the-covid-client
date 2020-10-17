@@ -25,6 +25,11 @@ export const cache: InMemoryCache = new InMemoryCache({
             return makeVar.savedLocationsVar()
           }
         },
+        selectedLocationsEvents: {
+          read() {
+            return makeVar.selectedLocationsEventsVar()
+          }
+        },
       }
     }
   }

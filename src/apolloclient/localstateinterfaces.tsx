@@ -22,3 +22,7 @@ export interface AuthenticatedUser {
 }
 
 export type SavedLocations = Location[];
+
+export interface SelectedLocationEvents {
+  location: Location | null
+}

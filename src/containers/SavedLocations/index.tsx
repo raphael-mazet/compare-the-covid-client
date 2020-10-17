@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SavedLocationItem from '../../components/SavedLocationItem';
 import { savedLocationsVar } from "../../apolloclient/makevar";
 import { useQuery } from "@apollo/react-hooks";
@@ -24,7 +24,6 @@ const SavedLocations: React.FunctionComponent = () => {
       }
     })
   })
-console.log('savedLocationsAfterLoop', savedLocationsWithEvents)
 
   return (
     <div className='container'>
