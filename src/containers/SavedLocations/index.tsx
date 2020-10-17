@@ -9,99 +9,25 @@ import client from "../../client";
 
 const SavedLocations: React.FunctionComponent = () => {
   
-  //Trying to attach events to each user location and failing miserably
-
-  // GET_EVENTS_BY_MULTIPLE_LOCATION_IDS
-
-  // const locationIdFromCache = client.readQuery({
-    //   query: GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
-    //   variables: {
-      //     location_id: 1
-      //   }
-      // })
-  let savedLocations = savedLocationsVar();
+  const savedLocations = savedLocationsVar();
+  let savedLocationsWithEvents = savedLocations.map((location) => 
+    Object.assign({}, location, {events:[]})
+  )
   const locationIds = savedLocations.map(location => location.id);
-  const {data: mulitpleFromDB} = useQuery(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
+  const {data: allUserEvents} = useQuery(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
     variables: {
       location_ids: locationIds
     }
   })
 
-  console.log('savedLocations', savedLocations)
-  console.log('locationIds',locationIds )
-  console.log('mulitpleFromDB', mulitpleFromDB)
-
-
-
-
-  // const [getEventsFromDB, {data: getMultipleEventData}] = useLazyQuery<{getEventsbyMultipleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS)
-
-  // console.log('getMultipleEventData', getMultipleEventData)
-
-  // console.log('mulitpleFromDB', mulitpleFromDB)
-
-  //   const res = client.readQuery({
-  //   query: GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
-  //   variables: {
-  //     location_ids: [1]
-  //   }
-  // })
-
-  // console.log('res', res)
-  
-  
-  // const[locationsWithEvents, setLocationsWithEvents] = useState(savedLocations)
-  // const [getLocationEvents, eventData] = useLazyQuery(GET_EVENTS_BY_LOCATION_ID, {
-  //   onCompleted: attachEventData
-  // })
-
-  
-  // const res = client.readQuery({
-  //   query: GET_USER_BY_ID,
-  //   variables: {
-  //     id: 10
-  //   }
-  // })
-  
-  // console.log('res', res)
-  
-  
-  // console.log('locationdata', locationDataFromDB)
-
-  // const locationIdFromCache = client.readQuery({
-  //   query: GET_EVENTS_BY_LOCATION_ID,
-  //   variables: {
-  //     location_id: 1
-  //   }
-  // })
-
-  // console.log('locationIdFromCache', locationIdFromCache)
-  
-
-  // useEffect(() => {
-  //   // getEventsFromDB({
-  //   //   variables: {
-  //   //     location_ids: [1]
-  //   //   }
-  //   // })
-  //   // savedLocations.forEach(
-  //   //   (location: Location)=>{
-  //       // const res = client.readQuery({
-  //       //   query: GET_EVENTS_BY_LOCATION_ID,
-  //       //   variables: {
-  //       //     location_id: location.id
-  //       //   }
-  //       // })
-  //       // console.log('res', res)
-  //   //   }
-  //   // )
-  //   //   getLocationEvents({
-  //   //     variables: {
-  //   //       location_id: location.id,
-  //   //     }
-  //   //   })
-  //   // })
-  // }, [])
+  allUserEvents.getEventsbyMultipleLocationIds.forEach((event:any )=> {
+    savedLocationsWithEvents.forEach(location => {
+      if(location.id === event.location_id.id) {
+        location?.events?.push(event)
+      }
+    })
+  })
+console.log('savedLocationsAfterLoop', savedLocationsWithEvents)
 
   return (
     <div className='container'>
@@ -113,16 +39,3 @@ const SavedLocations: React.FunctionComponent = () => {
 };
 
 export default SavedLocations;
-
-
-  // function attachEventData (eventData: any) {
-  //   const locationsWithEvents = [...savedLocations]
-  //   locationsWithEvents.forEach(location => {
-  //     if ( eventData.getEventsbyLocation_Id[0].location_id.id === location.id) {
-  //       //location.events = eventData.getEventsbyLocation_Id creates typescript non-extensible object error
-  //       location = {...location, events: eventData.getEventsbyLocation_Id}
-  //     }
-  //   })
-  //   savedLocationsVar(locationsWithEvents);
-  //   savedLocations = savedLocationsVar();
-  // }
