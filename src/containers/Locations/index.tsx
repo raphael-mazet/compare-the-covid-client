@@ -4,7 +4,7 @@ import LocationInfo from '../../components/LocationInformation'
 import Button from '../../components/Button'
 import { geolocate } from '../../helpers/geolocate'
 // import { addLocation } from '../../helpers/addLocation'
-import { userSearchDataVar, authenticatedUserVar } from '../../apolloclient/makevar'
+import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 import { useMutation } from '@apollo/client';
 
@@ -15,12 +15,12 @@ const Locations: React.FunctionComponent = () => {
   const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION,
     {onCompleted: addSavedLocationHelper});
 
-  const [addSavedLocation] = useMutation(CREATE_SAVED_LOCATION);
+  const [addSavedLocation, {data: createSavedLocationResponse}] = useMutation(CREATE_SAVED_LOCATION, 
+    {onCompleted: addSavedLocationToMakeVarHelper});
 
   function addSavedLocationHelper (locationResponse: any) {
-    const location_id = locationResponse.createLocation.id
-    const user_id = authenticatedUserVar().id
-
+    const location_id = locationResponse.createLocation.id;
+    const user_id = authenticatedUserVar().id;
     addSavedLocation(
       { variables: {
         user_id,
@@ -28,6 +28,12 @@ const Locations: React.FunctionComponent = () => {
         selection_date: new Date().toISOString()
       }
     });
+  }
+
+  function addSavedLocationToMakeVarHelper (recievedData: any) {
+    const existingSavedlocation = savedLocationsVar();
+    const newSavedLocation = recievedData.createSavedLocation.location_id
+    savedLocationsVar([...existingSavedlocation, newSavedLocation])
   }
 
   const clickHandler = () => {
@@ -42,9 +48,6 @@ const Locations: React.FunctionComponent = () => {
       }
     });
   }
-
-  // also use the same location_id alongside the user_id for this session to send createsavedlocation query to DB
-  // response from usemutation, save location_id to savedlocations makevar
 
   return (
     <div className='container'>

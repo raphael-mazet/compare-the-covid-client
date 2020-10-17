@@ -17,7 +17,12 @@ const CREATE_SAVED_LOCATION = gql `
       }
       location_id {
         id
+        name
+        country
         googlemap_URL
+        location_type
+        longitude
+        latitude
       }
       selection_date
     }
