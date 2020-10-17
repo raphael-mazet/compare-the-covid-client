@@ -55,7 +55,7 @@ const TestLogin: React.FunctionComponent = (props: any) => {
     }
   } 
 
-  const startSetAlerts = (data: { getEventsbyMulitpleLocationIds: [Event] }) => {
+  const startSetAlerts = (data: { getEventsbyMultipleLocationIds: [Event] }) => {
     setAlerts(data, ()=> history.push('home'));
   }
   
@@ -67,17 +67,17 @@ const TestLogin: React.FunctionComponent = (props: any) => {
     onCompleted: getLocationEvents
   });
 
-  const [getEvents, {data: getMultipleEventData}] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
+  const [getEvents, {data: getMultipleEventData}] = useLazyQuery<{getEventsbyMultipleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
     onCompleted: startSetAlerts
   })
 
-  console.log('getMultipleEventData', getMultipleEventData)
+  // console.log('getMultipleEventData', getMultipleEventData)
 
-  const {data: locationDataFromDB} = useQuery<any>(GET_EVENTS_BY_LOCATION_ID, {
-    variables: {
-      location_id: 1
-    }
-  })
+  // const {data: locationDataFromDB} = useQuery<any>(GET_EVENTS_BY_LOCATION_ID, {
+  //   variables: {
+  //     location_id: 1
+  //   }
+  // })
 
 
   function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
