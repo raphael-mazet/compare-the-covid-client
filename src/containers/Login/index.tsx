@@ -1,17 +1,20 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { User, SavedLocations, SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import {
   GET_SAVED_LOCATION_BY_USER_ID,
   GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
-  GET_USER_BY_USERNAME_AND_PASSWORD
+  GET_USER_BY_USERNAME_AND_PASSWORD,
+  GET_EVENTS_BY_LOCATION_ID
 } from '../../apis/graphQL/queries/index';
 import Input from '../../components/Forms/Input';
 import Button from '../../components/Button';
 import { setAlerts } from '../../helpers/setAlerts'
 import { useHistory } from 'react-router-dom';
 import useWindowSize from '../../helpers/getWindowSize';
-import './index.style.scss';
+import './index.style.scss'
+import { authenticatedUserVar } from "../../apolloclient/makevar";
+import saveLocationsToCache from '../../helpers/saveLocationsToCache'
 
 type userData = { 
   status: number;
@@ -41,9 +44,14 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   }
 
   const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
-    const {status, message, token } = response.getUserbyUsernameAndPassword;
-    
+    const {status, message, token, userData } = response.getUserbyUsernameAndPassword;
+      
     if (status === 200 && token) {
+      const userInfo = {
+        id: userData?.id,
+        token: token,
+      }
+      authenticatedUserVar(userInfo);
       searchLocations();
       setError(null);
     } else if (status === 404) {
@@ -51,7 +59,7 @@ const TestLogin: React.FunctionComponent = (props: any) => {
     }
   } 
 
-  const startSetAlerts = (data: { getEventsbyMulitpleLocationIds: [Event] }) => {
+  const startSetAlerts = (data: { getEventsbyMultipleLocationIds: [Event] }) => {
     setAlerts(data, ()=> history.push('home'));
   }
   
@@ -63,14 +71,23 @@ const TestLogin: React.FunctionComponent = (props: any) => {
     onCompleted: getLocationEvents
   });
 
-  const [getEvents] = useLazyQuery<{getEventsbyMulitpleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
+  const [getEvents, {data: getMultipleEventData}] = useLazyQuery<{getEventsbyMultipleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
     onCompleted: startSetAlerts
   })
 
+  // console.log('getMultipleEventData', getMultipleEventData)
+
+  // const {data: locationDataFromDB} = useQuery<any>(GET_EVENTS_BY_LOCATION_ID, {
+  //   variables: {
+  //     location_id: 1
+  //   }
+  // })
+
 
   function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
+    saveLocationsToCache(locationData)
     const locationIds: (number | null)[] = [];
-    locationData.getSavedLocationbyUser_Id.forEach((location: SavedLocations) => {
+    locationData.getSavedLocationbyUser_Id.forEach((location: any) => {
       locationIds.push(location.location_id.id)
     })
     getEvents({

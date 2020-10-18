@@ -1,4 +1,4 @@
-import { CREATE_USER } from "./userMutations";
+import { CREATE_USER, UPDATE_LAST_CHECKED_EVENTS } from "./userMutations";
 import { CREATE_EVENT } from "./eventMutations";
 import { CREATE_LOCATION } from "./locationMutations";
 import {
@@ -12,6 +12,7 @@ import {
 
 export {
   CREATE_USER,
+  UPDATE_LAST_CHECKED_EVENTS,
   CREATE_EVENT,
   CREATE_LOCATION,
   CREATE_SAVED_LOCATION,

@@ -13,3 +13,10 @@ export const userAlertsVar = makeVar<interfaces.UserAlerts>(
 export const authenticatedUserVar = makeVar<interfaces.AuthenticatedUser>(
   initialvalues.authenticatedUserInitialValue
 )
+export const savedLocationsVar = makeVar<interfaces.SavedLocations>(
+  initialvalues.savedLocationsInitialValue
+)
+
+export const selectedLocationsEventsVar = makeVar<interfaces.SelectedLocationEvents>(
+  initialvalues.selectedLocationsEventsInitialValue
+)

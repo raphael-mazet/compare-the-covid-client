@@ -31,6 +31,9 @@ const GET_EVENTS_BY_LOCATION_ID = gql`
       alertScore
       created_at
       expires_on
+      location_id {
+        id
+      }
     }
   }
 `;

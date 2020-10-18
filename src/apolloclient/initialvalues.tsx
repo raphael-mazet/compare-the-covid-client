@@ -23,3 +23,9 @@ export const UserAlertsInitialValue: interfaces.UserAlerts =
     id: 3,
     token: 'hello'
   }
+
+  export const savedLocationsInitialValue: interfaces.SavedLocations = []
+
+  export const selectedLocationsEventsInitialValue: interfaces.SelectedLocationEvents = {
+    location: null
+  }

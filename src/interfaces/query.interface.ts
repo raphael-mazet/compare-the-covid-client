@@ -3,9 +3,20 @@ interface User {
   username: string;
   password: string;
   firstName: string;
-  lastName: string
+  lastName: string;
+  email: string;
+  last_loggedin: string;
+  last_checkedEvents: string;
 }
 
+interface Event {
+  id: number | null;
+  alertType: string;
+  alertDate: string;
+  alertScore: number;
+  created_at: string;
+  expires_on: string;
+}
 interface Location {
   id: number | null;
   name: string;
@@ -13,7 +24,8 @@ interface Location {
   googlemap_URL: string;
   location_type: string;
   longitude: number;
-  latitude: number
+  latitude: number;
+  events?: Event[]
 }
 
 interface SavedLocations {
@@ -25,19 +37,12 @@ type GetUserbyId = User
 
 type SavedLocationsArray = SavedLocations[]
 
-interface Event {
-  id: number | null;
-  alertType: string;
-  alertDate: string;
-  alertScore: number;
-  created_at: string;
-  expires_on: string;
-}
 
 export type {
   User,
   SavedLocations,
   GetUserbyId,
   SavedLocationsArray,
+  Location,
   Event
 }

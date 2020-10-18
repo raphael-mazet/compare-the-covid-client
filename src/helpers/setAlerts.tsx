@@ -26,15 +26,14 @@ export function setAlerts (eventData: any, callback: ()=>void) {
   }
 
   userAlertsVar(data);
-  console.log('data ->', data)
-  client.writeQuery({
-    query: USER_ALERTS,
-    data: {
-      greenAlerts: tempEvents.green,
-      yellowAlerts: tempEvents.yellow,
-      redAlerts: tempEvents.red
-    } 
-  });
+  // client.writeQuery({
+  //   query: USER_ALERTS,
+  //   data: {
+  //     greenAlerts: tempEvents.green,
+  //     yellowAlerts: tempEvents.yellow,
+  //     redAlerts: tempEvents.red
+  //   } 
+  // });
 
   callback();
 }

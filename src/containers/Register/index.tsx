@@ -10,7 +10,7 @@ import useWindowSize from '../../helpers/getWindowSize';
 import './index.style.scss';
 
 type userForm = {
-  email: string;
+  username: string;
   password: string;
   confirmPassword: string;
   firstName: string;
@@ -53,7 +53,7 @@ const Register: React.FunctionComponent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const registrationData = {
-      username: formData?.email,
+      username: formData?.username,
       password: formData?.password,
       firstName: formData?.firstName,
       lastName: formData?.lastName,
@@ -67,64 +67,63 @@ const Register: React.FunctionComponent = () => {
     <div className='page-wrapper'>
       <div className='form-wrapper'>
         <form className='form-container' onSubmit={(e)=>handleSubmit(e)}>
-          <Input
-            label="email"
-            required={true}
-            value={formData?.email}
-            onChange={(e)=>handleChange(e.target.value, 'email')}
-            inLineLabel={ window.width > 375 ? true : false }
-            id='email'
-            autoComplete=''
-            error=''
-          />
-          <Input
-            label="first name"
-            required={true}
-            value={formData?.firstName}
-            onChange={(e) => handleChange(e.target.value, 'firstName')}
-            inLineLabel={ window.width > 375 ? true : false }
-            id='email'
-            autoComplete=''
-            error=''
-          />
-          <Input
-            label="last name"
-            required={true}
-            value={formData?.lastName}
-            onChange={(e) => handleChange(e.target.value, 'lastName')}
-            inLineLabel={ window.width > 375 ? true : false }
-            id='email'
-            autoComplete=''
-            error=''
-          />
+        <Input
+          label="username"
+          required={true}
+          value={formData?.username}
+          onChange={(e)=>handleChange(e.target.value, 'username')}
+          inLineLabel={true}
+          id='username'
+          autoComplete=''
+          error=''
+        />
+        <Input
+          label="first name"
+          required={true}
+          value={formData?.firstName}
+          onChange={(e) => handleChange(e.target.value, 'firstName')}
+          inLineLabel={true}
+          id='email'
+          autoComplete=''
+          error=''
+        />
+        <Input
+          label="last name"
+          required={true}
+          value={formData?.lastName}
+          onChange={(e) => handleChange(e.target.value, 'lastName')}
+          inLineLabel={true}
+          id='email'
+          autoComplete=''
+          error=''
+        />
+        <Input
+          label="password"
+          required={true}
+          value={formData?.password}
+          onChange={(e) => handleChange(e.target.value, 'password')}
+          inLineLabel={ window.width > 375 ? true : false }
+          id='password'
+          autoComplete=''
+          error=''
+        />
 
-          <Input
-            label="password"
-            required={true}
-            value={formData?.password}
-            onChange={(e) => handleChange(e.target.value, 'password')}
-            inLineLabel={ window.width > 375 ? true : false }
-            id='password'
-            autoComplete=''
-            error=''
-          />
-
-          <Input
-            label="confirm password"
-            required={true}
-            value={formData?.confirmPassword}
-            onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
-            inLineLabel={ window.width > 375 ? true : false }
-            id='password'
-            autoComplete=''
-            error=''
-          />
+        <Input
+          label="confirm password"
+          required={true}
+          value={formData?.confirmPassword}
+          onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
+          inLineLabel={ window.width > 375 ? true : false }
+          id='password'
+          autoComplete=''
+          error=''
+        />
 
         </form>
       </div>
       <div className='button-container'>
         <Button
-          onClick={(e)=>handleSubmit(e)}
+          onClick={(e) => handleSubmit(e)}
           content="Submit"
         />
       </div>
