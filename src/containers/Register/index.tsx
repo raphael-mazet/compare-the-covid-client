@@ -6,6 +6,8 @@ import { CREATE_USER } from '../../apis/graphQL/mutations';
 import { User } from '../../interfaces/query.interface';
 import client from '../../client';
 import { authenticatedUserVar } from "../../apolloclient/makevar";
+import useWindowSize from '../../helpers/getWindowSize';
+import './index.style.scss';
 
 type userForm = {
   username: string;
@@ -17,6 +19,10 @@ type userForm = {
 
 const Register: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<userForm>();
+
+
+  const window = useWindowSize();
+
 
   const checkAuth = (responseData: any) => {
     //logic for authentication
@@ -58,8 +64,9 @@ const Register: React.FunctionComponent = () => {
   }
 
   return (
-    <>
-      <form>
+    <div className='page-wrapper'>
+      <div className='form-wrapper'>
+        <form className='form-container' onSubmit={(e)=>handleSubmit(e)}>
         <Input
           label="username"
           required={true}
@@ -90,13 +97,12 @@ const Register: React.FunctionComponent = () => {
           autoComplete=''
           error=''
         />
-
         <Input
           label="password"
           required={true}
           value={formData?.password}
           onChange={(e) => handleChange(e.target.value, 'password')}
-          inLineLabel={true}
+          inLineLabel={ window.width > 375 ? true : false }
           id='password'
           autoComplete=''
           error=''
@@ -107,18 +113,21 @@ const Register: React.FunctionComponent = () => {
           required={true}
           value={formData?.confirmPassword}
           onChange={(e) => handleChange(e.target.value, 'confirmPassword')}
-          inLineLabel={true}
+          inLineLabel={ window.width > 375 ? true : false }
           id='password'
           autoComplete=''
           error=''
         />
 
+        </form>
+      </div>
+      <div className='button-container'>
         <Button
           onClick={(e) => handleSubmit(e)}
           content="Submit"
         />
-      </form>
-    </>
+      </div>
+    </div>
   );
 };
 

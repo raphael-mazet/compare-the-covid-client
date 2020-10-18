@@ -4,9 +4,10 @@ import Button from '../../components/Button'
 import Alerts from '../../components/Alerts'
 import { useHistory } from 'react-router-dom';
 import { authenticatedUserVar, userSearchDataVar } from '../../apolloclient/makevar'
-import { geolocate } from '../../helpers/geolocate'
+import { geolocate } from '../../helpers/geolocate';
+import './index.style.scss';
 import { useMutation } from "@apollo/react-hooks";
-import { UPDATE_LAST_CHECKED_EVENTS } from '../../apis/graphQL/mutations'
+import { UPDATE_LAST_CHECKED_EVENTS } from '../../apis/graphQL/mutations';
 
 const Homepage: React.FunctionComponent = () => {
 
@@ -51,31 +52,37 @@ const Homepage: React.FunctionComponent = () => {
   const caseRouter = () => history.push('/log-case');
 
   return (
-    <div className='container'>
-
-      {/* <div onClick={ async () => 
+    <div className='page-wrapper'>
+      <div style={{ width: '100%', margin: 'auto', marginTop:'10px', position: 'absolute', top: '10%'}}>
+       {/* <div onClick={ async () => 
         await updateLastCheckedEvents(
           { variables: lastCheckedEventsData }
       )}> */}
         <Alerts/>
       {/* </div> */}
-
-      <Button
-        content='Save a Location'
-        onClick={locationRouter}
-      />
-
-      <Button
-        content='Log a Covid'
-        onClick={caseRouter}
-      />
-      
-      <Searchbar 
-        placeholder="Search a location"
-        inputAction={setQueryMaps}
-        searchValue={searchValue}
-        setSearch={setSearchValue}
-      />
+      </div>
+      <div style={{width: '100%', position: 'absolute', top: '50%'}}>
+        <Searchbar
+          placeholder="Search a location"
+          inputAction={setQueryMaps}
+          searchValue={searchValue}
+          setSearch={setSearchValue}
+        />
+      </div>
+      <div className='actions_container'>
+        <div className='button-container'>
+          <Button
+            content='Save a Location'
+            onClick={locationRouter}
+          />
+        </div>
+        <div className='button-container'>
+          <Button
+            content='Log a Covid'
+            onClick={caseRouter}
+          />
+        </div>
+      </div>
     </div>
   );
 };

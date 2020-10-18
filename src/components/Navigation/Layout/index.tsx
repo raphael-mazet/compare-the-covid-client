@@ -26,7 +26,9 @@ const Layout: React.FC<ILayoutProps> = (props: ILayoutProps) => {
   return (
     <div className="container">
       <Navbar route={currentRoute} />
-      <div className="layout_page_container">{props.children}</div>
+      <div className="layout_page_container">
+        {props.children}
+      </div>
       <Footer route={currentRoute} />
     </div>
   );

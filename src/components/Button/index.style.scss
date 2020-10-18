@@ -7,6 +7,8 @@
   cursor: pointer;
   outline: unset;
   text-transform: capitalize;
+  width: calc(100% - 20px);
+  min-width: 150px;
 
   &:hover {
     color: #296654;
