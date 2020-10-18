@@ -3,13 +3,14 @@ import "./index.style.scss";
 
 type propTypes = {
   label: string;
-  required: boolean;
+  required?: boolean;
   value?: string;
   onChange: (e: any) => void;
-  inLineLabel: boolean;
-  id: string;
-  autoComplete: string;
-  error: string;
+  inLineLabel?: boolean;
+  id?: string;
+  autoComplete?: string;
+  error?: string;
+  type?: string;
 };
 
 const Input = (props: propTypes): JSX.Element => {
@@ -22,6 +23,7 @@ const Input = (props: propTypes): JSX.Element => {
     id,
     autoComplete,
     error,
+    type
   } = props;
 
   const inLineClass: string = inLineLabel ? "inLine" : "";
@@ -34,7 +36,7 @@ const Input = (props: propTypes): JSX.Element => {
           {required ? <span style={{ color: "red" }}>*</span> : null}:
         </span>
       )}
-      <input className={errorClass} id={id} value={value} onChange={onChange} />
+      <input type={type} className={errorClass} id={id} value={value} onChange={onChange} />
       {error && <span className="errorText">{error}</span>}
     </div>
   );

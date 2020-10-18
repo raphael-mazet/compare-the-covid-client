@@ -6,8 +6,8 @@ const routes = [
     isPrivate: false,
     footerActions: [
       {
-        title: 'My Locations',
-        action: ''
+        title: 'Look up',
+        action: '/locations'
       },
       {
         title: "Saved Locations",
