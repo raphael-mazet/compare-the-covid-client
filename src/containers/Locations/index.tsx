@@ -1,24 +1,38 @@
-import React, { useEffect } from "react";
-import GoogleMap from '../../components/GoogleMap'
-import LocationInfo from '../../components/LocationInformation'
-import Button from '../../components/Button'
-import { geolocate } from '../../helpers/geolocate'
+import React, { useEffect, useState } from "react";
+import GoogleMap from '../../components/GoogleMap';
+import LocationInfo from '../../components/LocationInformation';
+import Button from '../../components/Button';
+import getGeolocation from '../../helpers/geolocate';
 // import { addLocation } from '../../helpers/addLocation'
 import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
+import './index.style.scss';
+
+type Coords = {
+  latitude: number | null;
+  longitude: number | null;
+}
+
+const initialState = {
+  latitude: null,
+  longitude: null
+}
 
 const Locations: React.FunctionComponent = () => {
+  const [coords, setCoords] = useState<Coords>(initialState);
+
   const history = useHistory();
   const data = userSearchDataVar();
 
   useEffect(() => {
+    console.log(history.location)
     if (!history.location.state || history.location.state !== 'searchbar') {
-      geolocate()
+      geolocateUser();
     } 
   }, []);
-    
+
   const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION,
     {onCompleted: addSavedLocationHelper});
 
@@ -37,6 +51,12 @@ const Locations: React.FunctionComponent = () => {
     });
   }
 
+  const geolocateUser = () => {
+    getGeolocation().then((coords: Coords) => {
+      setCoords(coords)
+    });
+  } 
+
   function addSavedLocationToMakeVarHelper (recievedData: any) {
     const existingSavedlocation = savedLocationsVar();
     const newSavedLocation = recievedData.createSavedLocation.location_id
@@ -45,7 +65,8 @@ const Locations: React.FunctionComponent = () => {
 
   const clickHandler = () => {
     addLocation(
-      { variables: {
+      {
+        variables: {
         name: data.name,
         country: 'test',
         googlemap_URL: data.googlemap_URL,
@@ -57,17 +78,29 @@ const Locations: React.FunctionComponent = () => {
   }
 
   return (
-    <div className='container'>
-      <LocationInfo/>
-      <Button
-        content='Save a location'
-        onClick={clickHandler}
-      />
-      <Button
-        content='Geolocation'
-        onClick={geolocate}
-      />
-      <GoogleMap placeName={'test'}/>
+    <div className='container_locations'>
+      <div className='container_locations_data'>
+        <LocationInfo />
+        <Button
+          content='Save a location'
+          onClick={clickHandler}
+        />
+        <Button
+          content='Geolocation'
+          onClick={geolocateUser}
+        />
+      </div>
+      <div className='locations_map'>
+        {(!coords.longitude || !coords.latitude) &&
+          <p> Map is Loading</p>
+        }
+        {(coords.longitude && coords.latitude) &&
+          <GoogleMap
+            latitude={coords.latitude}
+            longitude={coords.longitude}
+          />
+        }
+      </div>
     </div>
   );
 };

@@ -20,8 +20,8 @@ export const UserAlertsInitialValue: interfaces.UserAlerts =
 
   export const authenticatedUserInitialValue: interfaces.AuthenticatedUser =
   {
-    id: 3,
-    token: 'hello'
+    id: null,
+    token: null
   }
 
   export const savedLocationsInitialValue: interfaces.SavedLocations = []

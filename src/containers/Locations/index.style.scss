@@ -1,5 +1,19 @@
-.container {
+.container_locations {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.locations_map {
+  width: 100%;
+  height: 200px;
+}
+
+.container_locations_data {
+  height: calc(100% - 200px);
+  width: 100%;
+  margin-bottom: 10px;
+  overflow-y: auto;
 }

@@ -2,6 +2,9 @@ import React from 'react';
 import { Location } from '../../interfaces/query.interface';
 import { useHistory } from 'react-router-dom';
 import {selectedLocationsEventsVar} from "../../apolloclient/makevar"; 
+import './index.style.scss';
+import moment from 'moment';
+import Map from '../GoogleMap';
 
 type propTypes = {
   location: Location
@@ -29,19 +32,28 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
     await selectedLocationsEventsVar({location: props.location})
     history.push('/locationalerts');
   }
-
+  // <p>Longitude: <span>{props.location.longitude}</span></p>
+  // <p>Latitude: <span>{props.location.latitude}</span></p>
+  let alertZone = 'safe';
+  if (props.location.events && props.location.events?.length > 5 && props.location.events?.length < 10) {
+    alertZone = 'mid';
+  } else if (props.location.events && props.location.events?.length > 10) {
+    alertZone = 'high';
+  }
   return (  
-    <div className='container'>
+    <div className={['location-container', alertZone].join(' ')} onClick={clickHandler}>
       <div>
-        <h1>Saved Location Information</h1>
-      </div>
-      <div>
-        <p>Name of location: <span>{props.location.name}</span></p>
-        <p style={{cursor:'pointer'}} onClick={clickHandler}>Total covid alerts: {props.location.events?.length}</p>
-        <p>Date of last alert: {latestEvent.created_at}</p>
-        {/* <p>Last visited: <span>{'static'}</span></p> */}
-        <p>Longitude: <span>{props.location.longitude}</span></p>
-        <p>Latitude: <span>{props.location.latitude}</span></p>
+        <span style={{ fontWeight: 'bold' }}>{props.location.name}</span>
+        <div className='location_map_container'> 
+          <Map
+            latitude={0}
+            longitude={0}
+          />
+        </div>
+        <div className="location_data_container">
+          <p> Alerts: {props.location.events?.length}</p>
+          <p>Last: {latestEvent.created_at ? latestEvent.created_at : moment().format("MMM Do YY")}</p>
+        </div>
       </div>
     </div>
   );
