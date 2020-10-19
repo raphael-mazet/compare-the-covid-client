@@ -9,12 +9,13 @@ import { SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import { CREATE_EVENT } from '../../apis/graphQL/mutations/eventMutations';
 import Button from '../../components/Button';
 import { useHistory } from 'react-router-dom';
+import { savedLocationsVar } from '../../apolloclient/makevar';
 
 type eventForm = { 
   alertLevel: string | undefined;
   alertDate: string | undefined;
   alertLocation: string | undefined;
-  score: Int16Array | undefined;
+  score: number;
   searchedLocation: string;
 }
 
@@ -22,7 +23,7 @@ const initialState = {
   alertLevel: undefined,
   alertDate: moment().format(),
   alertLocation: '',
-  score: undefined,
+  score: 0,
   searchedLocation: ''
 }
 
@@ -42,22 +43,24 @@ const Logger: React.FunctionComponent = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+    const expiryDate = Date.now() + 12096e5;
+
     const eventData = {
       alertType: formValues?.alertLevel,
       alertDate: formValues?.alertDate,
       alertScore: formValues?.score,
-      location_id: formValues?.alertLocation,
-      created_at: Date.now(),
-      expires_on: Date.now() + 12096e5
+      location_id: Number(formValues?.alertLocation),
+      created_at: new Date().toISOString(),
+      expires_on: new Date(expiryDate).toISOString()
     }
-
     createNewEvent({
       variables: eventData
     });
   }
 
   useEffect(() => { 
-    console.log('get locations from cache');
+    const locationsFromCache = savedLocationsVar();
+    setLocations(locationsFromCache);
   }, []);
 
   const handleChange = (value: string, field: string) => {
@@ -72,21 +75,21 @@ const Logger: React.FunctionComponent = () => {
   const alertOptions = [
     {
       id: 'lowLevel',
-      value: 'Unsafe',
-      option: 'Unsafe Location'
+      value: 'safe',
+      option: 'Safe Location'
     },
     {
       id: 'midLevel',
-      value: 'Possible Case',
+      value: 'suspected',
       option: 'Possible case'
     },
     {
       id: 'highLevel',
-      value: 'Confirmed Case',
+      value: 'confirmed',
       option: 'Confirmed Case'
     }
   ];
-
+  console.log(formValues)
   return (
     <div className='page-wrapper'>
       <div className='form-wrapper'>
@@ -96,7 +99,7 @@ const Logger: React.FunctionComponent = () => {
               <Select 
                 label="Alert Level"
                 required={true}
-                onChange={(e: any) => handleChange(e.target.value, 'alertType')}
+                onChange={(e: any) => handleChange(e.target.value, 'alertLevel')}
                 value={formValues?.alertLevel}
                 hasDefaultValue={true}
                 placeholder="-- Select Level --"
@@ -111,7 +114,7 @@ const Logger: React.FunctionComponent = () => {
                 inLineLabel={window.width > 375 ? true : false}
               />
               <Select
-                label="Alert Level"
+                label="Alert Location"
                 required={true}
                 onChange={(e: any) => handleChange(e.target.value, 'alertLocation')}
                 value={formValues?.alertLocation}
@@ -119,8 +122,8 @@ const Logger: React.FunctionComponent = () => {
                 placeholder="-- Select Existing Location --"
                 options={locations.map((item: any) => ({
                   id: item.id,
-                  option: item.id,
-                  value: item.name
+                  value: item.id,
+                  option: item.name
                 }))}
                 inLineLabel={window.width > 375 ? true : false}
               />

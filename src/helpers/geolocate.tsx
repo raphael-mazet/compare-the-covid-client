@@ -3,12 +3,12 @@ import { userSearchDataVar } from '../apolloclient/makevar'
 export function geolocate () {
 
   navigator.geolocation.getCurrentPosition( async (position) => {
-    const currentLongitude = await position.coords.longitude;
-    const currentLatitude = await position.coords.latitude;
+    const currentLongitude = await position.coords;
+    // const currentLatitude = await position.coords.latitude;
     
     const obj = {
-      latitude: currentLatitude,
-      longitude: currentLongitude,
+      latitude: currentLongitude.latitude,
+      longitude: currentLongitude.longitude,
     }
 
     userSearchDataVar(obj);

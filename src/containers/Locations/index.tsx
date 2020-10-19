@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GoogleMap from '../../components/GoogleMap'
 import LocationInfo from '../../components/LocationInformation'
 import Button from '../../components/Button'
@@ -7,11 +7,18 @@ import { geolocate } from '../../helpers/geolocate'
 import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 import { useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 const Locations: React.FunctionComponent = () => {
-  
+  const history = useHistory();
   const data = userSearchDataVar();
 
+  useEffect(() => {
+    if (!history.location.state || history.location.state !== 'searchbar') {
+      geolocate()
+    } 
+  }, []);
+    
   const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION,
     {onCompleted: addSavedLocationHelper});
 

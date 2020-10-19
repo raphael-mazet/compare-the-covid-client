@@ -1,7 +1,6 @@
 import { RouteProps } from "react-router";
 
 export interface ILayoutProps {
-  location: RouteProps["location"];
   children: RouteProps["children"];
 }
 

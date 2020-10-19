@@ -5,6 +5,7 @@ import { ILayoutProps, routeData } from "./index.interface";
 import routes from "../../Router/routes";
 import "./index.style.scss";
 import currentLocationData from "../../../helpers/locationChecker";
+import { useLocation } from 'react-router-dom';
 
 const initialRoute = {
   to: "",
@@ -17,9 +18,10 @@ const initialRoute = {
 
 const Layout: React.FC<ILayoutProps> = (props: ILayoutProps) => {
   const [currentRoute, setCurrentRoute] = useState<routeData>(initialRoute);
+  const location = useLocation();
 
   useEffect(() => {
-    const routeData = currentLocationData(props.location, routes);
+    const routeData = currentLocationData(location, routes);
     setCurrentRoute(routeData);
   }, []);
 
