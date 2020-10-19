@@ -4,7 +4,7 @@ import { gql, useMutation } from '@apollo/react-hooks';
 import Button from '../../components/Button';
 import { CREATE_USER } from '../../apis/graphQL/mutations';
 import { User } from '../../interfaces/query.interface';
-import client from '../../client';
+import { useHistory } from 'react-router-dom';
 import { authenticatedUserVar } from "../../apolloclient/makevar";
 import useWindowSize from '../../helpers/getWindowSize';
 import './index.style.scss';
@@ -22,18 +22,15 @@ const Register: React.FunctionComponent = () => {
 
 
   const window = useWindowSize();
-
+  const history = useHistory(); 
 
   const checkAuth = (responseData: any) => {
     //logic for authentication
-    console.log(responseData.createUser)
     const newUser = authenticatedUserVar();
-    console.log('newUser ->', newUser)
     const newUserData = {
       id: responseData.createUser.userData.id,
       token: responseData.createUser.token
     }
-    console.log('newUserData -> ', newUserData)
     authenticatedUserVar(newUserData)
   }
 
@@ -61,6 +58,7 @@ const Register: React.FunctionComponent = () => {
     setUser({
       variables: registrationData,
     });
+    history.push('/login');
   }
 
   return (

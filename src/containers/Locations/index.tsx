@@ -14,7 +14,7 @@ const Locations: React.FunctionComponent = () => {
   const data = userSearchDataVar();
 
   useEffect(() => {
-    if (!history.location.state || history.location.state !== 'searchbar') {
+    if (!history.location || !history.location.state || history.location.state !== 'searchbar') {
       geolocate()
     } 
   }, []);
