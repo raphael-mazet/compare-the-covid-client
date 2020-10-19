@@ -10,24 +10,24 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
   const todaysDate = new Date().toISOString();
   const last_checkedEventsDate = String(authenticatedUserVar().last_checkedEvents);
  
-  console.log('lastcheckedevents', authenticatedUserVar().last_checkedEvents)
-
   const filteredConfirmedCases = data.confirmed.filter(event => event.expires_on > todaysDate);
   const filteredSuspectedCases = data.suspected.filter(event => event.expires_on > todaysDate);
   const filteredSafeCases = data.safe.filter(event => event.expires_on > todaysDate);
 
-  const filteredCheckedConfirmedCases = filteredConfirmedCases.filter(event => event.expires_on > last_checkedEventsDate);
-  const filteredCheckedSuspectedCases = filteredSuspectedCases.filter(event => event.expires_on > last_checkedEventsDate);
-  const filteredCheckedSafeCases = filteredSafeCases.filter(event => event.expires_on > last_checkedEventsDate);
+  const filteredUnCheckedConfirmedCases = filteredConfirmedCases.filter(event => event.created_on > last_checkedEventsDate);
+  const filteredUnCheckedSuspectedCases = filteredSuspectedCases.filter(event => event.created_on > last_checkedEventsDate);
+  const filteredUnCheckedSafeCases = filteredSafeCases.filter(event => event.created_on > last_checkedEventsDate);
 
-  const confirmedCases = filteredCheckedConfirmedCases.length;
-  const suspectedCases = filteredCheckedSuspectedCases.length;
-  const safeCases = filteredCheckedSafeCases.length;
+  const confirmedUncheckedCases = filteredUnCheckedConfirmedCases.length;
+  const suspectedUncheckedCases = filteredUnCheckedSuspectedCases.length;
+  const safeUncheckedCases = filteredUnCheckedSafeCases.length;
 
-  const confirmedCheckedCases = filteredConfirmedCases.length - confirmedCases;
-  const suspectedCheckedCases = filteredSuspectedCases.length - suspectedCases;
-  const safeCheckedCases = filteredSafeCases.length - safeCases;
+  const confirmedCheckedCases = filteredConfirmedCases.length - filteredUnCheckedConfirmedCases.length;
+  const suspectedCheckedCases = filteredSuspectedCases.length - filteredUnCheckedSuspectedCases.length;
+  const safeCheckedCases = filteredSafeCases.length - filteredUnCheckedSafeCases.length;
 
+  console.log('uncheckedconfirmedcases',confirmedUncheckedCases)
+  console.log('checkedconfirmedcases',confirmedCheckedCases)
 
   const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(false);
   const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(false);
@@ -38,11 +38,11 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
   const [noNewAlerts, setnoNewAlerts] = useState<boolean>(false);
 
   useEffect(() => {
-    if (confirmedCases !== 0) setShowConfirmedCircle(true);
+    if (confirmedUncheckedCases !== 0) setShowConfirmedCircle(true);
     else if (confirmedCheckedCases!==0) setShowCheckedConfirmedCircle(true);
-    else if (suspectedCases !== 0) setShowSuspectedCircle(true);
+    else if (suspectedUncheckedCases !== 0) setShowSuspectedCircle(true);
     else if (suspectedCheckedCases !== 0) setShowCheckedSuspectedCircle(true);
-    else if (safeCases !== 0) setShowSafeCircle(true);
+    else if (safeUncheckedCases !== 0) setShowSafeCircle(true);
     else if (safeCheckedCases !==0) setShowCheckedSafeCircle(true);
     else setnoNewAlerts(true);
   }, []);
@@ -63,37 +63,37 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
         <h2> Covid Alerts</h2>
       </div>
       <CircleItem
-        caseProps={confirmedCases}
+        caseProps={confirmedUncheckedCases}
         styleProps={stylesPickerForCircles.confirmedUncheckedStyles}
         textProps={"Confirmed"}
         displayProps={showConfirmedCircle}
       />
       <CircleItem
-        caseProps={suspectedCases}
+        caseProps={suspectedUncheckedCases}
         styleProps={stylesPickerForCircles.suspectedUncheckedStyles}
         textProps={"Suspected"}
         displayProps={showSuspectedCircle}
       />
       <CircleItem
-        caseProps={safeCases}
+        caseProps={safeUncheckedCases}
         styleProps={stylesPickerForCircles.safeUncheckedStyles}
         textProps={"Safe"}
         displayProps={showSafeCircle}
       />
       <CircleItem
-        caseProps={confirmedCases}
+        caseProps={confirmedCheckedCases}
         styleProps={stylesPickerForCircles.confirmedCheckedStyles}
         textProps={"Confirmed"}
         displayProps={showCheckedConfirmedCircle}
       />
       <CircleItem
-        caseProps={suspectedCases}
+        caseProps={suspectedCheckedCases}
         styleProps={stylesPickerForCircles.suspectedCheckedStyles}
         textProps={"Suspected"}
         displayProps={showCheckedSuspectedCircle}
       />
       <CircleItem
-        caseProps={safeCases}
+        caseProps={safeCheckedCases}
         styleProps={stylesPickerForCircles.safeCheckedStyles}
         textProps={"Safe"}
         displayProps={showCheckedSafeCircle}
