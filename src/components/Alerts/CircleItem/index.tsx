@@ -1,29 +1,20 @@
 import React from "react";
-import CircleItemProps from "./index.interface";
+import { circleItemProps } from "./index.interface";
 import "./index.style.scss";
 import { Link } from "react-router-dom";
 
-const circleItem = ({
-  caseProps,
-  styleProps,
-  textProps,
-  displayProps,
-}: CircleItemProps): JSX.Element | null => {
-  
-  let displayText;
-  
-  if (styleProps === ('confirmedCheckedStyles' || 'suspectedCheckedStyles' || 'safeCheckedStyles')) {
-    displayText = `You have no new cases and ${caseProps} active cases from the last week`;
-  } else {
-    displayText = `You have ${caseProps} new ${textProps} cases since you last checked`;
-  }  
-  
-  if (displayProps) {
+const circleItem = ({alerts}: circleItemProps): JSX.Element | null => {
+  const { alertType, alertNumber, isNew } = alerts;
+
+  const displayText = (!isNew) ? 
+  `You have no new cases and ${alertNumber} active case${(alertNumber === 1) ? '' : 's'} from the last week` :
+  `You have ${alertNumber} new ${alertType} case${(alertNumber === 1) ? '' : 's'} since you last checked`;
+
     return (
       <div className="circleContainer">
         <Link to="/alerts">
-          <div className={styleProps}>
-            <p className="number">{caseProps}</p>
+          <div className={`${alertType}-${isNew ? 'un' : ''}checked-styles`}>
+            <p className="number">{alertNumber}</p>
           </div>
         </Link>
         <div>
@@ -31,9 +22,6 @@ const circleItem = ({
         </div>
       </div>
     );
-  } else {
-    return null;
-  }
 };
 
 export default circleItem;

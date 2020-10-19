@@ -1,6 +1,9 @@
-export default interface circleItemProps {
-  caseProps: number;
-  styleProps: string;
-  textProps: string;
-  displayProps: boolean;
+export interface FilteredAlerts {
+  alertType: string,
+  alertNumber: number
+  isNew: boolean
+}
+
+export interface circleItemProps {
+  alerts: FilteredAlerts;
 }

@@ -1,4 +1,5 @@
-import { Location } from '../interfaces/query.interface'
+import { Location } from '../interfaces/query.interface';
+import { Event } from '../interfaces/query.interface'
 
 export interface UserSearchData {
   id?: number,
@@ -11,9 +12,9 @@ export interface UserSearchData {
 }
 
 export interface UserAlerts {
-  confirmed: any[],
-  suspected: any[],
-  safe: any[],
+  confirmed: Event[],
+  suspected: Event[],
+  safe: Event[],
 }
 
 export interface AuthenticatedUser {
