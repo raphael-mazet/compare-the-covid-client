@@ -55,7 +55,7 @@ const Logger: React.FunctionComponent = () => {
     createNewEvent({
       variables: eventData
     });
-    const existingAlerts = userAlertsVar()
+    const existingAlerts = userAlertsVar();
     if (eventData.alertType === 'confirmed') existingAlerts.confirmed = [...existingAlerts.confirmed, eventData];
     else if (eventData.alertType === 'suspected') existingAlerts.suspected = [...existingAlerts.suspected, eventData];
     else existingAlerts.safe = [...existingAlerts.safe, eventData];
