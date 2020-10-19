@@ -18,7 +18,7 @@ export interface UserAlerts {
 
 export interface AuthenticatedUser {
   id?: number | null | undefined,
-  token?: string,
+  token?: string | null,
 }
 
 export type SavedLocations = Location[];

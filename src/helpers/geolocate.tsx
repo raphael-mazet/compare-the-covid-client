@@ -1,18 +1,24 @@
-import { userSearchDataVar } from '../apolloclient/makevar'
+// import { userSearchDataVar } from '../apolloclient/makevar'
 
-export function geolocate () {
-
-  navigator.geolocation.getCurrentPosition( async (position) => {
-    const currentLongitude = await position.coords;
-    // const currentLatitude = await position.coords.latitude;
-    
-    const obj = {
-      latitude: currentLongitude.latitude,
-      longitude: currentLongitude.longitude,
-    }
-
-    userSearchDataVar(obj);
-
-  });
-
+type Coords = {
+  latitude: number;
+  longitude: number;
 }
+
+const geolocate: any = () => {
+  const coords = {
+    latitude: 0,
+    longitude: 0
+  };
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const currentCoords = await position.coords;
+      coords.latitude = currentCoords.latitude;
+      coords.longitude = currentCoords.longitude;
+      resolve(coords);
+      reject('error')
+    });
+  });
+}
+
+export default geolocate;
