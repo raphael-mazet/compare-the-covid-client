@@ -72,7 +72,7 @@ const Register: React.FunctionComponent = () => {
           required={true}
           value={formData?.username}
           onChange={(e)=>handleChange(e.target.value, 'username')}
-          inLineLabel={true}
+          inLineLabel={window.width > 375 ? true : false}
           id='username'
           autoComplete=''
           error=''
@@ -82,7 +82,7 @@ const Register: React.FunctionComponent = () => {
           required={true}
           value={formData?.firstName}
           onChange={(e) => handleChange(e.target.value, 'firstName')}
-          inLineLabel={true}
+          inLineLabel={window.width > 375 ? true : false}
           id='email'
           autoComplete=''
           error=''
@@ -92,7 +92,7 @@ const Register: React.FunctionComponent = () => {
           required={true}
           value={formData?.lastName}
           onChange={(e) => handleChange(e.target.value, 'lastName')}
-          inLineLabel={true}
+          inLineLabel={window.width > 375 ? true : false}
           id='email'
           autoComplete=''
           error=''

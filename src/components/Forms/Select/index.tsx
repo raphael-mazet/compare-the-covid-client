@@ -9,14 +9,14 @@ type option = {
 
 interface propTypes {
   label: string;
-  required: boolean;
-  onChange: () => any;
-  value: string;
-  error: string;
-  inLineLabel: boolean;
+  required?: boolean;
+  onChange: (e: any) => void;
+  value?: string;
+  error?: string;
+  inLineLabel?: boolean;
   options: option[];
-  hasDefaultValue: boolean;
-  placeholder: string;
+  hasDefaultValue?: boolean;
+  placeholder?: string;
 }
 
 const SelectInput = (props: propTypes): JSX.Element => {

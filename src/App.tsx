@@ -8,8 +8,6 @@ import dotenv from 'dotenv'
 
 function App(): JSX.Element {
   dotenv.config()
-  console.log(process.env.API_KEY)
-
   return (
     <BrowserRouter>
       <Router />
