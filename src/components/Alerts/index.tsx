@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CircleItem from "./CircleItem/index";
 import "./index.style.scss";
-import { userAlertsVar, authenticatedUserVar } from '../../apolloclient/makevar'
-import { log } from "console";
-import { UserAlerts } from "../../apolloclient/localstateinterfaces";
-import { Event } from '../../interfaces/query.interface'
+import { savedLocationsVar, userAlertsVar } from '../../apolloclient/makevar'
 import filterActiveAndNew from "../../helpers/filterActiveAndNew";
-
 
 const Alerts: React.FunctionComponent = (): JSX.Element => {
   
   const userAlerts = userAlertsVar();
-
+  console.log(' ---> userAlerts', userAlerts);
+  const userLocations = savedLocationsVar();
   const filteredAlerts = filterActiveAndNew(userAlerts);
-  console.log('filteredAlerts ---> ', filteredAlerts);
 
   return (
     <div className='alertContainer'>
@@ -23,9 +19,9 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
       <CircleItem
         alerts={filteredAlerts}
       />
-      {/* {noNewAlerts ? (
-        <p>You have no new alerts. Save some locations and get alerted.</p>
-      ) : null} */}
+      {!userLocations.length ? (
+        <p>You are not following any locations. Save some below to get alerted.</p>
+      ) : null}
     </div>
   );
 };

@@ -4,33 +4,17 @@ import "./index.style.scss";
 import { Link } from "react-router-dom";
 
 const circleItem = ({alerts}: circleItemProps): JSX.Element | null => {
-  console.log(' ---> alerts', alerts);
+  const { alertType, alertNumber, isNew } = alerts;
 
-    // style names need to correspond with styles in ./circleitem/index.style.scss
-    // const stylesPickerForCircles = {
-    //   confirmedUncheckedStyles: "confirmedUncheckedStyles",
-    //   suspectedUncheckedStyles: "suspectedUncheckedStyles",
-    //   safeUncheckedStyles: "safeUncheckedStyles",
-    //   confirmedCheckedStyles: "confirmedCheckedStyles",
-    //   suspectedCheckedStyles: "suspectedCheckedStyles",
-    //   safeCheckedStyles: "safeCheckedStyles",
-    // };
-  
-    // interface FilteredAlerts {
-    //   alertType: string,
-    //   alertNumber: number
-    //   isNew: boolean
-    // }
-  
-  const displayText = (!alerts.isNew) ? 
-  `You have no new cases and ${alerts.alertNumber} active cases from the last week` :
-  `You have ${alerts.alertNumber} new ${alerts.alertType} cases since you last checked`;
+  const displayText = (!isNew) ? 
+  `You have no new cases and ${alertNumber} active case${(alertNumber === 1) ? '' : 's'} from the last week` :
+  `You have ${alertNumber} new ${alertType} case${(alertNumber === 1) ? '' : 's'} since you last checked`;
 
     return (
       <div className="circleContainer">
         <Link to="/alerts">
-          <div className={`${alerts.alertType}-${alerts.isNew ? 'un' : ''}checked-styles`}>
-            <p className="number">{alerts.alertNumber}</p>
+          <div className={`${alertType}-${isNew ? 'un' : ''}checked-styles`}>
+            <p className="number">{alertNumber}</p>
           </div>
         </Link>
         <div>
