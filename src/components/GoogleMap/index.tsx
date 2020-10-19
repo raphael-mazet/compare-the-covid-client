@@ -2,37 +2,39 @@ import React, { useState, useEffect } from 'react';
 import "./index.style.scss";
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
-import { userSearchDataVar } from '../../apolloclient/makevar'
-import { useReactiveVar } from '@apollo/client';
+// import { userSearchDataVar } from '../../apolloclient/makevar'
+// import { useReactiveVar } from '@apollo/client';
 
 type GoogleMapProps = {
-  placeName: string;
+  latitude: number;
+  longitude: number;
+  name?: string;
 };
 
-const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
+const GoogleMap = (props: GoogleMapProps): JSX.Element => {
 
   const [center, setCenter] = useState({lat: 0, lng: 0});
   const [zoom, setZoom] = useState(13);
 
   useEffect(() => {
-    const data = userSearchDataVar()
+    // const data = userSearchDataVar()
  
     const centerObj = {
-      lat: data.latitude,
-      lng: data.longitude,
+      lat: props.latitude,
+      lng: props.longitude,
     }
 
     setCenter(centerObj)
   }, []);
 
-  const data2 = useReactiveVar(userSearchDataVar)
-  const centerObj = {
-    lat: data2.latitude,
-    lng: data2.longitude,
-  }
+  // const data2 = useReactiveVar(userSearchDataVar)
+  // const centerObj = {
+  //   lat: data2.latitude,
+  //   lng: data2.longitude,
+  // }
   
-  if (centerObj.lat !== center.lat) setCenter(centerObj);
-  else if (centerObj.lng !== center.lng) setCenter(centerObj);
+  // if (centerObj.lat !== center.lat) setCenter(centerObj);
+  // else if (centerObj.lng !== center.lng) setCenter(centerObj);
   
    const mockData = [
     {
@@ -67,7 +69,7 @@ const GoogleMap = ({placeName}: GoogleMapProps): JSX.Element => {
   }
 
   return (
-    <div style={{ height: '400px', width: '400px' }}>
+    <div style={{ height: '100%', width: '100%' }}>
       <GoogleMapReact
         options={createMapOptions}
         bootstrapURLKeys={{ key: String(googleMapKey) }}

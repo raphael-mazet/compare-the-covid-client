@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState, useEffect} from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { User, SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import {
@@ -13,7 +13,8 @@ import { useHistory } from 'react-router-dom';
 import useWindowSize from '../../helpers/getWindowSize';
 import './index.style.scss'
 import { authenticatedUserVar } from "../../apolloclient/makevar";
-import saveLocationsToCache from '../../helpers/saveLocationsToCache'
+import saveLocationsToCache from '../../helpers/saveLocationsToCache';
+import saveUserAuth from '../../helpers/authUserToCache';
 
 type userData = { 
   status: number;
@@ -22,17 +23,21 @@ type userData = {
   userData?: User;
 }
 
-const TestLogin: React.FunctionComponent = (props: any) => {
+const Login: React.FunctionComponent = (props: any) => {
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>();
-
   const history = useHistory();
-  // const locationRouter = () => history.push("/locations");
-  // const caseRouter = () => history.push("/log-case");
-
   const window = useWindowSize();
+
+  // useEffect(() => {
+  //   if (authenticatedUserVar().token) {
+  //     console.log('reroute')
+  //     history.push('/home');
+  //   }
+  // }, [])
+  
 
   function searchLocations() {
     getSavedLocations({
@@ -44,14 +49,13 @@ const TestLogin: React.FunctionComponent = (props: any) => {
 
   const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
     const {status, message, token, userData } = response.getUserbyUsernameAndPassword;
-      
     if (status === 200 && token) {
       const userInfo = {
         id: userData?.id,
         token: token,
         last_checkedEvents: userData?.last_checkedEvents,
       }
-      authenticatedUserVar(userInfo);
+      saveUserAuth(userInfo)
       searchLocations();
       setError(null);
     } else if (status === 404) {
@@ -60,7 +64,7 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   } 
 
   const startSetAlerts = (data: { getEventsbyMultipleLocationIds: [Event] }) => {
-    setAlerts(data, ()=> history.push('home'));
+    setAlerts(data, ()=> history.push('/home'));
   }
   
   const [getUser, {data: userData}] = useLazyQuery<{getUserbyUsernameAndPassword: userData}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
@@ -141,4 +145,4 @@ const TestLogin: React.FunctionComponent = (props: any) => {
   )
 }
 
-export default TestLogin;
+export default Login;

@@ -10,6 +10,21 @@
   width: calc(100% - 20px);
   min-width: 150px;
 
+  &.logout {
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px solid #46af8f;
+    padding: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    cursor: pointer;
+    outline: unset;
+    text-transform: capitalize;
+    height: 45px;
+    width: 45px;
+    min-width: unset;
+  }
+
   &:hover {
     color: #296654;
     border: 2px solid #2f7560;
