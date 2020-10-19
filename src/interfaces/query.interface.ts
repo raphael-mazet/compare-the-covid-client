@@ -10,13 +10,15 @@ interface User {
 }
 
 interface Event {
-  id: number | null;
-  alertType: string;
-  alertDate: string;
-  alertScore: number;
+  id?: number | null | undefined;
+  alertType: string | null | undefined;
+  alertDate: string | null | undefined;
+  alertScore: number | null | undefined;
+  location_id: number | null | undefined;
   created_at: string;
   expires_on: string;
 }
+
 interface Location {
   id: number | null;
   name: string;

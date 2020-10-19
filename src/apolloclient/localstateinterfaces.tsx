@@ -12,9 +12,9 @@ export interface UserSearchData {
 }
 
 export interface UserAlerts {
-  confirmed: any[],
-  suspected: any[],
-  safe: any[],
+  confirmed: Event[],
+  suspected: Event[],
+  safe: Event[],
 }
 
 export interface AuthenticatedUser {

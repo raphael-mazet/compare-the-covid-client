@@ -7,7 +7,6 @@ import filterActiveAndNew from "../../helpers/filterActiveAndNew";
 const Alerts: React.FunctionComponent = (): JSX.Element => {
   
   const userAlerts = userAlertsVar();
-  console.log(' ---> userAlerts', userAlerts);
   const userLocations = savedLocationsVar();
   const filteredAlerts = filterActiveAndNew(userAlerts);
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useState} from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState} from "react";
 import './index.style.scss';
 import { Input, Select } from '../../components/Forms';
 import useWindowSize from '../../helpers/getWindowSize';
 import moment from 'moment';
 import { useMutation } from '@apollo/react-hooks';
-import { SavedLocationsArray, Event } from '../../interfaces/query.interface';
-
+import { Event } from '../../interfaces/query.interface';
+import { SavedLocations } from '../../apolloclient/localstateinterfaces';
 import { CREATE_EVENT } from '../../apis/graphQL/mutations/eventMutations';
 import Button from '../../components/Button';
 import { useHistory } from 'react-router-dom';
@@ -21,7 +21,7 @@ type eventForm = {
 
 const initialState = {
   alertLevel: undefined,
-  alertDate: moment().format(),
+  alertDate: new Date().toISOString(),
   alertLocation: '',
   score: 0,
   searchedLocation: ''
@@ -29,11 +29,10 @@ const initialState = {
 
 const Logger: React.FunctionComponent = () => {
   const [formValues, setFormValue] = useState<eventForm>(initialState);
-  const [locations, setLocations] = useState<any>();
+  const [locations, setLocations] = useState<SavedLocations>();
   const history = useHistory();
 
-  const onCompletedEvent: any = () => {
-    console.log('registered event');
+  const onCompletedEvent = () => {
     history.push('/home');
   }
 
@@ -41,10 +40,10 @@ const Logger: React.FunctionComponent = () => {
     onCompleted: onCompletedEvent
   });
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const expiryDate = Date.now() + 12096e5;
-    const eventData = {
+    const eventData: Event = {
       alertType: formValues?.alertLevel,
       alertDate: formValues?.alertDate,
       alertScore: formValues?.score,
@@ -103,7 +102,7 @@ const Logger: React.FunctionComponent = () => {
               <Select 
                 label="Alert Level"
                 required={true}
-                onChange={(e: any) => handleChange(e.target.value, 'alertLevel')}
+                onChange={(e) => handleChange(e.target.value, 'alertLevel')}
                 value={formValues?.alertLevel}
                 hasDefaultValue={true}
                 placeholder="-- Select Level --"
@@ -114,13 +113,13 @@ const Logger: React.FunctionComponent = () => {
                 type='date'
                 label="Alert Date"
                 value={formValues?.alertDate}
-                onChange={(e: any) => handleChange(moment(e.target.value).format(), 'alertDate')}
+                onChange={(e) => handleChange(moment(e.target.value).format(), 'alertDate')}
                 inLineLabel={window.width > 375 ? true : false}
               />
               <Select
                 label="Alert Location"
                 required={true}
-                onChange={(e: any) => handleChange(e.target.value, 'alertLocation')}
+                onChange={(e) => handleChange(e.target.value, 'alertLocation')}
                 value={formValues?.alertLocation}
                 hasDefaultValue={true}
                 placeholder="-- Select Existing Location --"
