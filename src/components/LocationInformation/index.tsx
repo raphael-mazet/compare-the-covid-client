@@ -1,28 +1,30 @@
 import React from 'react';
 import "./index.style.scss";
-import { userSearchDataVar } from '../../apolloclient/makevar'
-import { useReactiveVar } from '@apollo/client';
 
-// interface LocationInfoProps {
-//   name: string;
-//   alerts: {}[];
-//   lastAlert: string;
-//   lastVisited: string;
-// }
+type dataProp = {
+  name: string;
+  country: string;
+  googlemap_URL: string;
+  location_type: string;
+  longitude: string;
+  latitude: string;
+}
 
-const LocationInfo = (): JSX.Element => {
+interface propTypes {
+  data: dataProp;
+}
 
-  const data = useReactiveVar(userSearchDataVar)
-
+const LocationInfo = (props: propTypes): JSX.Element => {
+  const {
+    data
+  } = props;
+  console.log('location info', data)
   return (  
     <div className='container'>
       <div>
-        <p>Name of location: <span>{data.name}</span></p>
-        <p>Covid alerts: <span>{'static'}</span></p>
-        <p>Date of last alert: <span>{'static'}</span></p>
-        <p>Last visited: <span>{'static'}</span></p>
-        <p>Longitude: <span>{data.longitude}</span></p>
-        <p>Latitude: <span>{data.latitude}</span></p>
+        <p className="location_info_name">{data.name}</p>
+        <p className="location_info_data">lat: {parseFloat(data.latitude).toFixed(3)} - long: {parseFloat(data.longitude).toFixed(3)} </p>
+        <p className="location_info_data">Type: {data.location_type}</p>
       </div>
     </div>
   );

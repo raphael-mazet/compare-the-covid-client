@@ -3,40 +3,49 @@ import Searchbar from '../../components/Searchbar'
 import Button from '../../components/Button'
 import Alerts from '../../components/Alerts'
 import { useHistory } from 'react-router-dom';
-import { authenticatedUserVar, userSearchDataVar } from '../../apolloclient/makevar'
-import getGeolocation from '../../helpers/geolocate';
+import { authenticatedUserVar, userSearchDataVar } from '../../apolloclient/makevar';
 import './index.style.scss';
 import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_LAST_CHECKED_EVENTS } from '../../apis/graphQL/mutations';
 
 const Homepage: React.FunctionComponent = () => {
-
-  const data2 = userSearchDataVar();
-
-  const [queryMaps, setQueryMaps] = useState<any | (() => any)>("");
-  const [searchValue, setSearchValue] = useState<any | (() => any)>("");
-
+  const [queryMaps, setQueryMaps] = useState<any | (() => any)>(""); //selected location from searchbar
+  const [searchValue, setSearchValue] = useState<any | (() => any)>(""); // input value in searchbar
   const [updateLastCheckedEvents] = useMutation(UPDATE_LAST_CHECKED_EVENTS);
   
-  let name = data2.name;
-  let place_id = data2.googlemap_URL;
-  let lat = data2.latitude;
-  let lng = data2.longitude;
+  const chacedSearch = userSearchDataVar(); //saved location from search in cache
+  
+  let name = chacedSearch.name;
+  let country = chacedSearch.country;
+  let location_type = chacedSearch.location_type;
+  let place_id = chacedSearch.googlemap_URL;
+  let lat = chacedSearch.latitude;
+  let lng = chacedSearch.longitude;
   
   if (queryMaps.name !== undefined) name = queryMaps.name;
+  if (queryMaps.address_components) country = queryMaps.address_components.find((item:any) => {
+    if (item.types.includes('country') || item.types.includes('')) {
+      return true;
+    }
+  })?.long_name;
+  if (queryMaps.types) location_type = queryMaps.types[0];
   if (queryMaps.place_id !== undefined) place_id = queryMaps.place_id;
-  if (queryMaps.geometry !== undefined) lat = queryMaps.geometry.location.lat();
-  if (queryMaps.geometry !== undefined) lng = queryMaps.geometry.location.lng();
-
-  const userSearchData = {
+  if (queryMaps.geometry !== undefined) {
+    lat = queryMaps.geometry.location.lat();
+    lng = queryMaps.geometry.location.lng();
+  }
+  
+  const searchedLocation = {
     name: name,
+    country: country,
+    location_type: location_type,
     googlemap_URL: place_id,
     latitude: lat,
     longitude: lng,
   };
-  
-  userSearchDataVar(userSearchData);
-  console.log('home')
+
+  userSearchDataVar(searchedLocation); //save search to cache
+
   const lastCheckedEventsData = {
     id: authenticatedUserVar().id,
     last_checkedEvents: new Date().toISOString(),
@@ -49,16 +58,14 @@ const Homepage: React.FunctionComponent = () => {
   }
 
   const history = useHistory();
-  const callroute = () => history.push(
+
+  const redirectToLocations = () => history.push(
     {
       pathname: '/locations',
       state: 'searchbar'
-    });
-
-  const locationRouter = async () => {
-    // await getGeolocation()
-    history.push('/locations');
-  } 
+    }  
+  );
+  
   const caseRouter = () => history.push('/log-case');
 
   return (
@@ -79,16 +86,10 @@ const Homepage: React.FunctionComponent = () => {
           inputAction={setQueryMaps}
           searchValue={searchValue}
           setSearch={setSearchValue}
-          callback={callroute}
+          callback={redirectToLocations}
         />
       </div>
       <div className='actions_container'>
-        <div className='button-container'>
-          <Button
-            content='Save a Location'
-            onClick={locationRouter}
-          />
-        </div>
         <div className='button-container'>
           <Button
             content='Log a Covid'

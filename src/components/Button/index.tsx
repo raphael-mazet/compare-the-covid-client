@@ -5,6 +5,7 @@ type propTypes = {
   content: string | JSX.Element;
   onClick: (e:any) => void;
   buttonType?: string;
+  disabled?: boolean;
 };
 
 const ButtonSt = (props: propTypes): JSX.Element => {
@@ -12,6 +13,7 @@ const ButtonSt = (props: propTypes): JSX.Element => {
     <button
       className={["button", props.buttonType].join(" ")}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.content}
     </button>

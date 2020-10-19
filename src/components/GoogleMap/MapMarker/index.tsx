@@ -5,7 +5,7 @@ interface MapMarkerProps {
   lat: number
   lng: number,
   text: string;
-  onClick?: () => void;
+  onClick?: (e:any) => any;
 }
 
 const MapMarker = ({ lat, lng, text, onClick }: MapMarkerProps): JSX.Element => (

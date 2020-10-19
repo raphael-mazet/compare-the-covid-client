@@ -48,11 +48,12 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
           <Map
             latitude={0}
             longitude={0}
+            markerSelectedAction={()=> null}
           />
         </div>
         <div className="location_data_container">
           <p> Alerts: {props.location.events?.length}</p>
-          <p>Last: {latestEvent.created_at ? latestEvent.created_at : moment().format("MMM Do YY")}</p>
+          <p> Last: {latestEvent.created_at ? latestEvent.created_at : moment().format("MMM Do YY")}</p>
         </div>
       </div>
     </div>
