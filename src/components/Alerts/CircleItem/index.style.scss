@@ -41,32 +41,32 @@
   text-align: center;
 }
 
-.confirmedUncheckedStyles {
+.confirmed-unchecked-styles {
   background-color: #c71f1f;
   @extend %styles-unchecked-shared;
 }
 
-.suspectedUncheckedStyles {
+.suspected-unchecked-styles {
   background-color: #d8db1e;
   @extend %styles-unchecked-shared;
 }
 
-.safeUncheckedStyles {
+.safe-unchecked-styles {
   background-color: #3bceac;
   @extend %styles-unchecked-shared;
 }
 
-.confirmedCheckedStyles {
+.confirmed-checked-styles {
   border-color: #c71f1f;
   @extend %styles-checked-shared;
 }
 
-.suspectedCheckedStyles {
+.suspected-checked-styles {
   border-color: #d8db1e;
   @extend %styles-checked-shared;
 }
 
-.safeCheckedStyles {
+.safe-checked-styles {
   border-color: #3bceac;
   @extend %styles-checked-shared;
 }
