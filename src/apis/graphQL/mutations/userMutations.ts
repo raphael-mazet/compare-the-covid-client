@@ -34,9 +34,11 @@ const CREATE_USER = gql`
 
 const UPDATE_LAST_CHECKED_EVENTS = gql`
   mutation UpdateLastCheckedEvents(
+    $id: Int!
     $last_checkedEvents: DateScalar!
   ) {
     updateLastCheckedEvents(
+      id: $id
       last_checkedEvents: $last_checkedEvents
     ) {
       id

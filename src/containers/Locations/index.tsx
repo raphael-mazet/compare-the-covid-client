@@ -27,7 +27,6 @@ const Locations: React.FunctionComponent = () => {
   const data = userSearchDataVar();
 
   useEffect(() => {
-    console.log(history.location)
     if (!history.location.state || history.location.state !== 'searchbar') {
       geolocateUser();
     } 
@@ -74,7 +73,9 @@ const Locations: React.FunctionComponent = () => {
         longitude: data.longitude.toString(),
         latitude: data.latitude.toString(),
       }
-    });
+    })
+    alert('location created');
+    ;
   }
 
   return (

@@ -53,6 +53,7 @@ const Login: React.FunctionComponent = (props: any) => {
       const userInfo = {
         id: userData?.id,
         token: token,
+        last_checkedEvents: userData?.last_checkedEvents,
       }
       saveUserAuth(userInfo)
       searchLocations();

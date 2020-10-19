@@ -9,8 +9,15 @@ const circleItem = ({
   textProps,
   displayProps,
 }: CircleItemProps): JSX.Element | null => {
-  const displayText = `You have new ${textProps} cases`;
-
+  
+  let displayText;
+  
+  if (styleProps === ('confirmedCheckedStyles' || 'suspectedCheckedStyles' || 'safeCheckedStyles')) {
+    displayText = `You have no new cases and ${caseProps} active cases from the last week`;
+  } else {
+    displayText = `You have ${caseProps} new ${textProps} cases since you last checked`;
+  }  
+  
   if (displayProps) {
     return (
       <div className="circleContainer">
