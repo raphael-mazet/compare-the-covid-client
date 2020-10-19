@@ -8,6 +8,7 @@ type propTypes = {
   searchValue: string;
   inputAction: any;
   placeholder: string;
+  callback: () => any;
 }
 
 let autoComplete: google.maps.places.Autocomplete;
@@ -19,7 +20,8 @@ const SearchBar = (props: propTypes): JSX.Element => {
     inputAction,
     placeholder,
     setSearch,
-    searchValue
+    searchValue,
+    callback,
   } = props;
  
   useEffect(() => {
@@ -34,7 +36,6 @@ const SearchBar = (props: propTypes): JSX.Element => {
   }
 
   const history = useHistory();
-  const callroute = () => history.push('/locations');
 
   const initMap = () => {
     if (autoCompleteRef.current) {
@@ -45,7 +46,7 @@ const SearchBar = (props: propTypes): JSX.Element => {
       autoComplete.setFields(["geometry", "name", "place_id", "formatted_address"]);
       autoComplete.addListener("place_changed", async () => {
         await handlePlaceSelect()
-        callroute()
+        callback();
       });
     }
   }

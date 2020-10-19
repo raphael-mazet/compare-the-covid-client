@@ -42,9 +42,13 @@ const Homepage: React.FunctionComponent = () => {
     last_checkedEvents: new Date().toISOString(),
   }
 
-  console.log('data', lastCheckedEventsData)
-
   const history = useHistory();
+  const callroute = () => history.push(
+    {
+      pathname: '/locations',
+      state: 'searchbar'
+    });
+
   const locationRouter = async () => {
     await geolocate()
     history.push('/locations');
@@ -67,6 +71,7 @@ const Homepage: React.FunctionComponent = () => {
           inputAction={setQueryMaps}
           searchValue={searchValue}
           setSearch={setSearchValue}
+          callback={callroute}
         />
       </div>
       <div className='actions_container'>

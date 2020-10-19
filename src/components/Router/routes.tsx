@@ -6,7 +6,7 @@ const routes = [
     isPrivate: true,
     footerActions: [
       {
-        title: 'Look up',
+        title: 'Check-in',
         action: '/locations'
       },
       {
