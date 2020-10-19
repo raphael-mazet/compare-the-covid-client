@@ -43,7 +43,7 @@ const Logger: React.FunctionComponent = () => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const expiryDate = Date.now() + 12096e5;
-    const eventData: Event = {
+    const eventData = {
       alertType: formValues?.alertLevel,
       alertDate: formValues?.alertDate,
       alertScore: formValues?.score,
@@ -51,6 +51,7 @@ const Logger: React.FunctionComponent = () => {
       created_at: new Date().toISOString(),
       expires_on: new Date(expiryDate).toISOString()
     }
+    
     createNewEvent({
       variables: eventData
     });
@@ -63,7 +64,7 @@ const Logger: React.FunctionComponent = () => {
 
   useEffect(() => { 
     const locationsFromCache = savedLocationsVar();
-    setLocations(locationsFromCache);
+    console.log(locationsFromCache);
   }, []);
 
   const handleChange = (value: string, field: string) => {
@@ -78,21 +79,21 @@ const Logger: React.FunctionComponent = () => {
   const alertOptions = [
     {
       id: 'lowLevel',
-      value: 'safe',
-      option: 'Safe Location'
+      value: 'Unsafe',
+      option: 'Unsafe Location'
     },
     {
       id: 'midLevel',
-      value: 'suspected',
+      value: 'Possible Case',
       option: 'Possible case'
     },
     {
       id: 'highLevel',
-      value: 'confirmed',
+      value: 'Confirmed Case',
       option: 'Confirmed Case'
     }
   ];
-  console.log(formValues)
+
   return (
     <div className='page-wrapper'>
       <div className='form-wrapper'>
@@ -117,7 +118,7 @@ const Logger: React.FunctionComponent = () => {
                 inLineLabel={window.width > 375 ? true : false}
               />
               <Select
-                label="Alert Location"
+                label="Alert Level"
                 required={true}
                 onChange={(e) => handleChange(e.target.value, 'alertLocation')}
                 value={formValues?.alertLocation}
@@ -125,8 +126,8 @@ const Logger: React.FunctionComponent = () => {
                 placeholder="-- Select Existing Location --"
                 options={locations.map((item: any) => ({
                   id: item.id,
-                  value: item.id,
-                  option: item.name
+                  option: item.id,
+                  value: item.name
                 }))}
                 inLineLabel={window.width > 375 ? true : false}
               />

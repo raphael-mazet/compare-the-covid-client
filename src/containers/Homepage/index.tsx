@@ -4,7 +4,7 @@ import Button from '../../components/Button'
 import Alerts from '../../components/Alerts'
 import { useHistory } from 'react-router-dom';
 import { authenticatedUserVar, userSearchDataVar } from '../../apolloclient/makevar'
-import { geolocate } from '../../helpers/geolocate';
+import getGeolocation from '../../helpers/geolocate';
 import './index.style.scss';
 import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_LAST_CHECKED_EVENTS } from '../../apis/graphQL/mutations';
@@ -36,7 +36,7 @@ const Homepage: React.FunctionComponent = () => {
   };
   
   userSearchDataVar(userSearchData);
-
+  console.log('home')
   const lastCheckedEventsData = {
     id: authenticatedUserVar().id,
     last_checkedEvents: new Date().toISOString(),
@@ -56,7 +56,7 @@ const Homepage: React.FunctionComponent = () => {
     });
 
   const locationRouter = async () => {
-    await geolocate()
+    // await getGeolocation()
     history.push('/locations');
   } 
   const caseRouter = () => history.push('/log-case');

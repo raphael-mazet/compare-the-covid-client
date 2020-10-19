@@ -8,6 +8,11 @@ interface User {
   last_loggedin: string;
   last_checkedEvents: string;
 }
+interface UserAuth {
+  id: number | null | undefined;
+  token: string;
+  last_checkedEvents: string | undefined;
+}
 
 interface Event {
   id?: number | null | undefined;
@@ -46,5 +51,6 @@ export type {
   GetUserbyId,
   SavedLocationsArray,
   Location,
-  Event
+  Event,
+  UserAuth
 }

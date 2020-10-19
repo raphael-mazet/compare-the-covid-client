@@ -17,9 +17,6 @@ const LocationInfo = (): JSX.Element => {
   return (  
     <div className='container'>
       <div>
-        <h1>Location Information</h1>
-      </div>
-      <div>
         <p>Name of location: <span>{data.name}</span></p>
         <p>Covid alerts: <span>{'static'}</span></p>
         <p>Date of last alert: <span>{'static'}</span></p>

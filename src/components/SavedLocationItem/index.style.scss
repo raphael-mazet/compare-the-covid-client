@@ -1,0 +1,36 @@
+.location-container{
+  width: calc(100% - 12px);
+  padding: 4px;
+  margin: 2px;
+  height: calc(250px - 4px);
+  border-radius: 8px;
+  border: 1px solid #5D7A98;
+
+  &.safe {
+    background-color: #80ed99;
+  }
+
+  &.mid {
+    background-color: #F9C74F;
+  }
+
+  &.high {
+    background-color: #F94144;
+  }
+}
+
+.location_map_container{
+
+}
+
+.location_data_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  p {
+    margin: unset;
+    font-size: 16px;
+    color: #808080;
+  }
+}
