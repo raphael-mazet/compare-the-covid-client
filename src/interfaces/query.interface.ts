@@ -11,6 +11,7 @@ interface User {
 interface UserAuth {
   id: number | null | undefined;
   token: string;
+  last_checkedEvents: string | undefined;
 }
 
 interface Event {
