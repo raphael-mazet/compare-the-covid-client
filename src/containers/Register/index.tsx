@@ -29,7 +29,8 @@ const Register: React.FunctionComponent = () => {
     const newUser = authenticatedUserVar();
     const newUserData = {
       id: responseData.createUser.userData.id,
-      token: responseData.createUser.token
+      token: responseData.createUser.token,
+      last_checkedEvents: ''
     }
     authenticatedUserVar(newUserData)
   }

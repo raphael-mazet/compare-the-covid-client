@@ -42,6 +42,12 @@ const Homepage: React.FunctionComponent = () => {
     last_checkedEvents: new Date().toISOString(),
   }
 
+  function updateAuthenticatedUserVar() {
+    const obj = authenticatedUserVar();
+    obj.last_checkedEvents = new Date().toISOString();
+    authenticatedUserVar(obj);
+  }
+
   const history = useHistory();
   const callroute = () => history.push(
     {
@@ -58,10 +64,12 @@ const Homepage: React.FunctionComponent = () => {
   return (
     <div className='page-wrapper'>
       <div style={{ width: '100%', margin: 'auto', marginTop:'10px', position: 'absolute', top: '10%'}}>
-       <div onClick={() => 
+       <div onClick={() => { 
         updateLastCheckedEvents(
-          { variables: lastCheckedEventsData }
-      )}>
+          { variables: lastCheckedEventsData })
+        updateAuthenticatedUserVar()
+        }
+      }>
         <Alerts/>
       </div>
       </div>
