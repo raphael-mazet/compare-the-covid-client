@@ -9,14 +9,14 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
   const data = userAlertsVar();
   const todaysDate = new Date().toISOString();
   const last_checkedEventsDate = String(authenticatedUserVar().last_checkedEvents);
- 
+
   const filteredConfirmedCases = data.confirmed.filter(event => event.expires_on > todaysDate);
   const filteredSuspectedCases = data.suspected.filter(event => event.expires_on > todaysDate);
   const filteredSafeCases = data.safe.filter(event => event.expires_on > todaysDate);
 
-  const filteredUnCheckedConfirmedCases = filteredConfirmedCases.filter(event => event.created_on > last_checkedEventsDate);
-  const filteredUnCheckedSuspectedCases = filteredSuspectedCases.filter(event => event.created_on > last_checkedEventsDate);
-  const filteredUnCheckedSafeCases = filteredSafeCases.filter(event => event.created_on > last_checkedEventsDate);
+  const filteredUnCheckedConfirmedCases = filteredConfirmedCases.filter(event => event.created_at > last_checkedEventsDate);
+  const filteredUnCheckedSuspectedCases = filteredSuspectedCases.filter(event => event.created_at > last_checkedEventsDate);
+  const filteredUnCheckedSafeCases = filteredSafeCases.filter(event => event.created_at > last_checkedEventsDate);
 
   const confirmedUncheckedCases = filteredUnCheckedConfirmedCases.length;
   const suspectedUncheckedCases = filteredUnCheckedSuspectedCases.length;
@@ -25,9 +25,6 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
   const confirmedCheckedCases = filteredConfirmedCases.length - filteredUnCheckedConfirmedCases.length;
   const suspectedCheckedCases = filteredSuspectedCases.length - filteredUnCheckedSuspectedCases.length;
   const safeCheckedCases = filteredSafeCases.length - filteredUnCheckedSafeCases.length;
-
-  console.log('uncheckedconfirmedcases',confirmedUncheckedCases)
-  console.log('checkedconfirmedcases',confirmedCheckedCases)
 
   const [showConfirmedCircle, setShowConfirmedCircle] = useState<boolean>(false);
   const [showSuspectedCircle, setShowSuspectedCircle] = useState<boolean>(false);

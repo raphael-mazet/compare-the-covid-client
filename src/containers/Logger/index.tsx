@@ -9,7 +9,7 @@ import { SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import { CREATE_EVENT } from '../../apis/graphQL/mutations/eventMutations';
 import Button from '../../components/Button';
 import { useHistory } from 'react-router-dom';
-import { savedLocationsVar } from '../../apolloclient/makevar';
+import { savedLocationsVar, userAlertsVar } from '../../apolloclient/makevar';
 
 type eventForm = { 
   alertLevel: string | undefined;
@@ -44,7 +44,6 @@ const Logger: React.FunctionComponent = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     const expiryDate = Date.now() + 12096e5;
-
     const eventData = {
       alertType: formValues?.alertLevel,
       alertDate: formValues?.alertDate,
@@ -56,6 +55,11 @@ const Logger: React.FunctionComponent = () => {
     createNewEvent({
       variables: eventData
     });
+    const existingAlerts = userAlertsVar()
+    if (eventData.alertType === 'confirmed') existingAlerts.confirmed = [...existingAlerts.confirmed, eventData];
+    else if (eventData.alertType === 'suspected') existingAlerts.suspected = [...existingAlerts.suspected, eventData];
+    else existingAlerts.safe = [...existingAlerts.safe, eventData];
+    userAlertsVar(existingAlerts);
   }
 
   useEffect(() => { 
