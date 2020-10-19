@@ -53,7 +53,9 @@ const Locations: React.FunctionComponent = () => {
         longitude: data.longitude.toString(),
         latitude: data.latitude.toString(),
       }
-    });
+    })
+    alert('location created');
+    ;
   }
 
   return (

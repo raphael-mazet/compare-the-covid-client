@@ -58,12 +58,12 @@ const Homepage: React.FunctionComponent = () => {
   return (
     <div className='page-wrapper'>
       <div style={{ width: '100%', margin: 'auto', marginTop:'10px', position: 'absolute', top: '10%'}}>
-       {/* <div onClick={ async () => 
-        await updateLastCheckedEvents(
+       <div onClick={() => 
+        updateLastCheckedEvents(
           { variables: lastCheckedEventsData }
-      )}> */}
+      )}>
         <Alerts/>
-      {/* </div> */}
+      </div>
       </div>
       <div style={{width: '100%', position: 'absolute', top: '50%'}}>
         <Searchbar
