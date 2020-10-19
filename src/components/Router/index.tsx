@@ -20,8 +20,6 @@ const Router: React.FC<any> = (props: any) => {
   useEffect(() => {
     importRoutes();
   },[]);
-  
-  console.log(authenticatedUserVar().token)
 
   const importRoutes = async () => {
     const importPromises = routesDefined.map((item) =>

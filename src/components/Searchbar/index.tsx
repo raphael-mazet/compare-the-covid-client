@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import './index.style.scss';
 import SearchSvg from '../../images/search';
-import { useHistory } from 'react-router-dom';
 
 type propTypes = {
   setSearch: any;
@@ -35,15 +34,13 @@ const SearchBar = (props: propTypes): JSX.Element => {
     setSearch(`${query.name}, ${query.formatted_address}`);
   }
 
-  const history = useHistory();
-
   const initMap = () => {
     if (autoCompleteRef.current) {
       autoComplete = new window.google.maps.places.Autocomplete(
         autoCompleteRef.current,
         { types: ['establishment'] }
       );
-      autoComplete.setFields(["geometry", "name", "place_id", "formatted_address"]);
+      autoComplete.setFields(["geometry", "name", "place_id", "formatted_address", "address_components", "types"]);
       autoComplete.addListener("place_changed", async () => {
         await handlePlaceSelect()
         callback();

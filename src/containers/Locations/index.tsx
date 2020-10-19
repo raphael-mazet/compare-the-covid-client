@@ -22,20 +22,27 @@ const initialState = {
 
 const Locations: React.FunctionComponent = () => {
   const [coords, setCoords] = useState<Coords>(initialState);
+  const [searchedLocation, setSelectedLocation] = useState<any>();
+  const [locationSelectedType, setLocationSelectedType] = useState<string>('');
 
-  const history = useHistory();
-  const data = userSearchDataVar();
-
+  const history: any = useHistory();
+  
   useEffect(() => {
-    if (!history.location.state || history.location.state !== 'searchbar') {
+    if (history.location.state !== 'searchbar') {
       geolocateUser();
-    } 
+      setLocationSelectedType('geoLocation');
+    } else {
+      setLocationSelectedType('searchedLocation');
+      const searchedLocation = userSearchDataVar();
+      setSelectedLocation(searchedLocation);
+      setCoords({ latitude: searchedLocation.latitude, longitude: searchedLocation.longitude})
+    }
   }, []);
 
-  const [addLocation, {data: createLocationResponse}] = useMutation(CREATE_LOCATION,
+  const [addLocation] = useMutation(CREATE_LOCATION,
     {onCompleted: addSavedLocationHelper});
 
-  const [addSavedLocation, {data: createSavedLocationResponse}] = useMutation(CREATE_SAVED_LOCATION, 
+  const [addSavedLocation] = useMutation(CREATE_SAVED_LOCATION, 
     {onCompleted: addSavedLocationToMakeVarHelper});
 
   function addSavedLocationHelper (locationResponse: any) {
@@ -51,6 +58,9 @@ const Locations: React.FunctionComponent = () => {
   }
 
   const geolocateUser = () => {
+    setCoords(initialState);
+    setSelectedLocation({});
+    setLocationSelectedType('geoLocation')
     getGeolocation().then((coords: Coords) => {
       setCoords(coords)
     });
@@ -61,46 +71,65 @@ const Locations: React.FunctionComponent = () => {
     const newSavedLocation = recievedData.createSavedLocation.location_id
     savedLocationsVar([...existingSavedlocation, newSavedLocation])
   }
-
+  
   const clickHandler = () => {
     addLocation(
       {
         variables: {
-        name: data.name,
-        country: 'test',
-        googlemap_URL: data.googlemap_URL,
-        location_type: 'test',
-        longitude: data.longitude.toString(),
-        latitude: data.latitude.toString(),
+        name: searchedLocation.name,
+        country: searchedLocation.country,
+        googlemap_URL: searchedLocation.googlemap_URL,
+        location_type: searchedLocation.location_type,
+        longitude: searchedLocation.longitude.toString(),
+        latitude: searchedLocation.latitude.toString(),
       }
     })
     alert('location created');
-    ;
+  }
+
+  let locationInfo = null;
+
+  if (history.location.state === 'searchbar' && searchedLocation && locationSelectedType === 'searchedLocation') {
+    locationInfo = <LocationInfo data={searchedLocation}/>;
+  } else {
+    locationInfo = <p> Current Location Displayed </p>;
   }
 
   return (
     <div className='container_locations'>
-      <div className='container_locations_data'>
-        <LocationInfo />
-        <Button
-          content='Save a location'
-          onClick={clickHandler}
-        />
-        <Button
-          content='Geolocation'
-          onClick={geolocateUser}
-        />
-      </div>
       <div className='locations_map'>
         {(!coords.longitude || !coords.latitude) &&
-          <p> Map is Loading</p>
+          <p style={{textAlign: 'center'}}> Map is Loading...</p>
         }
         {(coords.longitude && coords.latitude) &&
           <GoogleMap
             latitude={coords.latitude}
             longitude={coords.longitude}
+            markerSelectedAction={(item)=> setSelectedLocation(item)}
           />
         }
+      </div>
+      <div className='container_locations_data'>
+        <div style={{ height: '300px' }}>
+          {locationInfo}
+        </div>
+        <div className="locations_actions">
+          {
+            <div className="button_container">
+              <Button
+                disabled={!(!!locationSelectedType && !!searchedLocation && locationSelectedType === 'searchedLocation')}
+                content='Save location'
+                onClick={clickHandler}
+              />
+            </div>
+          }
+          <div className="button_container">
+            <Button
+              content='Locate me'
+              onClick={geolocateUser}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

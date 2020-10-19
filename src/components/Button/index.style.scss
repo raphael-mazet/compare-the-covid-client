@@ -33,7 +33,8 @@
 
   &:disabled {
     cursor: not-allowed;
-    background-color: grey;
+    border: 1px solid grey;
+    background-color: transparent;
     color: grey;
   }
 
