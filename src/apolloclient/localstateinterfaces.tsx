@@ -1,4 +1,5 @@
-import { Location } from '../interfaces/query.interface'
+import { Location } from '../interfaces/query.interface';
+import { Event } from '../interfaces/query.interface'
 
 export interface UserSearchData {
   id?: number,

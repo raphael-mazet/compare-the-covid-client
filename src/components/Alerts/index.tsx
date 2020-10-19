@@ -2,17 +2,24 @@ import React, { useState, useEffect } from "react";
 import CircleItem from "./CircleItem/index";
 import "./index.style.scss";
 import { userAlertsVar, authenticatedUserVar } from '../../apolloclient/makevar'
+import { log } from "console";
+import { UserAlerts } from "../../apolloclient/localstateinterfaces";
+import { Event } from '../../interfaces/query.interface'
+import filterActiveAndNew from "../../helpers/filterActiveAndNew";
 
 
 const Alerts: React.FunctionComponent = (): JSX.Element => {
   
-  const data = userAlertsVar();
+  const userAlerts = userAlertsVar();
   const todaysDate = new Date().toISOString();
   const last_checkedEventsDate = String(authenticatedUserVar().last_checkedEvents);
 
-  const filteredConfirmedCases = data.confirmed.filter(event => event.expires_on > todaysDate);
-  const filteredSuspectedCases = data.suspected.filter(event => event.expires_on > todaysDate);
-  const filteredSafeCases = data.safe.filter(event => event.expires_on > todaysDate);
+  const filteredAlerts = filterActiveAndNew(userAlerts);
+  console.log('filteredAlerts ---> ', filteredAlerts);
+
+  const filteredConfirmedCases = userAlerts.confirmed.filter(event => event.expires_on > todaysDate);
+  const filteredSuspectedCases = userAlerts.suspected.filter(event => event.expires_on > todaysDate);
+  const filteredSafeCases = userAlerts.safe.filter(event => event.expires_on > todaysDate);
 
   const filteredUnCheckedConfirmedCases = filteredConfirmedCases.filter(event => event.created_at > last_checkedEventsDate);
   const filteredUnCheckedSuspectedCases = filteredSuspectedCases.filter(event => event.created_at > last_checkedEventsDate);
