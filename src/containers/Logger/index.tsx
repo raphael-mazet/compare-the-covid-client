@@ -9,6 +9,7 @@ import { SavedLocationsArray, Event } from '../../interfaces/query.interface';
 import { CREATE_EVENT } from '../../apis/graphQL/mutations/eventMutations';
 import Button from '../../components/Button';
 import { useHistory } from 'react-router-dom';
+import { savedLocationsVar } from '../../apolloclient/makevar';
 
 type eventForm = { 
   alertLevel: string | undefined;
@@ -57,7 +58,8 @@ const Logger: React.FunctionComponent = () => {
   }
 
   useEffect(() => { 
-    console.log('get locations from cache');
+    const locationsFromCache = savedLocationsVar();
+    console.log(locationsFromCache);
   }, []);
 
   const handleChange = (value: string, field: string) => {

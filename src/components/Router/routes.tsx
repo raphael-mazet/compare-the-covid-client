@@ -3,7 +3,7 @@ const routes = [
     title: "Home",
     to: "/home",
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     footerActions: [
       {
         title: 'Look up',
@@ -46,7 +46,7 @@ const routes = [
     title: "My Locations",
     to: "/locations",
     exact: false,
-    isPrivate: false,
+    isPrivate: true,
     footerActions: [
       {
         title: "Home",
@@ -63,7 +63,7 @@ const routes = [
     title: "My Alerts",
     to: "/alerts",
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     footerActions: [
       {
         title: "Home",
@@ -76,7 +76,7 @@ const routes = [
     title: "Log a Covid",
     to: "/log-case",
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     footerActions: [
       {
         title: "Home",
@@ -89,7 +89,7 @@ const routes = [
     title: "Saved Locations",
     to: "/saved-locations",
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     footerActions: [
       {
         title: "Home",
@@ -102,7 +102,7 @@ const routes = [
     title: "Location Specific Alerts",
     to: "/locationalerts",
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     footerActions: [
       {
         title: "Home",

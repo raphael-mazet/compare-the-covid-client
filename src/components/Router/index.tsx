@@ -37,42 +37,42 @@ const Router: React.FC = () => {
     await Promise.all(importPromises);
   };
 
+  const routesRender = routes?.map((route: RouteType) => {
+    console.log(route.isPrivate)
+    if (route.isPrivate) {
+      return (
+        <PrivateRoute
+          key={`${route.to}-${route.title}`}
+          path={route.to}
+          isAuthenticated={true}
+          exact={route.exact}
+          render={() => (
+            <Layout>
+              <route.Component />
+            </Layout>
+          )}
+        />
+      );
+    } else if (!route.isPrivate) {
+      return (
+        <Route
+          key={`${route.to}-${route.title}`}
+          path={route.to}
+          render={() => (
+            <Layout >
+              <route.Component />
+            </Layout>
+          )}
+        />
+      );
+    }
+
+  });
+  
   return (
-    <Route
-      render={({ location }) => (
-        <Switch>
-          {routes &&
-            routes.map((route: RouteType) => {
-              if (route.isPrivate) {
-                return (
-                  <PrivateRoute
-                    key={`${route.to}-${route.title}`}
-                    path={route.to}
-                    exact={route.exact}
-                    render={() => (
-                      <Layout location={location}>
-                        <route.Component />
-                      </Layout>
-                    )}
-                  />
-                );
-              } else if (!route.isPrivate) {
-                return (
-                  <Route
-                    key={`${route.to}-${route.title}`}
-                    path={route.to}
-                    render={() => (
-                      <Layout location={location}>
-                        <route.Component />
-                      </Layout>
-                    )}
-                  />
-                );
-              }
-            })}
-        </Switch>
-      )}
-    />
+    <Switch>
+      {routesRender}
+    </Switch>
   );
 };
 
