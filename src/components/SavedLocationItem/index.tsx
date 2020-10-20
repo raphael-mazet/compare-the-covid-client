@@ -38,7 +38,9 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
   } else if (props.location.events && props.location.events?.length > 10) {
     alertZone = 'high';
   }
-  console.log(props.location)
+  
+  const zoomSetting = 12;
+
   return (  
     <div className={['location-container', alertZone].join(' ')} >
       <div className="location_container_clickable" onClick={clickHandler}>
@@ -50,6 +52,7 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
             latitude={props.location.latitude}
             longitude={props.location.longitude}
             markerSelectedAction={()=> null}
+            zoom={zoomSetting}
           />
         </div>
         <div className="location_data_container">

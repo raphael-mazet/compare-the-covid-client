@@ -13,6 +13,7 @@ type Location = {
 interface GoogleMapProps {
   latitude: number;
   longitude: number;
+  zoom?: number;
   name?: string;
   savedLocations?: Location[];
   mapClickedAction?: (e: any) => any;
@@ -25,7 +26,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
   const [zoom, setZoom] = useState(15);
 
   useEffect(() => {
-    console.log(props)
+    if (props.zoom) setZoom(props.zoom);
     setCenter({
       lat: Number(props.latitude),
       lng: Number(props.longitude),
