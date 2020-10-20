@@ -6,13 +6,11 @@ const Alerts: React.FunctionComponent = () => {
   
   const data: any = selectedLocationsEventsVar()
   
-  console.log('data', data)
-
   const dataArray: any = data.location.events
 
   return (
     <>
-      <h1>Your Alerts for {data.location.name}</h1>
+      <h1>{data.location.name}</h1>
       {dataArray.map(
         (event:any)=> 
           <AlertItem

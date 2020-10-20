@@ -1,16 +1,17 @@
 import React from "react";
 import './index.style.scss';
+import { DateTime } from 'luxon';
 
 const alertItem = ({ alertProps }: any): JSX.Element | null => {
   
+  const formattedAlert = alertProps.alertType.charAt(0).toUpperCase() + alertProps.alertType.slice(1)
+  const formattedDate = DateTime.fromISO(alertProps.created_at).toFormat('dd LLL yy')
+
   return (
     <div className="alertItemContainer">
-      <p>Test</p>
-      <p>Type: {alertProps.alertType}</p>
-      <p>Score: {alertProps.alertScore}</p>
-      <p>Created: {alertProps.created_at}</p>
-      <p>Country: {alertProps.location_id.country}</p>
-      <p>Location Name: {alertProps.location_id.name}</p>
+      <p className={formattedAlert}>Alert: {formattedAlert}</p>
+      <p>Created on: {formattedDate}</p>
+      <p>Sanitary rating: {alertProps.alertScore}</p>
     </div>
   );
 };

@@ -7,8 +7,6 @@ const Alerts: React.FunctionComponent = () => {
   const data = userAlertsVar();
   let dataToMap = [...data.confirmed, ...data.suspected, ...data.safe]
   
-  console.log(dataToMap)
-
   return (
     <>
       <h1>Your Alerts</h1>
