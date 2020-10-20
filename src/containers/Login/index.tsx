@@ -1,27 +1,24 @@
-import React, {ChangeEvent, FormEvent, useState, useEffect} from 'react';
+import React, {ChangeEvent, FormEvent, useState } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { User, SavedLocationsArray, Event } from '../../interfaces/query.interface';
-import {
-  GET_SAVED_LOCATION_BY_USER_ID,
-  GET_EVENTS_BY_MULTIPLE_LOCATION_IDS,
-  GET_USER_BY_USERNAME_AND_PASSWORD,
-} from '../../apis/graphQL/queries/index';
+import { User } from '../../interfaces/query.interface';
+import { GET_USER_BY_USERNAME_AND_PASSWORD } from '../../apis/graphQL/queries/index';
 import Input from '../../components/Forms/Input';
 import Button from '../../components/Button';
-import { setAlerts } from '../../helpers/setAlerts'
 import { useHistory } from 'react-router-dom';
 import useWindowSize from '../../helpers/getWindowSize';
 import './index.style.scss'
-import { authenticatedUserVar } from "../../apolloclient/makevar";
-import saveLocationsToCache from '../../helpers/saveLocationsToCache';
-import saveUserAuth from '../../helpers/authUserToCache';
 import logo from '../../images/logo.png'
+import { authenticatedUserVar, savedLocationsVar, userAlertsVar } from '../../apolloclient/makevar';
+import { SavedLocations, UserAlerts } from '../../apolloclient/localstateinterfaces'
+
 
 type userData = { 
   status: number;
   message: string;
   token?: string;
   userData?: User;
+  locationData?: SavedLocations;
+  eventData?: UserAlerts
 }
 
 const Login: React.FunctionComponent = (props: any) => {
@@ -32,66 +29,26 @@ const Login: React.FunctionComponent = (props: any) => {
   const history = useHistory();
   const window = useWindowSize();
 
-  // useEffect(() => {
-  //   if (authenticatedUserVar().token) {
-  //     console.log('reroute')
-  //     history.push('/home');
-  //   }
-  // }, [])
-  
 
-  function searchLocations() {
-    getSavedLocations({
-      variables: {
-        user_id: userData?.getUserbyUsernameAndPassword?.userData?.id
-      }
-    })
-  }
+  const [getUser] = useLazyQuery<{getUserbyUsernameAndPassword: userData}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
+    onCompleted: checkAuth
+  });
 
-  const checkAuth = (response: {getUserbyUsernameAndPassword: userData }) => {
-    const {status, message, token, userData } = response.getUserbyUsernameAndPassword;
+  function checkAuth (response: {getUserbyUsernameAndPassword: userData }) {
+    const {status, message, token, userData, locationData, eventData } = response.getUserbyUsernameAndPassword;
     if (status === 200 && token) {
       const userInfo = {
         id: userData?.id,
         token: token,
         last_checkedEvents: userData?.last_checkedEvents,
       }
-      saveUserAuth(userInfo)
-      searchLocations();
-      setError(null);
-    } else if (status === 404) {
-      setError(message);
+      authenticatedUserVar(userInfo);
+      savedLocationsVar(locationData);
+      userAlertsVar(eventData);
+      // history.push('/home')
     }
   } 
 
-  const startSetAlerts = (data: { getEventsbyMultipleLocationIds: [Event] }) => {
-    setAlerts(data, ()=> history.push('/home'));
-  }
-  
-  const [getUser, {data: userData}] = useLazyQuery<{getUserbyUsernameAndPassword: userData}>(GET_USER_BY_USERNAME_AND_PASSWORD, {
-    onCompleted: checkAuth
-  });
-
-  const [getSavedLocations] = useLazyQuery<{getSavedLocationbyUser_Id: SavedLocationsArray}>(GET_SAVED_LOCATION_BY_USER_ID, {
-    onCompleted: getLocationEvents
-  });
-
-  const [getEvents] = useLazyQuery<{getEventsbyMultipleLocationIds: [Event]}>(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
-    onCompleted: startSetAlerts
-  })
-
-  function getLocationEvents (locationData: {getSavedLocationbyUser_Id: SavedLocationsArray}) {
-    saveLocationsToCache(locationData)
-    const locationIds: (number | null)[] = [];
-    locationData.getSavedLocationbyUser_Id.forEach((location: any) => {
-      locationIds.push(location.location_id.id)
-    })
-    getEvents({
-      variables: {
-        location_ids: locationIds
-      }
-    })
-  }
     
   function handleChange (e: ChangeEvent<HTMLInputElement>) {
     if (e.target.id === 'email') setUsername(e.target.value)
