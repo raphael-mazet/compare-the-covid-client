@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Saira', sans-serif;
+  font-family: 'Montserrat', 'Saira', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 1px;
@@ -9,7 +9,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: 'Lato', source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 

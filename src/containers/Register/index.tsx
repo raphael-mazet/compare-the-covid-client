@@ -7,6 +7,9 @@ import { User } from '../../interfaces/query.interface';
 import { useHistory } from 'react-router-dom';
 import { authenticatedUserVar } from "../../apolloclient/makevar";
 import useWindowSize from '../../helpers/getWindowSize';
+import useModal from '../../helpers/useModal'
+import Modal from "../../components/Modal";
+
 import './index.style.scss';
 
 type userForm = {
@@ -19,7 +22,6 @@ type userForm = {
 
 const Register: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<userForm>();
-
 
   const window = useWindowSize();
   const history = useHistory(); 
@@ -56,11 +58,21 @@ const Register: React.FunctionComponent = () => {
       firstName: formData?.firstName,
       lastName: formData?.lastName,
     }
-    setUser({
-      variables: registrationData,
-    });
-    history.push('/login');
+    if ((formData?.username && formData?.password) !== undefined ) {
+      if (formData?.password === formData?.confirmPassword) {
+        setUser({ variables: registrationData });
+        history.push('/login');
+      } else {
+        const text = 'Please submit matching passwords';
+        toggleModal(text);  
+      }
+    } else {
+      const text = 'Please submit both a username and password';
+      toggleModal(text);
+    }
   }
+
+  const {isShowing, toggleModal, modalText} = useModal();
 
   return (
     <div className='page-wrapper'>
@@ -106,7 +118,6 @@ const Register: React.FunctionComponent = () => {
           autoComplete=''
           error=''
         />
-
         <Input
           label="confirm password"
           required={true}
@@ -117,7 +128,6 @@ const Register: React.FunctionComponent = () => {
           autoComplete=''
           error=''
         />
-
         </form>
       </div>
       <div className='button-container'>
@@ -126,6 +136,11 @@ const Register: React.FunctionComponent = () => {
           content="Submit"
         />
       </div>
+      <Modal
+        isShowing={isShowing}
+        hide={toggleModal}
+        text={modalText}
+      />
     </div>
   );
 };

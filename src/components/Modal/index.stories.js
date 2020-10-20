@@ -9,17 +9,18 @@ export default {
 
 export const Classic = () => {
   
-  const {isShowing, toggleModal} = useModal();
+  const {isShowing, toggleModal, modalText} = useModal();
 
   return( 
    <>
-   <button onClick={toggleModal}>
+   <button onClick={toggleModal('some text for the modal')}>
      Test Modal
    </button>
 
    <Modal
      isShowing={isShowing}
      hide={toggleModal}
+     text={modalText}
    />
    </>
   )

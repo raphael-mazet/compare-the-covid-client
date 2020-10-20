@@ -1,8 +1,10 @@
+@import '../../../styling/colors.scss';
+
 .navbar_container {
   width: calc(100% - 40px);
   height: 60px;
   padding: 5px 20px;
-  background-color: #46AF8F;
+  background-color: $brightblue;
   display: flex;
   position: fixed;
   top: 0;
@@ -12,7 +14,7 @@
 
 .navbar_title {
   width: 80%;
-  color: #23052e;
+  color: white;
   font-size: 30px;
   margin: auto;
 }
