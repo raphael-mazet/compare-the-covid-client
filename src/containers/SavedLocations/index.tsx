@@ -3,12 +3,13 @@ import SavedLocationItem from '../../components/SavedLocationItem';
 import { savedLocationsVar } from "../../apolloclient/makevar";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from "../../apis/graphQL/queries";
+import './index.style.scss';
 
 const SavedLocations: any = () => {
   
   const savedLocations = savedLocationsVar();
 
-  let savedLocationsWithEvents = savedLocations.map((location) => 
+  const savedLocationsWithEvents = savedLocations.map((location) => 
     Object.assign({}, location, {events:[]})
   );
 
@@ -30,9 +31,14 @@ const SavedLocations: any = () => {
 
   return (
     <div className='container'>
-      {savedLocationsWithEvents.map(location=>
-      <SavedLocationItem key={location.id} location={location}/>
-      )}
+      <div style={{height: '100%'}}>
+        {savedLocationsWithEvents.map(location=>
+          <SavedLocationItem
+            key={location.id}
+            location={location}
+          />
+        )}
+      </div>
     </div>
   );
 };

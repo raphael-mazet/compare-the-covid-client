@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import {selectedLocationsEventsVar} from "../../apolloclient/makevar"; 
 import './index.style.scss';
 import moment from 'moment';
-import Map from '../GoogleMap';
+import GoogleMap from '../GoogleMap';
 
 type propTypes = {
   location: Location
@@ -32,22 +32,23 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
     await selectedLocationsEventsVar({location: props.location})
     history.push('/locationalerts');
   }
-  // <p>Longitude: <span>{props.location.longitude}</span></p>
-  // <p>Latitude: <span>{props.location.latitude}</span></p>
   let alertZone = 'safe';
   if (props.location.events && props.location.events?.length > 5 && props.location.events?.length < 10) {
     alertZone = 'mid';
   } else if (props.location.events && props.location.events?.length > 10) {
     alertZone = 'high';
   }
+  console.log(props.location)
   return (  
-    <div className={['location-container', alertZone].join(' ')} onClick={clickHandler}>
+    <div className={['location-container', alertZone].join(' ')} >
+      <div className="location_container_clickable" onClick={clickHandler}>
+      </div>
       <div>
         <span style={{ fontWeight: 'bold' }}>{props.location.name}</span>
         <div className='location_map_container'> 
-          <Map
-            latitude={0}
-            longitude={0}
+          <GoogleMap
+            latitude={props.location.latitude}
+            longitude={props.location.longitude}
             markerSelectedAction={()=> null}
           />
         </div>

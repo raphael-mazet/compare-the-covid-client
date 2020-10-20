@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./index.style.scss";
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
-// import { userSearchDataVar } from '../../apolloclient/makevar'
-// import { useReactiveVar } from '@apollo/client';
+
 type Location = {
   name: string;
   latitude: number;
@@ -16,6 +15,7 @@ interface GoogleMapProps {
   longitude: number;
   name?: string;
   savedLocations?: Location[];
+  mapClickedAction?: (e: any) => any;
   markerSelectedAction: (e: any) => any;
 }
 
@@ -25,9 +25,10 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
   const [zoom, setZoom] = useState(15);
 
   useEffect(() => {
+    console.log(props)
     setCenter({
-      lat: props.latitude,
-      lng: props.longitude,
+      lat: Number(props.latitude),
+      lng: Number(props.longitude),
     });
   }, []);
   
@@ -36,13 +37,15 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
   const googleMapKey = 'AIzaSyBnQCOZ8iMqtqBFAqpF7w-YdlaOBfeD3lA'
   const mapClick = (mapProps: any) => {
     console.log(mapProps)
+    props.mapClickedAction && props.mapClickedAction({ latitude: mapProps.lat, longitude: mapProps.lng });
   }
 
   const createMapOptions = (maps: any) => {
     return {
       panControl: false,
       mapTypeControl: false,
-      scrollwheel: true,
+      fullscreenControl: false,
+      scrollwheel: false,
       zoomControl: false,
       styles: [{ stylers: [{ 'saturation': 0 }, { 'gamma': 0.8 }, { 'lightness': 4 }, { 'visibility': 'on' }] }]
     }
