@@ -18,10 +18,10 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
     eventsArr.forEach((event: any) => {
       if (res.created_at) {
         if (event.created_at >= res.created_at) {
-          res = event
+          res = event;
         }
       }
-      else res = event
+      else res = event;
     })
     return res;
   }
