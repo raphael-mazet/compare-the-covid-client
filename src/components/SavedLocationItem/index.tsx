@@ -7,7 +7,6 @@ import GoogleMap from '../GoogleMap';
 import { DateTime } from 'luxon';
 import { greyStyle } from '../../helpers/mapstylesetting'
 
-
 type propTypes = {
   location: Location
 }
