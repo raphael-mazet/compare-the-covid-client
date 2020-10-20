@@ -1,4 +1,5 @@
 import React from "react";
+import './index.style.scss';
 
 const alertItem = ({ alertProps }: any): JSX.Element | null => {
   
