@@ -49,7 +49,7 @@ const SearchBar = (props: propTypes): JSX.Element => {
   }
 
   return (
-    <div className='searchBar'>
+    <div className="container_search">
       <input
         id="searchQuery"
         ref={autoCompleteRef}
@@ -58,7 +58,7 @@ const SearchBar = (props: propTypes): JSX.Element => {
         type="text"
         onChange={(e) => setSearch(e.target.value)}
         placeholder={placeholder} />
-      <SearchSvg height={'20px'} color={'#5D7A98'} />
+      <div className="search"></div>
     </div>
   );
 }

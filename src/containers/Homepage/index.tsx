@@ -69,9 +69,12 @@ const Homepage: React.FunctionComponent = () => {
   const caseRouter = () => history.push('/log-case');
 
   return (
-    <div className='page-wrapper'>
-      <div style={{ width: '100%', margin: 'auto', marginTop:'10px', position: 'absolute', top: '10%'}}>
-       <div onClick={() => { 
+    <div className='homepage-wrapper'>
+      <h2>
+        Covid Alerts
+      </h2>
+      <div className='content_container'>
+       <div className='alerts_container' onClick={() => { 
         updateLastCheckedEvents(
           { variables: lastCheckedEventsData })
         updateAuthenticatedUserVar()
@@ -80,7 +83,7 @@ const Homepage: React.FunctionComponent = () => {
         <Alerts/>
       </div>
       </div>
-      <div style={{width: '100%', position: 'absolute', top: '50%'}}>
+      <div className='content_container'>
         <Searchbar
           placeholder="Search a location"
           inputAction={setQueryMaps}
