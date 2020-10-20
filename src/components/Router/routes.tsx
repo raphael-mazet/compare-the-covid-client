@@ -99,7 +99,7 @@ const routes = [
     component: 'SavedLocations'
   },
   {
-    title: "Location Specific Alerts",
+    title: "Location Alerts",
     to: "/locationalerts",
     exact: true,
     isPrivate: true,
