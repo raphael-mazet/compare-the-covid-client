@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./index.style.scss";
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
+import { classicStyle } from '../../helpers/mapstylesetting'
 
 type Location = {
   name: string;
@@ -15,6 +16,7 @@ interface GoogleMapProps {
   longitude: number;
   zoom?: number;
   name?: string;
+  style?: any[];
   savedLocations?: Location[];
   mapClickedAction?: (e: any) => any;
   markerSelectedAction: (e: any) => any;
@@ -24,9 +26,11 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
 
   const [center, setCenter] = useState({lat: 0, lng: 0});
   const [zoom, setZoom] = useState(15);
+  const [style, setStyle] = useState(classicStyle)
 
   useEffect(() => {
     if (props.zoom) setZoom(props.zoom);
+    if (props.style) setStyle(props.style);
     setCenter({
       lat: Number(props.latitude),
       lng: Number(props.longitude),
@@ -48,7 +52,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
       fullscreenControl: false,
       scrollwheel: false,
       zoomControl: false,
-      styles: [{ stylers: [{ 'saturation': 0 }, { 'gamma': 0.8 }, { 'lightness': 4 }, { 'visibility': 'on' }] }]
+      styles: style,
     }
   }
   
