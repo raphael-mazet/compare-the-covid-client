@@ -83,7 +83,7 @@ const Homepage: React.FunctionComponent = () => {
         <Alerts/>
       </div>
       </div>
-      <div className='content_container'>
+      <div className='searchbar_container'>
         <Searchbar
           placeholder="Search a location"
           inputAction={setQueryMaps}
