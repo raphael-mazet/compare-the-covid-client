@@ -12,9 +12,6 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
 
   return (
     <div className='alertContainer'>
-      <div>
-        <h2> Covid Alerts</h2>
-      </div>
       <CircleItem
         alerts={filteredAlerts}
       />

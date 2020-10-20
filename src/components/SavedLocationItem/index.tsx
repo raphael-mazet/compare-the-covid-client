@@ -6,6 +6,7 @@ import './index.style.scss';
 import GoogleMap from '../GoogleMap';
 import { DateTime } from 'luxon';
 import { greyStyle } from '../../helpers/mapstylesetting'
+import CloseIcon from '../CloseIcon'
 
 type propTypes = {
   location: Location
@@ -45,9 +46,9 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
 
   return (  
     <div className={['location-container', alertZone].join(' ')} >
+      <CloseIcon/>
       <div className="location_container_clickable" onClick={clickHandler}>
       </div>
-      <div className='content_container'>
         <span style={{ fontWeight: 'bold' }}>{props.location.name}</span>
         <div className="location_data_container">
           <p> <span>Alerts:</span> {props.location.events?.length}</p>
@@ -63,7 +64,6 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
           />
         </div>
       </div>
-    </div>
   );
 }
 

@@ -1,0 +1,20 @@
+@import '../../styling/colors.scss';
+
+.closeIcon_container {
+  display: flex;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  background-color: $red;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.closeIcon_asset {
+  height: 12px;
+  width: 12px;
+}
