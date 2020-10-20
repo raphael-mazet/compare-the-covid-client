@@ -33,7 +33,6 @@ const Logger: React.FunctionComponent = () => {
   const history = useHistory();
   
   const onCompletedEvent = (response: any) => {
-    console.log('eventcreated', response)
     const existingAlerts = userAlertsVar();
     
     if (response.createEvent.alertType === 'confirmed') existingAlerts.confirmed = [...existingAlerts.confirmed, response.createEvent];

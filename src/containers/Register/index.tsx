@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from '../../components/Forms/Input';
-import { gql, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import Button from '../../components/Button';
 import { CREATE_USER } from '../../apis/graphQL/mutations';
 import { User } from '../../interfaces/query.interface';
@@ -27,8 +27,6 @@ const Register: React.FunctionComponent = () => {
   const history = useHistory(); 
 
   const checkAuth = (responseData: any) => {
-    //logic for authentication
-    const newUser = authenticatedUserVar();
     const newUserData = {
       id: responseData.createUser.userData.id,
       token: responseData.createUser.token,
@@ -37,7 +35,7 @@ const Register: React.FunctionComponent = () => {
     authenticatedUserVar(newUserData)
   }
 
-  const [setUser, { data: responseData }] = useMutation<{ createUser: User }>(CREATE_USER, {
+  const [setUser] = useMutation<{ createUser: User }>(CREATE_USER, {
     onCompleted: checkAuth
   });
 

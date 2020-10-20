@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import Layout from "../Navigation/Layout";
 import routesDefined from "./routes";
-import { authenticatedUserVar } from '../../apolloclient/makevar';
 
 type RouteType = {
   Component: React.FunctionComponent;
@@ -15,7 +14,6 @@ type RouteType = {
 
 const Router: React.FC<any> = (props: any) => {
   const [routes, setRoutes] = useState<RouteType[]>([]);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
 
   useEffect(() => {
     importRoutes();
@@ -69,7 +67,6 @@ const Router: React.FC<any> = (props: any) => {
             />
           );
         }
-
       })
     }
     </Switch>

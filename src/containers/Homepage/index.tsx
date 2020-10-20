@@ -27,6 +27,7 @@ const Homepage: React.FunctionComponent = () => {
     if (item.types.includes('country') || item.types.includes('')) {
       return true;
     }
+    return false;
   })?.long_name;
   if (queryMaps.types) location_type = queryMaps.types[0];
   if (queryMaps.place_id !== undefined) place_id = queryMaps.place_id;

@@ -25,11 +25,3 @@ const PrivateRoute = ({
 };
 
 export default PrivateRoute;
-
-{
-  /* <PrivateRoute
-  path='/private'
-  isAuthenticated={this.props.state.session.isAuthenticated}
-  component={PrivateContainer}
-/> */
-}

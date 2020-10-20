@@ -1,4 +1,4 @@
-import { gql, ApolloCache, Resolvers } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const typeDefs = gql`
   # extend type Query {
@@ -13,19 +13,11 @@ export const typeDefs = gql`
   }
 `
 
-type ResolverFn = (
-  parent: any,
-  args: any,
-  { cache } : { cache: ApolloCache<any> }
-) => any;
-
-interface ResolverMap {
-  [field: string]: ResolverFn;
-}
-
-interface AppResolvers extends Resolvers {
-  // We will update this with our app's resolvers later
-}
+// type ResolverFn = (
+//   parent: any,
+//   args: any,
+//   { cache } : { cache: ApolloCache<any> }
+// ) => any;
 
 export const resolvers = {
 //NOTE: add client-side resolvers if needed
