@@ -1,6 +1,5 @@
 import { authenticatedUserVar } from '../apolloclient/makevar';
 import { Event } from '../interfaces/query.interface';
-import { UserAlerts } from '../apolloclient/localstateinterfaces';
 import { FilteredAlerts } from '../components/Alerts/CircleItem/index.interface'
 
 function filterActiveAndNew (alerts: any): FilteredAlerts {

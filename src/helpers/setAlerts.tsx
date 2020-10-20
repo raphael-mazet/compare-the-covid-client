@@ -1,7 +1,5 @@
-import { USER_ALERTS } from '../apis/graphQL/queries';
-import client from '../client';
+
 import { Event } from '../interfaces/query.interface';
-import { userAlertsVar } from '../apolloclient/makevar';
 
 export function setAlerts (eventData: any) {
   const tempEvents: any = {

@@ -19,7 +19,8 @@ const SavedLocations = (): JSX.Element => {
 
   events && events.forEach((event: any )=> {
     savedLocationsWithEvents.forEach(location => {
-      if(location.id === event?.location_id?.id) {
+      console.log(event.location_id)
+      if(location.id === event?.location_id.id) {
         location.events.push(event)
       }
     })

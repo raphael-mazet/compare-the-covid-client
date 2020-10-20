@@ -26,7 +26,7 @@ const Login: React.FunctionComponent = (props: any) => {
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string | null>();
+  const [error,] = useState<string | null>();
   const history = useHistory();
   const window = useWindowSize();
 
@@ -44,7 +44,6 @@ const Login: React.FunctionComponent = (props: any) => {
         last_checkedEvents: userData?.last_checkedEvents,
       }
       authenticatedUserVar(userInfo);
-      console.log(locationData, eventData)
       savedLocationsVar(locationData);
       const classifiedAlerts = setAlerts(eventData);
       userAlertsVar(classifiedAlerts);

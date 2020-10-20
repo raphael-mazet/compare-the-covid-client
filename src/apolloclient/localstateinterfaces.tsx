@@ -12,7 +12,6 @@ export interface UserSearchData {
 }
 
 export interface UserAlerts {
-  el?: string;
   confirmed: any[],
   suspected: any[],
   safe: any[],

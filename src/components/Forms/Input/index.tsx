@@ -21,7 +21,6 @@ const Input = (props: propTypes): JSX.Element => {
     onChange,
     inLineLabel,
     id,
-    autoComplete,
     error,
     type
   } = props;

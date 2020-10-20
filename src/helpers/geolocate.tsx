@@ -1,9 +1,8 @@
-// import { userSearchDataVar } from '../apolloclient/makevar'
 
-type Coords = {
-  latitude: number;
-  longitude: number;
-}
+// type Coords = {
+//   latitude: number;
+//   longitude: number;
+// }
 
 const geolocate: any = () => {
   const coords = {
