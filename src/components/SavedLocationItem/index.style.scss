@@ -1,48 +1,59 @@
+@import '../../styling/colors.scss';
+
 .location-container{
-  width: calc(100% - 12px);
-  padding: 4px;
-  margin: 2px;
+  width: calc(95% - 12px);
   height: calc(250px - 4px);
-  border-radius: 8px;
-  border: 1px solid #5D7A98;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 1px #3333;
+  margin: 1px 10px 10px 10px;
+  padding: 12px 10px 12px 10px;
   position: relative;
+  background-color: white;
 
   &.safe {
-    background-color: #80ed99;
+    color: $green;
   }
 
   &.mid {
-    background-color: #F9C74F;
+    color: $yellow;
   }
 
   &.high {
-    background-color: #F94144;
+    color: $red;
   }
 }
 
 .location_container_clickable{
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
   z-index: 3;
   background-color: transparent;
 }
 
 .location_map_container{
+  display: flex;
   height: 180px;
-  width: 100%;
+  width: 95%;
   z-index: 2;
+  margin: 0px;
 }
 
 .location_data_container{
   display: flex;
-  flex-direction: row;
+  margin: 4px 0 4px 0;
+  flex-direction: column;
   justify-content: space-between;
   z-index: 2;
 
   p {
     margin: unset;
     font-size: 16px;
-    color: #808080;
+    color: $lightGrayFont;
+  }
+
+  span {
+    font-weight: 500;
+    color: $darkGrayFont
   }
 }

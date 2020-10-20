@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 const alertItem = ({ alertProps }: any): JSX.Element | null => {
   
   const formattedAlert = alertProps.alertType.charAt(0).toUpperCase() + alertProps.alertType.slice(1)
-  const formattedDate = DateTime.fromISO(alertProps.created_at).toFormat('dd LLL yy')
+  const formattedDate = DateTime.fromISO(alertProps.created_at).toFormat('dd LLL yy');
 
   return (
     <div className="alertItemContainer">
