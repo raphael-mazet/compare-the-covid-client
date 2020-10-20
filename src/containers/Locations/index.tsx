@@ -9,6 +9,7 @@ import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutat
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import './index.style.scss';
+import Loading from '../../components/Loading'
 
 type Coords = {
   latitude: number | null;
@@ -118,7 +119,7 @@ const Locations: React.FunctionComponent = () => {
     <div className='container_locations'>
       <div className='locations_map'>
         {(!coords.longitude || !coords.latitude) &&
-          <p style={{textAlign: 'center'}}> Map is Loading...</p>
+          <Loading/>
         }
         {(coords.longitude && coords.latitude) &&
           <GoogleMap
