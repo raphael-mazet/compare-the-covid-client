@@ -102,7 +102,7 @@ const Logger: React.FunctionComponent = () => {
           {locations &&
             <>
               <Select 
-                label="Alert Level"
+                label="Alert Type"
                 required={true}
                 onChange={(e) => handleChange(e.target.value, 'alertLevel')}
                 value={formValues?.alertLevel}
@@ -119,7 +119,7 @@ const Logger: React.FunctionComponent = () => {
                 inLineLabel={window.width > 375 ? true : false}
               />
               <Select
-                label="Alert Level"
+                label="Alert Location"
                 required={true}
                 onChange={(e) => handleChange(e.target.value, 'alertLocation')}
                 value={formValues?.alertLocation}
