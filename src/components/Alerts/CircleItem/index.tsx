@@ -20,7 +20,7 @@ const CircleItem = ({alerts}: circleItemProps): JSX.Element | null => {
     return (
       <div className="circleContainer">
         <div onClick={clickHandler} className={`${alertType}-${isNew ? 'un' : ''}checked-styles`}>
-          <p className="number">{alertNumber}</p>
+          <div className="number">{alertNumber}</div>
         </div>
         <div className='alert_text'>
           <p>{displayText}</p>
