@@ -31,12 +31,18 @@ const Logger: React.FunctionComponent = () => {
   const [formValues, setFormValue] = useState<eventForm>(initialState);
   const [locations, setLocations] = useState<SavedLocations>();
   const history = useHistory();
-
-  const onCompletedEvent = () => {
-    console.log('eventcreated')
+  
+  const onCompletedEvent = (response: any) => {
+    console.log('eventcreated', response)
+    const existingAlerts = userAlertsVar();
+    
+    if (response.createEvent.alertType === 'confirmed') existingAlerts.confirmed = [...existingAlerts.confirmed, response.createEvent];
+    else if (response.createEvent.alertType === 'suspected') existingAlerts.suspected = [...existingAlerts.suspected, response.createEvent];
+    else existingAlerts.safe = [...existingAlerts.safe, response.createEvent];
+    userAlertsVar(existingAlerts);
     history.push('/home');
   }
-
+  
   const [createNewEvent] = useMutation<{ createEvent: Event }>(CREATE_EVENT, {
     onCompleted: onCompletedEvent
   });
@@ -52,17 +58,10 @@ const Logger: React.FunctionComponent = () => {
       created_at: new Date().toISOString(),
       expires_on: new Date(expiryDate).toISOString()
     }
-    
+
     createNewEvent({
       variables: eventData
     });
-
-    const existingAlerts = userAlertsVar();
-
-    if (eventData.alertType === 'confirmed') existingAlerts.confirmed = [...existingAlerts.confirmed, eventData];
-    else if (eventData.alertType === 'suspected') existingAlerts.suspected = [...existingAlerts.suspected, eventData];
-    else existingAlerts.safe = [...existingAlerts.safe, eventData];
-    userAlertsVar(existingAlerts);
   }
 
   useEffect(() => { 

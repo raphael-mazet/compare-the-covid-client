@@ -44,6 +44,7 @@ const Login: React.FunctionComponent = (props: any) => {
         last_checkedEvents: userData?.last_checkedEvents,
       }
       authenticatedUserVar(userInfo);
+      console.log(locationData, eventData)
       savedLocationsVar(locationData);
       const classifiedAlerts = setAlerts(eventData);
       userAlertsVar(classifiedAlerts);
