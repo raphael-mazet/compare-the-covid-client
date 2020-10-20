@@ -47,6 +47,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
       styles: [{ stylers: [{ 'saturation': 0 }, { 'gamma': 0.8 }, { 'lightness': 4 }, { 'visibility': 'on' }] }]
     }
   }
+  
   const markers = props.savedLocations?.map(item => {
     return (
       <MapMarker
