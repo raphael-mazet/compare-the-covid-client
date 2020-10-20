@@ -3,13 +3,13 @@ import client from '../client';
 import { Event } from '../interfaces/query.interface';
 import { userAlertsVar } from '../apolloclient/makevar';
 
-export function setAlerts (eventData: any, callback: ()=>void) {
+export function setAlerts (eventData: any) {
   const tempEvents: any = {
     green: [],
     yellow: [],
     red: []
   }
-  eventData.getEventsbyMultipleLocationIds.forEach((event: Event) => {
+  eventData.forEach((event: Event) => {
     if (event.alertType === 'confirmed') {
       tempEvents.red.push(event)
     } else if (event.alertType === 'suspected') {
@@ -25,7 +25,5 @@ export function setAlerts (eventData: any, callback: ()=>void) {
     safe: tempEvents.green,
   }
 
-  userAlertsVar(data);
-
-  callback();
+  return data;
 }

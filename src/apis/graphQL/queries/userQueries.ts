@@ -29,6 +29,32 @@ const GET_USER_BY_USERNAME_AND_PASSWORD = gql`
         last_loggedin,
         last_checkedEvents
       }
+      locationData {
+        id,
+        name,
+        country,
+        googlemap_URL,
+        location_type,
+        longitude,
+        latitude
+      }
+      eventData {
+        id,
+        alertType,
+        alertDate,
+        alertScore,
+        location_id {
+          id,
+          name,
+          country,
+          googlemap_URL,
+          location_type,
+          longitude,
+          latitude
+        },
+        created_at,
+        expires_on
+      }
     }
   }
 `;
