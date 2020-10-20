@@ -1,78 +1,133 @@
+@import '../../../styling/colors.scss';
+
+%animation-unchecked-shared {
+  animation: 
+  fadeInDown 2s,
+  wobble 4s 3s,
+  pulse-red 2s 7s infinite
+}
+
 %styles-unchecked-shared {
+  @extend %animation-unchecked-shared;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   color: white;
   cursor: pointer;
-
-  &:hover {
-    color: #296654;
-    border: 2px solid #2f7560;
-    background-color: transparent;
-  }
 }
 
 %styles-checked-shared {
+  animation: fadeInDown 2s;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  color: black;
+  color: $darkGrayFont;
   background-color: white;
   cursor: pointer;
   border-style: solid;
   border-width: 5px;
-  
-  &:hover {
-    color: #296654;
-    border: 2px solid #2f7560;
-    background-color: transparent;
-  }
 }
 
 p {
   font-size: 15px;
-  font-family: 'Montserrat';
   margin-left: 10px;
+  text-align: center;
 }
 
 .circleContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  font-size: 30;
+  cursor: pointer;
+}
+
+.alert_text {
+  align-self: flex-end;
+  justify-self: flex-end;
 }
 
 .number {
   text-align: center;
+  margin-top: 10px;
 }
 
 .confirmed-unchecked-styles {
-  background-color: #c71f1f;
+  background-color: $red;
   @extend %styles-unchecked-shared;
 }
 
 .suspected-unchecked-styles {
-  background-color: #d8db1e;
+  background-color: $yellow;
   @extend %styles-unchecked-shared;
 }
 
 .safe-unchecked-styles {
-  background-color: #3bceac;
+  background-color: $green;
   @extend %styles-unchecked-shared;
 }
 
 .confirmed-checked-styles {
-  border-color: #c71f1f;
+  border-color: $red;
   @extend %styles-checked-shared;
 }
 
 .suspected-checked-styles {
-  border-color: #d8db1e;
+  border-color: $yellow;
   @extend %styles-checked-shared;
 }
 
 .safe-checked-styles {
-  border-color: #3bceac;
+  border-color: $green;
   @extend %styles-checked-shared;
+}
+
+@keyframes fadeInDown {
+  0% {
+      opacity:0;
+      transform: translatey(-15px);
+  }
+  50% {
+    opacity:0.5;
+    transform: translatey(15px);
+  }
+  100% {
+      opacity:1;
+      transform: translatey(0);
+  }
+}
+
+@keyframes wobble {
+  0% { transform: translateX(0%) translateY(0%); } 
+  10% { transform: translateX(-15%) rotate(-15deg) translateY(-15%); } 
+  20% { transform: translateX(10%) rotate(15deg) translateY(10%); } 
+  30% { transform: translateX(-15%) rotate(-3deg) translateY(-5%); } 
+  40% { transform: translateX(10%) rotate(2deg) translateY(5%); }
+  50% { transform: translateX(-5%) rotate(-5deg) translateY(-15%); }
+  60% { transform: translateX(15%) rotate(5deg) translateY(25%); }
+  70% { transform: translateX(15%) rotate(-10deg) translateY(0%); }
+  80% { transform: translateX(25%) rotate(-5deg) translateY(-15%); }
+  90% { transform: translateX(15%) rotate(1deg) translateY(15%); }
+  100% { transform: translateX(0%); } 
+} 
+
+@keyframes pulse-red {
+  0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 $redrgba;
+      
+  }
+  
+  70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+  
+  100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
 }
