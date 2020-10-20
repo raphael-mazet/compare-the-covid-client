@@ -5,7 +5,7 @@ const HeartSvg = (): JSX.Element => {
 	const fillColor = '#E63946'
 	
 	return (
-		<svg version="1.1" x="0px" y="0px" width="100px" height="85px" viewBox="0 0 100 85">
+		<svg version="1.1" x="0px" y="0px" width="100px" height="50px" viewBox="0 0 100 85">
 			<style type="text/css">
 			</style>
 			<defs>
@@ -17,8 +17,8 @@ const HeartSvg = (): JSX.Element => {
         attributeName="transform" 
         type="scale" 
         values="1; 1.5; 1.25; 1.5; 1.5; 1;" 
-        dur="2s" 
-        repeatCount="5"
+        dur="3s" 
+        repeatCount="indefinite"
 				> 
       </animateTransform>
 		</svg>

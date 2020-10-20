@@ -15,6 +15,7 @@ import './index.style.scss'
 import { authenticatedUserVar } from "../../apolloclient/makevar";
 import saveLocationsToCache from '../../helpers/saveLocationsToCache';
 import saveUserAuth from '../../helpers/authUserToCache';
+import logo from '../../images/logo.png'
 
 type userData = { 
   status: number;
@@ -108,6 +109,9 @@ const Login: React.FunctionComponent = (props: any) => {
   
   return (
     <div className='page-wrapper' >
+      <div className='image-wrapper'>
+        <img src={logo} alt="Logo"/>
+      </div>
       <div className='form-wrapper'>
         <form className='form-container' onSubmit={(e)=> handleSubmit(e)}>
           <Input

@@ -1,19 +1,26 @@
 .form-container {
   width: 100%;
-  height: 50%;
-  margin-top: 10vh;
+  height: 75%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 
 .form-wrapper {
-  margin: auto 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   height: 80%;
+}
+
+.image-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  max-height: 100px;
+  animation: appear 2s
 }
 
 .page-wrapper {
@@ -30,4 +37,13 @@
   margin: auto; 
   margin-top: 20px;
   width: 200px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
 }

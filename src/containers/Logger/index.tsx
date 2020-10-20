@@ -64,7 +64,7 @@ const Logger: React.FunctionComponent = () => {
 
   useEffect(() => { 
     const locationsFromCache = savedLocationsVar();
-    console.log(locationsFromCache);
+    setLocations(locationsFromCache);
   }, []);
 
   const handleChange = (value: string, field: string) => {
@@ -79,17 +79,17 @@ const Logger: React.FunctionComponent = () => {
   const alertOptions = [
     {
       id: 'lowLevel',
-      value: 'Unsafe',
+      value: 'safe',
       option: 'Unsafe Location'
     },
     {
       id: 'midLevel',
-      value: 'Possible Case',
+      value: 'suspected',
       option: 'Possible case'
     },
     {
       id: 'highLevel',
-      value: 'Confirmed Case',
+      value: 'confirmed',
       option: 'Confirmed Case'
     }
   ];
@@ -126,8 +126,8 @@ const Logger: React.FunctionComponent = () => {
                 placeholder="-- Select Existing Location --"
                 options={locations.map((item: any) => ({
                   id: item.id,
-                  option: item.id,
-                  value: item.name
+                  option: item.name,
+                  value: item.id
                 }))}
                 inLineLabel={window.width > 375 ? true : false}
               />
