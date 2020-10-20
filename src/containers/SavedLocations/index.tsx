@@ -1,21 +1,27 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import SavedLocationItem from '../../components/SavedLocationItem';
-import { savedLocationsVar } from "../../apolloclient/makevar";
-import { useQuery } from "@apollo/react-hooks";
+import { savedLocationsVar, userAlertsVar } from "../../apolloclient/makevar";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { GET_EVENTS_BY_MULTIPLE_LOCATION_IDS } from "../../apis/graphQL/queries";
 import './index.style.scss';
 
 const SavedLocations: any = () => {
-  
+  const [events, setEventsCache] = useState<any>();
   const savedLocations = savedLocationsVar();
 
   const savedLocationsWithEvents = savedLocations.map((location) => 
     Object.assign({}, location, {events:[]})
   );
+  useEffect(() => {
+    console.log('getEvents')
+    getEvents();
+    const cachedEvents = userAlertsVar();
+    setEventsCache(cachedEvents);
 
+  },[])
   const locationIds = savedLocations.map(location => location.id);
 
-  const {data: allUserEvents} = useQuery(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
+  const [getEvents, {data: allUserEvents}] = useLazyQuery(GET_EVENTS_BY_MULTIPLE_LOCATION_IDS, {
     variables: {
       location_ids: locationIds
     }
@@ -29,10 +35,12 @@ const SavedLocations: any = () => {
     })
   });
 
+  const sortedLocations = savedLocationsWithEvents && savedLocationsWithEvents.sort((a, b) => b.events.length - a.events.length);
+  console.log(events)
   return (
     <div className='container'>
       <div style={{height: '100%'}}>
-        {savedLocationsWithEvents.map(location=>
+        {sortedLocations.map(location=>
           <SavedLocationItem
             key={location.id}
             location={location}

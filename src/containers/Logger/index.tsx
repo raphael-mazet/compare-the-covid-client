@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState} from "react";
+import React, { FormEvent, useEffect, useState} from "react";
 import './index.style.scss';
 import { Input, Select } from '../../components/Forms';
 import useWindowSize from '../../helpers/getWindowSize';
@@ -33,6 +33,7 @@ const Logger: React.FunctionComponent = () => {
   const history = useHistory();
 
   const onCompletedEvent = () => {
+    console.log('eventcreated')
     history.push('/home');
   }
 
@@ -55,7 +56,9 @@ const Logger: React.FunctionComponent = () => {
     createNewEvent({
       variables: eventData
     });
+
     const existingAlerts = userAlertsVar();
+
     if (eventData.alertType === 'confirmed') existingAlerts.confirmed = [...existingAlerts.confirmed, eventData];
     else if (eventData.alertType === 'suspected') existingAlerts.suspected = [...existingAlerts.suspected, eventData];
     else existingAlerts.safe = [...existingAlerts.safe, eventData];
@@ -110,10 +113,10 @@ const Logger: React.FunctionComponent = () => {
                 options={alertOptions}
                 inLineLabel={window.width > 375 ? true : false}
               />
-              <Input
-                type='date'
-                label="Alert Date"
-                value={formValues?.alertDate}
+            <Input
+              type='date'
+              label="Alert Date"
+              value={moment(formValues?.alertDate).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(moment(e.target.value).format(), 'alertDate')}
                 inLineLabel={window.width > 375 ? true : false}
               />
