@@ -51,7 +51,6 @@ const SearchBar = (props: propTypes): JSX.Element => {
   return (
     <div className="container_search">
       <input
-        style={{backgroundColor: 'transparent'}}
         id="searchQuery"
         ref={autoCompleteRef}
         className='searchInput'
