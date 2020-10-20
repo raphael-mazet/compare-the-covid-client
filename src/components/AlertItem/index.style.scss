@@ -1,0 +1,36 @@
+@import '../../styling/colors.scss';
+
+%p-shared {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.alertItemContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 1px #3333;
+  margin: 1px 10px 10px 10px;
+  padding: 12px 10px 12px 10px;
+}
+
+p {
+  margin: 1px;
+}
+
+.Confirmed {
+  @extend %p-shared;
+  color: $red;
+}
+
+.Suspected {
+  @extend %p-shared;
+  color: $yellow;
+}
+
+.Safe {
+  @extend %p-shared;
+  color: $green;
+}
