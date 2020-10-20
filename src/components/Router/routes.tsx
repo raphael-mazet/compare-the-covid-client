@@ -30,7 +30,7 @@ const routes = [
     component: "Login",
   },
   {
-    title: "User Registration",
+    title: "Register",
     to: "/sign-up",
     exact: false,
     isPrivate: false,

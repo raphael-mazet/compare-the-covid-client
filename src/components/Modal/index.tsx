@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.style.scss'
 
-const Modal = ({ isShowing, hide }: any) => {
+const Modal = ({ isShowing, hide, text }: any) => {
   if (isShowing) { 
     return (  
       <>
@@ -14,7 +14,7 @@ const Modal = ({ isShowing, hide }: any) => {
               </button>
             </div>
             <p>
-              Your request has been registered.
+              {text}
             </p>
           </div>
         </div>
