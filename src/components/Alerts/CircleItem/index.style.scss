@@ -33,14 +33,22 @@ p {
   font-size: 15px;
   font-family: 'Montserrat';
   margin-left: 10px;
+  text-align: center;
 }
 
 .circleContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  font-size: 30;
+}
+
+.alert_text {
+  align-self: flex-end;
+  justify-self: flex-end;
 }
 
 .number {
