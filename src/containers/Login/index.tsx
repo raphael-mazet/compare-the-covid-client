@@ -10,6 +10,7 @@ import './index.style.scss'
 import logo from '../../images/logo.png'
 import { authenticatedUserVar, savedLocationsVar, userAlertsVar } from '../../apolloclient/makevar';
 import { SavedLocations, UserAlerts } from '../../apolloclient/localstateinterfaces'
+import { setAlerts } from '../../helpers/setAlerts';
 
 
 type userData = { 
@@ -44,12 +45,12 @@ const Login: React.FunctionComponent = (props: any) => {
       }
       authenticatedUserVar(userInfo);
       savedLocationsVar(locationData);
-      userAlertsVar(eventData);
-      // history.push('/home')
+      const classifiedAlerts = setAlerts(eventData);
+      userAlertsVar(classifiedAlerts);
+      history.push('/home')
     }
   } 
 
-    
   function handleChange (e: ChangeEvent<HTMLInputElement>) {
     if (e.target.id === 'email') setUsername(e.target.value)
     else setPassword(e.target.value)

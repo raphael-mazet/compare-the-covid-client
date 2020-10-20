@@ -44,7 +44,13 @@ const GET_USER_BY_USERNAME_AND_PASSWORD = gql`
         alertDate,
         alertScore,
         location_id {
-          id
+          id,
+          name,
+          country,
+          googlemap_URL,
+          location_type,
+          longitude,
+          latitude
         },
         created_at,
         expires_on
