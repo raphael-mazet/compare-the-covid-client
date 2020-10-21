@@ -1,3 +1,5 @@
+@import '../../../styling/colors.scss';
+
 @mixin OpaqueBackground($alpha, $color) {
   background-color: rgba(red($color), green($color), blue($color), $alpha);
 }
@@ -9,15 +11,31 @@
   width: 100%;
   justify-content: center;
   margin: 4px auto;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: $ruler;
+  background-color:$color-bg;
+  text-shadow: 1px 1px 0 $color-white;
 
 
   input {
-    padding: 5px 5px;
-    padding-left: 15px;
-    border-radius: 20px;
-    font-size: 20px;
+    border: 0;
+    padding: $ruler/1.25;
+    border-radius: $ruler*20;
     outline: none;
-    border: 2px solid #5d7a98;
+    box-sizing: border-box;
+    box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+    background-color:$color-bg;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.2px;
+    font-size: $ruler/1.25;
+    text-shadow: 1px 1px 1px $color-white;
+
+    &:focus {
+      box-shadow:  inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+    }
 
     &.error {
       border: 2px solid #f94144;
@@ -35,10 +53,10 @@
 }
 
 .label {
-  text-transform: uppercase;
   padding: 5px;
   margin: auto 1px;
   padding-left: 20px;
+  margin-bottom: $ruler*1.5;
 }
 
 .errorText {

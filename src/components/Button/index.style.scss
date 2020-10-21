@@ -1,36 +1,30 @@
 @import '../../styling/colors.scss';
 
 .button {
-  color: white;
-  background-color: $red;
-  border-radius: 20px;
-  border: 2px solid white;
-  padding: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: $ruler;
+  color: $color-button;
+  font-weight: 600;
+  border: 0;
+  outline: 0;
+  font-size: $ruler;
+  border-radius: $ruler*20;
+  padding: $ruler;
+  background-color:$color-bg;
+  text-shadow: 1px 1px 0 $color-white;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
-  outline: unset;
-  text-transform: capitalize;
   width: calc(100% - 20px);
-  min-width: 150px;
+  min-width: 50px;
 
-  &.logout {
-    background-color: transparent;
-    border-radius: 50%;
-    border: 2px solid #46af8f;
-    padding: 5px;
-    padding-left: 10px;
-    padding-top: 10px;
-    cursor: pointer;
-    outline: unset;
-    text-transform: capitalize;
-    height: 45px;
-    width: 45px;
-    min-width: unset;
+  &:active {
+    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
   }
 
   &:hover {
-    color: #296654;
-    border: 2px solid #2f7560;
-    background-color: transparent;
+    box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
   }
 
   &:disabled {
@@ -73,9 +67,15 @@
   }
 
   &.back {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     color: $darkGrayFont;
+    opacity: 0.25;
     background-color: $lightGray;
-    border: unset;
+    box-shadow: none;
+    padding: $ruler/2;
+    transition: all .2s ease-in-out;
 
     &:hover {
       background-color: #313e49;
