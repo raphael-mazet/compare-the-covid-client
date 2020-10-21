@@ -128,6 +128,7 @@ const Locations: React.FunctionComponent = () => {
     console.log(coords, markerClicked)
     //get lat long from map
     if (type === 'existingMarker') {
+      console.log(item)
       setMarkerClicked(true);
       setSelectedLocation(item)
     } else if(type==='geolocated' && !markerClicked){
@@ -146,7 +147,6 @@ const Locations: React.FunctionComponent = () => {
         setLocationSelectedType('searchedLocation')
       })
     }
-    setMarkerClicked(false);
   }
 
   let locationInfo = null;
@@ -157,7 +157,7 @@ const Locations: React.FunctionComponent = () => {
     locationInfo = <p> Current Location Displayed </p>;
   }
 
-  console.log(' ---> locationAlerts', locationAlerts);
+  // console.log(' ---> locationAlerts', locationAlerts);
 
   return (
     <div className='container_locations'>
