@@ -96,13 +96,17 @@ const Logger: React.FunctionComponent = () => {
   ];
 
   return (
-    <div className='page-wrapper'>
-      <div className='form-wrapper'>
-        <form className='form-container' onSubmit={(e) => onSubmit(e)}>
+    <div className='logger-page-wrapper'>
+      <div className="logger-explain">
+        <p className="logger-explain-text">Have you tested positive <br/> to Covid  or suspect <br/> your are ill?</p>
+      </div>
+      <div className='logger-form-wrapper'>
+        <form className='logger-form-container' onSubmit={(e) => onSubmit(e)}>
           {locations &&
             <>
+            <div className="covid-alert-type">
               <Select 
-                label="Alert Type"
+                label="Severity"
                 required={true}
                 onChange={(e) => handleChange(e.target.value, 'alertLevel')}
                 value={formValues?.alertLevel}
@@ -111,20 +115,24 @@ const Logger: React.FunctionComponent = () => {
                 options={alertOptions}
                 inLineLabel={window.width > 375 ? true : false}
               />
-            <Input
-              type='date'
-              label="Alert Date"
-              value={moment(formValues?.alertDate).format('YYYY-MM-DD')}
-                onChange={(e) => handleChange(moment(e.target.value).format(), 'alertDate')}
-                inLineLabel={window.width > 375 ? true : false}
-              />
+            </div>
+            <div className="covid-alert-date">
+              <Input
+                type='date'
+                label="When"
+                value={moment(formValues?.alertDate).format('YYYY-MM-DD')}
+                  onChange={(e) => handleChange(moment(e.target.value).format(), 'alertDate')}
+                  inLineLabel={window.width > 375 ? true : false}
+                />
+            </div>
+            <div className="covid-alert-location">
               <Select
-                label="Alert Location"
+                label="Where"
                 required={true}
                 onChange={(e) => handleChange(e.target.value, 'alertLocation')}
                 value={formValues?.alertLocation}
                 hasDefaultValue={true}
-                placeholder="-- Select Existing Location --"
+                placeholder="-- Select Location --"
                 options={locations.map((item: any) => ({
                   id: item.id,
                   option: item.name,
@@ -132,10 +140,13 @@ const Logger: React.FunctionComponent = () => {
                 }))}
                 inLineLabel={window.width > 375 ? true : false}
               />
+            </div>
+            <div className="logger-button-container">
               <Button
-                content='Create Event'
+                content='Report case'
                 onClick={(e) => onSubmit(e)}
               />
+            </div>
             </>
           }
           {!locations && 
