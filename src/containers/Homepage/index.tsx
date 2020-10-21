@@ -12,40 +12,6 @@ const Homepage: React.FunctionComponent = () => {
   const [queryMaps, setQueryMaps] = useState<any | (() => any)>(""); //selected location from searchbar
   const [searchValue, setSearchValue] = useState<any | (() => any)>(""); // input value in searchbar
   const [updateLastCheckedEvents] = useMutation(UPDATE_LAST_CHECKED_EVENTS);
-  
-  const chacedSearch = userSearchDataVar(); //saved location from search in cache
-  
-  let name = chacedSearch.name;
-  let country = chacedSearch.country;
-  let location_type = chacedSearch.location_type;
-  let place_id = chacedSearch.googlemap_URL;
-  let lat = chacedSearch.latitude;
-  let lng = chacedSearch.longitude;
-  
-  if (queryMaps.name !== undefined) name = queryMaps.name;
-  if (queryMaps.address_components) country = queryMaps.address_components.find((item:any) => {
-    if (item.types.includes('country') || item.types.includes('')) {
-      return true;
-    }
-    return false;
-  })?.long_name;
-  if (queryMaps.types) location_type = queryMaps.types[0];
-  if (queryMaps.place_id !== undefined) place_id = queryMaps.place_id;
-  if (queryMaps.geometry !== undefined) {
-    lat = queryMaps.geometry.location.lat();
-    lng = queryMaps.geometry.location.lng();
-  }
-  
-  const searchedLocation = {
-    name: name,
-    country: country,
-    location_type: location_type,
-    googlemap_URL: place_id,
-    latitude: lat,
-    longitude: lng,
-  };
-
-  userSearchDataVar(searchedLocation); //save search to cache
 
   const lastCheckedEventsData = {
     id: authenticatedUserVar().id,
@@ -60,14 +26,43 @@ const Homepage: React.FunctionComponent = () => {
 
   const history = useHistory();
 
-  const redirectToLocations = () => history.push(
-    {
+  const redirectToLocations = () => {
+    history.push({
       pathname: '/locations',
       state: 'searchbar'
-    }  
-  );
+    }); 
+  };
   
   const caseRouter = () => history.push('/log-case');
+
+  const saveSearch = (data: any) => {
+    console.log('searchdata',data)
+    const name = data.name;
+    const country = data.address_components?.find((item: any) => {
+      if (item.types.includes('country') || item.types.includes('')) {
+        return true;
+      }
+      return false;
+    })?.long_name;
+    const location_type = data.types[0];
+    const place_id = data.place_id;
+    const lat = data.geometry.location.lat();
+    const lng = data.geometry.location.lng();
+    
+    const searchedLocation = {
+      name: name,
+      country: country,
+      location_type: location_type,
+      googlemap_URL: place_id,
+      latitude: lat,
+      longitude: lng,
+    };
+
+    console.log('pushed obj', searchedLocation)
+    setQueryMaps(searchedLocation);
+    userSearchDataVar(searchedLocation);
+    redirectToLocations();
+  }
 
   return (
     <div className='homepage-wrapper'>
@@ -87,7 +82,7 @@ const Homepage: React.FunctionComponent = () => {
       <div className='searchbar_container'>
         <Searchbar
           placeholder="Search a location"
-          inputAction={setQueryMaps}
+          inputAction={(data:any) => saveSearch(data)}
           searchValue={searchValue}
           setSearch={setSearchValue}
           callback={redirectToLocations}

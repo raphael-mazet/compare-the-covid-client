@@ -6,10 +6,13 @@ import getGeolocation from '../../helpers/geolocate';
 // import { addLocation } from '../../helpers/addLocation'
 import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import './index.style.scss';
 import Loading from '../../components/Loading'
+import { GET_EVENTS_BY_LOCATION_ID, GET_LOCATION_BY_URL } from "../../apis/graphQL/queries";
+import filterActiveAndNew from "../../helpers/filterActiveAndNew";
+import { setAlerts } from "../../helpers/setAlerts";
 
 type Coords = {
   latitude: number | null;
@@ -23,20 +26,53 @@ const initialState = {
 
 const Locations: React.FunctionComponent = () => {
   const [coords, setCoords] = useState<Coords>(initialState);
-  const [searchedLocation, setSelectedLocation] = useState<any>();
+  const [searchedLocation, setSelectedLocation] = useState<any>({});
+  const [markerClicked, setMarkerClicked] = useState<boolean>(false);
   const [locationSelectedType, setLocationSelectedType] = useState<string>('');
-
+  const searchedLocationCache = userSearchDataVar();
+  const [locationAlerts, setLocationAlerts] = useState<any>();
   const history: any = useHistory();
+
+  const [getSearchedLocationId, {data: searchedLocatiomDbData}] = useLazyQuery<any>(GET_LOCATION_BY_URL, {
+    onCompleted:LocationAlerts
+  })
+  const [getLocationAlerts, {data: searchedLocationAlertsData}] = useLazyQuery<any>(GET_EVENTS_BY_LOCATION_ID, {
+    onCompleted: filterAlerts
+  })
   
+  function LocationAlerts(data: any) {
+    if (data.getLocationbyURL) {
+      getLocationAlerts({
+        variables: {
+          location_id: data.getLocationbyURL.id
+        }
+      })
+    }
+  }
+
+  function filterAlerts (data: any) {
+    const classifiedAlerts = setAlerts(data.getEventsbyLocation_Id)
+    setLocationAlerts(filterActiveAndNew(classifiedAlerts))
+  }
+
+  useEffect(() => {
+    if (searchedLocation?.googlemap_URL) {
+      getSearchedLocationId({
+        variables: {
+          googlemap_URL: searchedLocation?.googlemap_URL
+        }
+      })
+    }
+  }, [searchedLocation]);
+
   useEffect(() => {
     if (history.location.state !== 'searchbar') {
       geolocateUser();
       setLocationSelectedType('geoLocation');
     } else {
       setLocationSelectedType('searchedLocation');
-      const searchedLocation = userSearchDataVar();
-      setSelectedLocation(searchedLocation);
-      setCoords({ latitude: searchedLocation.latitude, longitude: searchedLocation.longitude})
+      setCoords({ latitude: searchedLocationCache?.latitude || null, longitude: searchedLocationCache?.longitude|| null})
+      setSelectedLocation(searchedLocationCache);
     }
   }, []);
 
@@ -59,6 +95,7 @@ const Locations: React.FunctionComponent = () => {
   }
 
   const geolocateUser = () => {
+    setLocationAlerts(null);
     setCoords(initialState);
     setSelectedLocation({});
     setLocationSelectedType('geoLocation')
@@ -88,23 +125,29 @@ const Locations: React.FunctionComponent = () => {
     alert('location created');
   }
 
-  const getLocationByGeocode = (coords: any) => {
+  const getLocationByGeocode = (coords: any, type: string, item: any) => {
+    console.log(coords, markerClicked)
     //get lat long from map
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
-      (response) => response.json()
-    ).then((data) => {
-      const location = data.results[0];
-      console.log('location',location)
-      setSelectedLocation({
-        name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
-        country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
-        googlemap_URL: location.place_id,
-        location_type: location.types[0],
-        longitude: location.geometry.location.lng.toString(),
-        latitude: location.geometry.location.lat.toString(),
+    if (type === 'existingMarker') {
+      console.log(item)
+      setMarkerClicked(true);
+      setSelectedLocation(item)
+    } else if(type==='geolocated' && !markerClicked){
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
+        (response) => response.json()
+      ).then((data) => {
+        const location = data.results[0];
+        setSelectedLocation({
+          name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
+          country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
+          googlemap_URL: location.place_id,
+          location_type: location.types[0],
+          longitude: location.geometry.location.lng.toString(),
+          latitude: location.geometry.location.lat.toString(),
+        })
+        setLocationSelectedType('searchedLocation')
       })
-      setLocationSelectedType('searchedLocation')
-    })
+    }
   }
 
   let locationInfo = null;
@@ -115,8 +158,15 @@ const Locations: React.FunctionComponent = () => {
     locationInfo = <p> Current Location Displayed </p>;
   }
 
+  // console.log(' ---> locationAlerts', locationAlerts);
+
   return (
     <div className='container_locations'>
+      
+      <div className="locations_subtitle">
+        <p className="locations_subtitle_text">{searchedLocation?.name ? `You searched for` : `Your location`}</p>
+      </div>
+      
       <div className='locations_map'>
         {(!coords.longitude || !coords.latitude) &&
           <Loading/>
@@ -126,17 +176,24 @@ const Locations: React.FunctionComponent = () => {
             latitude={coords.latitude}
             longitude={coords.longitude}
             mapClickedAction={getLocationByGeocode}
-            markerSelectedAction={(item)=> setSelectedLocation(item)}
+            savedLocations={savedLocationsVar()}
+            markerSelectedAction={(item) => getLocationByGeocode(null, 'existingMarker',item)}
           />
         }
       </div>
       <div className='container_locations_data'>
-        <div style={{ height: '300px' }}>
+        <div className='locations_data_text'>
           {locationInfo}
+        </div>
+        <div className="locations_data_alerts">
+          <p className={`locations_data_alerts_text${locationAlerts ? `_${locationAlerts.alertType}` : ''}`}>{(!locationAlerts || !locationAlerts.alertNumber) ?
+            'There are currently no alerts for this location' : 
+            `${locationAlerts.alertNumber} ${locationAlerts.alertType} covid case${(locationAlerts.alertNumber === 1) ? ' was' : 's were'} reported at this location in the last week`}
+          </p>
         </div>
         <div className="locations_actions">
           {
-            <div className="button_container">
+            <div className="locations_button_container">
               <Button
                 disabled={!(!!locationSelectedType && !!searchedLocation && locationSelectedType === 'searchedLocation')}
                 content='Save location'
@@ -144,7 +201,7 @@ const Locations: React.FunctionComponent = () => {
               />
             </div>
           }
-          <div className="button_container">
+          <div className="locations_button_container">
             <Button
               content='Locate me'
               onClick={geolocateUser}
