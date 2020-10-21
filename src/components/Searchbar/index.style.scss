@@ -89,7 +89,7 @@
     }
     &:focus ~ .search {
       right: -220px;
-      background: $powderblue;
+      background: $color-button;
       z-index: 6;
       &::before {
         top: 0;
