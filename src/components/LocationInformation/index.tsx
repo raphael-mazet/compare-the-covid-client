@@ -18,9 +18,9 @@ const LocationInfo = (props: propTypes): JSX.Element => {
   const {
     data
   } = props;
-  console.log('location info', data)
+  
   data.location_type = data.location_type.split('_').join(' ');
-
+  
   return (  
     <div className='container'>
       <div>

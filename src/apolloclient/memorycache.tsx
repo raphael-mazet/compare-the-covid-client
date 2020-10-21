@@ -5,12 +5,12 @@ export const cache: InMemoryCache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        searchdata: {
+        searchData: {
           read () {
             return makeVar.userSearchDataVar();
           }
         },
-        useralerts: {
+        userAlerts: {
           read () {
             return makeVar.userAlertsVar();
           }

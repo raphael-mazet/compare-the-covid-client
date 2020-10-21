@@ -25,10 +25,11 @@ const initialState = {
 
 const Locations: React.FunctionComponent = () => {
   const [coords, setCoords] = useState<Coords>(initialState);
-  const [searchedLocation, setSelectedLocation] = useState<any>();
+  const [searchedLocation, setSelectedLocation] = useState<any>({});
+  const [markerClicked, setMarkerClicked] = useState<boolean>(false);
   const [locationSelectedType, setLocationSelectedType] = useState<string>('');
+  const searchedLocationCache = userSearchDataVar();
   const [locationAlerts, setLocationAlerts] = useState<any>();
-
   const history: any = useHistory();
 
   const [getSearchedLocationId, {data: searchedLocatiomDbData}] = useLazyQuery<any>(GET_LOCATION_BY_URL, {
@@ -69,9 +70,8 @@ const Locations: React.FunctionComponent = () => {
       setLocationSelectedType('geoLocation');
     } else {
       setLocationSelectedType('searchedLocation');
-      const searchedLocation = userSearchDataVar();
-      setSelectedLocation(searchedLocation);
-      setCoords({ latitude: searchedLocation.latitude, longitude: searchedLocation.longitude})
+      setCoords({ latitude: searchedLocationCache?.latitude || null, longitude: searchedLocationCache?.longitude|| null})
+      setSelectedLocation(searchedLocationCache);
     }
   }, []);
 
@@ -124,22 +124,29 @@ const Locations: React.FunctionComponent = () => {
     alert('location created');
   }
 
-  const getLocationByGeocode = (coords: any) => {
+  const getLocationByGeocode = (coords: any, type: string, item: any) => {
+    console.log(coords, markerClicked)
     //get lat long from map
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
-      (response) => response.json()
-    ).then((data) => {
-      const location = data.results[0];
-      setSelectedLocation({
-        name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
-        country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
-        googlemap_URL: location.place_id,
-        location_type: location.types[0],
-        longitude: location.geometry.location.lng.toString(),
-        latitude: location.geometry.location.lat.toString(),
+    if (type === 'existingMarker') {
+      setMarkerClicked(true);
+      setSelectedLocation(item)
+    } else if(type==='geolocated' && !markerClicked){
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
+        (response) => response.json()
+      ).then((data) => {
+        const location = data.results[0];
+        setSelectedLocation({
+          name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
+          country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
+          googlemap_URL: location.place_id,
+          location_type: location.types[0],
+          longitude: location.geometry.location.lng.toString(),
+          latitude: location.geometry.location.lat.toString(),
+        })
+        setLocationSelectedType('searchedLocation')
       })
-      setLocationSelectedType('searchedLocation')
-    })
+    }
+    setMarkerClicked(false);
   }
 
   let locationInfo = null;
@@ -169,7 +176,7 @@ const Locations: React.FunctionComponent = () => {
             longitude={coords.longitude}
             mapClickedAction={getLocationByGeocode}
             savedLocations={savedLocationsVar()}
-            markerSelectedAction={(item)=> setSelectedLocation(item)}
+            markerSelectedAction={(item) => getLocationByGeocode(null, 'existingMarker',item)}
           />
         }
       </div>

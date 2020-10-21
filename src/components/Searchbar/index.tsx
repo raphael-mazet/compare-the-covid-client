@@ -42,8 +42,7 @@ const SearchBar = (props: propTypes): JSX.Element => {
       );
       autoComplete.setFields(["geometry", "name", "place_id", "formatted_address", "address_components", "types"]);
       autoComplete.addListener("place_changed", async () => {
-        await handlePlaceSelect()
-        callback();
+       await handlePlaceSelect()
       });
     }
   }
