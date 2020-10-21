@@ -5,6 +5,7 @@ import { Event } from '../../interfaces/query.interface'
 import './index.style.scss';
 import { useMutation } from "@apollo/react-hooks";
 import { DELETE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
+// import { DateTime } from 'luxon';
 
 const SavedLocations = (): JSX.Element => {
   const [events, setEventsCache] = useState<Event[]>();
@@ -37,8 +38,30 @@ const SavedLocations = (): JSX.Element => {
       }
     })
   ));
+  
+  // // const dateLocations = savedLocationsWithEvents && savedLocationsWithEvents?.map(location => {
+  // //   location.events.sort((a:any,b:any) => DateTime.fromISO(b.alertDate).toMillis() - DateTime.fromISO(a.alertDate).toMillis());
+  // // });
+  
+  // const dateLocations = savedLocationsWithEvents?.map(location=>DateTime.fromISO(location.events[0].alertDate).toMillis())
+  
+  // const dateLocations1 = savedLocationsWithEvents?.sort((a:any,b:any)=>DateTime.fromISO(a.events[0].alertDate).toMillis() - DateTime.fromISO(b.events[0].alertDate).toMillis())
 
-  const sortedLocations = savedLocationsWithEvents && savedLocationsWithEvents.sort((a, b) => b.events.length - a.events.length);
+  // console.log(dateLocations)
+  // console.log(dateLocations1)
+
+  const sortTotalAlert = () => {
+    return savedLocationsWithEvents?.sort((a, b) => b.events.length - a.events.length);
+  }
+  // const datesorter = (arg: any) => {
+  //   return arg?.sort((a:any, b:any) => b[0].alertDate - a[0].alertDate)
+  // }
+
+  // const sortLastAlert = () => {
+  //   return datesorter(dateLocations);
+  // }
+
+  const sortedLocations = savedLocationsWithEvents && sortTotalAlert();
 
   const deleteAction = (location_id: number) => {
     const authData = authenticatedUserVar();
@@ -51,11 +74,11 @@ const SavedLocations = (): JSX.Element => {
       }
     });
   } 
-
+  
   return (
-    <div className='container'>
+    <div className='saved_locations_container'>
       <div style={{height: '100%'}}>
-        {sortedLocations?.map(location=>
+        {sortedLocations?.map((location:any)=>
           <SavedLocationItem
             key={location.id}
             location={location}
