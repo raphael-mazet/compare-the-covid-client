@@ -178,7 +178,7 @@ const Locations: React.FunctionComponent = () => {
           {locationInfo}
         </div>
         <div className="locations_data_alerts">
-          <p>{(!locationAlerts || !locationAlerts.alertNumber) ?
+          <p className={`locations_data_alerts_text${locationAlerts ? `_${locationAlerts.alertType}` : ''}`}>{(!locationAlerts || !locationAlerts.alertNumber) ?
             'There are currently no alerts for this location' : 
             `${locationAlerts.alertNumber} ${locationAlerts.alertType} covid case${(locationAlerts.alertNumber === 1) ? ' was' : 's were'} reported at this location in the last week`}
           </p>
