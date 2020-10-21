@@ -151,6 +151,8 @@ const Locations: React.FunctionComponent = () => {
     locationInfo = <p> Current Location Displayed </p>;
   }
 
+  console.log(' ---> locationAlerts', locationAlerts);
+
   return (
     <div className='container_locations'>
       
@@ -174,6 +176,12 @@ const Locations: React.FunctionComponent = () => {
       <div className='container_locations_data'>
         <div className='locations_data_text'>
           {locationInfo}
+        </div>
+        <div className="locations_data_alerts">
+          <p>{(!locationAlerts || !locationAlerts.alertNumber) ?
+            'There are currently no alerts for this location' : 
+            `${locationAlerts.alertNumber} ${locationAlerts.alertType} covid case${(locationAlerts.alertNumber === 1) ? ' was' : 's were'} reported at this location in the last week`}
+          </p>
         </div>
         <div className="locations_actions">
           {
