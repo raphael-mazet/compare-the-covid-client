@@ -94,6 +94,7 @@ const Locations: React.FunctionComponent = () => {
   }
 
   const geolocateUser = () => {
+    setLocationAlerts(null);
     setCoords(initialState);
     setSelectedLocation({});
     setLocationSelectedType('geoLocation')
@@ -129,7 +130,6 @@ const Locations: React.FunctionComponent = () => {
       (response) => response.json()
     ).then((data) => {
       const location = data.results[0];
-      console.log('location',location)
       setSelectedLocation({
         name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
         country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
