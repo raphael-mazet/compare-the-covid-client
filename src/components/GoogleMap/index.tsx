@@ -59,7 +59,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
   const markers = props.savedLocations?.map(item => {
     return (
       <MapMarker
-        key={item.location_id}
+        key={`${item.location_id}-${item.name}`}
         lat={item.latitude}
         lng={item.longitude}
         text={item.name}
