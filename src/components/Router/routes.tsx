@@ -10,7 +10,7 @@ const routes = [
         action: '/locations'
       },
       {
-        title: "Saved Locations",
+        title: "My Locations",
         action: "/saved-locations",
       }
     ],
@@ -86,7 +86,7 @@ const routes = [
     component: "Logger",
   },
   {
-    title: "Saved Locations",
+    title: "My Locations",
     to: "/saved-locations",
     exact: true,
     isPrivate: true,

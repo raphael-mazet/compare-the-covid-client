@@ -10,6 +10,7 @@ import CloseIcon from '../CloseIcon'
 
 type propTypes = {
   location: Location
+  onDelete: (e: any) => any;
 }
 
 const SavedLocationItem = (props: propTypes): JSX.Element => {
@@ -28,7 +29,7 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
   }
 
   const latestEvent = findLatest(props.location.events)
-  const formattedDate = DateTime.fromISO(latestEvent.created_at).toFormat('dd LLL yy');
+  const formattedDate = DateTime.fromISO(latestEvent.created_at).toFormat('dd LLL yyyy');
 
   const history = useHistory();
   const clickHandler = async () => {
@@ -41,18 +42,19 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
   } else if (props.location.events && props.location.events?.length > 10) {
     alertZone = 'high';
   }
-  
+
   const mapZoomSetting = 12;
 
   return (  
-    <div className={['location-container', alertZone].join(' ')} >
-      <CloseIcon/>
-      <div className="location_container_clickable" onClick={clickHandler}>
-      </div>
+    <div className="location_container_wrapper">
+      <div className={['location-container', alertZone].join(' ')} >
+        <CloseIcon clickHandler={()=>props.onDelete(props.location.id)}/>
+        <div className="location_container_clickable" onClick={clickHandler}>
+        </div>
         <span style={{ fontWeight: 'bold' }}>{props.location.name}</span>
         <div className="location_data_container">
           <p> <span>Alerts:</span> {props.location.events?.length}</p>
-          <p> <span>Last event:</span> {latestEvent.created_at ? formattedDate : 'No events'}</p>
+          <p> <span>Last:</span> {latestEvent.created_at ? formattedDate : 'No events'}</p>
         </div>
         <div className='location_map_container'> 
           <GoogleMap
@@ -64,6 +66,7 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
           />
         </div>
       </div>
+    </div>
   );
 }
 
