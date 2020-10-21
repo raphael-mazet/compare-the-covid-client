@@ -1,0 +1,21 @@
+@mixin keyframe-alerts-pulse ($type, $color) {
+  @keyframes alerts-pulse-#{$type} {
+    0% {
+      box-shadow: 0 0 5px 0 #{$color};
+    }
+  
+    50% {
+      box-shadow: 0 0 5px 2px #{$color};
+    }
+  
+    100% {
+      box-shadow: 0 0 5px 0 #{$color};
+    }
+  }
+}
+
+@mixin locations-pulse-animation($type) {
+  animation: alerts-pulse-#{$type} 0.6s;
+  animation-iteration-count: 2;
+  animation-delay: 0.5s;
+}
