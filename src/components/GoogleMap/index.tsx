@@ -17,7 +17,7 @@ interface GoogleMapProps {
   zoom?: number;
   name?: string;
   style?: any[];
-  savedLocations?: Location[];
+  savedLocations?: any[];
   mapClickedAction?: (e: any) => any;
   markerSelectedAction: (e: any) => any;
 }
