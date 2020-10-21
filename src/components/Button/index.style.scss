@@ -17,7 +17,7 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   width: calc(100% - 20px);
-  min-width: 150px;
+  min-width: 50px;
 
   &:active {
     box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
@@ -67,10 +67,15 @@
   }
 
   &.back {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     color: $darkGrayFont;
+    opacity: 0.25;
     background-color: $lightGray;
     box-shadow: none;
     padding: $ruler/2;
+    transition: all .2s ease-in-out;
 
     &:hover {
       background-color: #313e49;
