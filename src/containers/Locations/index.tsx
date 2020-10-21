@@ -3,6 +3,7 @@ import GoogleMap from '../../components/GoogleMap';
 import LocationInfo from '../../components/LocationInformation';
 import Button from '../../components/Button';
 import getGeolocation from '../../helpers/geolocate';
+// import { addLocation } from '../../helpers/addLocation'
 import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';

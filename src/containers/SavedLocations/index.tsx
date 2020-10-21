@@ -44,7 +44,6 @@ const SavedLocations = (): JSX.Element => {
     const authData = authenticatedUserVar();
     const newLocations = locations?.filter(location => location.id !== location_id);
     setLocations(newLocations);
-
     deleteLocation({
       variables: {
         user_id: authData.id,
@@ -52,6 +51,16 @@ const SavedLocations = (): JSX.Element => {
       }
     });
   } 
+
+  const [className, setClassName] = useState<string>('');
+  const [animationFinished, setAnimationFinished] = useState<Boolean>(false);
+
+  const startAnimation = () => {
+    setClassName('animation');
+  }
+  onanimationend = () => {
+    setAnimationFinished(true);
+  }
 
   return (
     <div className='container'>
@@ -61,6 +70,7 @@ const SavedLocations = (): JSX.Element => {
             key={location.id}
             location={location}
             onDelete={deleteAction}
+            className={className}
           />
         )}
       </div>

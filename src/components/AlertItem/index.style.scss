@@ -14,6 +14,7 @@
   box-shadow: 0 0 10px 1px #3333;
   margin: 1px 10px 10px 10px;
   padding: 12px 10px 12px 10px;
+  animation: flipInX 0.5s ease-in;
 }
 
 p {
@@ -33,4 +34,19 @@ p {
 .Safe {
   @extend %p-shared;
   color: $green;
+}
+
+@keyframes flipInX {
+  0% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  
+  100% {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
 }
