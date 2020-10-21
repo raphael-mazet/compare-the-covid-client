@@ -7,10 +7,6 @@ const alertItem = ({ alertProps }: any): JSX.Element | null => {
   const formattedAlert = alertProps.alertType.charAt(0).toUpperCase() + alertProps.alertType.slice(1)
   const formattedDate = DateTime.fromISO(alertProps.created_at).toFormat('dd LLL yy');
 
-  onanimationend = () => {
-    console.log('finished')
-  };
-
   return (
     <div className="alertItemContainer">
       <p className={formattedAlert}>Alert: {formattedAlert}</p>

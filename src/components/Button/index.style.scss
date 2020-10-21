@@ -81,14 +81,14 @@
     background-color: $color-button-opacity;
     box-shadow: none;
     padding: 0;
-    transition: all 1s ease-in-out;
-    letter-spacing: 0.5px;
+    // transition: all 0.5s ease-in-out;
+    letter-spacing: 0.25px;
     overflow-wrap: unset;
     white-space: nowrap;
     text-transform: uppercase;
 
-    &:focus {
-      color: transparent;
+    &.animation {
+      animation: fadeTextout 0.5s; 
     }
 
     &:disabled {
@@ -96,5 +96,14 @@
       background-color: grey;
       color: grey;
     }
+  }
+}
+
+@keyframes fadeTextout {
+  0% {
+    color: white;
+  }
+  100% {
+    color: transparent;
   }
 }
