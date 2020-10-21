@@ -3,10 +3,10 @@
 .closeIcon_container {
   display: flex;
   position: absolute;
-  top: -5px;
-  right: -5px;
-  height: 20px;
-  width: 20px;
+  top: -10px;
+  right: -10px;
+  height: 25px;
+  width: 25px;
   border-radius: 50px;
   background-color: $red;
   justify-content: center;
@@ -15,6 +15,6 @@
 }
 
 .closeIcon_asset {
-  height: 12px;
-  width: 12px;
+  height: 16px;
+  width: 16px;
 }
