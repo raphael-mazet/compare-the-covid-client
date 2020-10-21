@@ -10,8 +10,8 @@ const CircleItem = ({alerts}: circleItemProps): JSX.Element | null => {
   const history = useHistory();
 
   const displayText = (!isNew) ? 
-  `You have no new cases and ${alertNumber} active case${(alertNumber === 1) ? '' : 's'} from the last week` :
-  `You have ${alertNumber} new ${alertType} case${(alertNumber === 1) ? '' : 's'} since you last checked`;
+  `${alertNumber} covid case${(alertNumber === 1) ? ' was' : 's were'} recently reported in your tracked locations` :
+  `${alertNumber} new ${alertType} case${(alertNumber === 1) ? ' was' : 's were'} reported since you last checked`;
 
   const clickHandler = () => {
     history.push('/alerts')
