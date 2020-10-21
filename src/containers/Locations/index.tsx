@@ -125,28 +125,37 @@ const Locations: React.FunctionComponent = () => {
     alert('location created');
   }
 
-  const getLocationByGeocode = (coords: any, type: string, item: any) => {
-    console.log(coords, markerClicked)
-    //get lat long from map
+  const getLocationByGeocode = async (coords: any, type: string, item: any) => {
     if (type === 'existingMarker') {
-      console.log(item)
       setMarkerClicked(true);
       setSelectedLocation(item)
-    } else if(type==='geolocated' && !markerClicked){
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
-        (response) => response.json()
-      ).then((data) => {
-        const location = data.results[0];
-        setSelectedLocation({
-          name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
-          country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
-          googlemap_URL: location.place_id,
-          location_type: location.types[0],
-          longitude: location.geometry.location.lng.toString(),
-          latitude: location.geometry.location.lat.toString(),
-        })
-        setLocationSelectedType('searchedLocation')
-      })
+    } else if (type === 'geolocated' && !markerClicked) {
+      setTimeout(async () => {
+        const name = document.getElementsByClassName("title full-width")[0]?.innerHTML;
+        const city = document.getElementsByClassName("address-line full-width")[1]?.innerHTML;
+        const citySplit = city.split(', ');
+        const cityLength = citySplit.length;
+        const cityEdit = citySplit[cityLength - 1];
+        const nameEdit = name.replace(' ', '%');
+        await fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${nameEdit}%${cityEdit}&inputtype=textquery&fields=formatted_address,types,name,place_id,geometry&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
+          (response) => response.json()
+        ).then((response) => {
+          if (response.candidates) {
+            const newLocation = response.candidates[0];
+            const addressItemsLength = newLocation.formatted_address.split(', ').length;
+            const country = newLocation.formatted_address.split(', ')[addressItemsLength - 1];
+            setSelectedLocation({
+              name: newLocation.name,
+              country: country,
+              googlemap_URL: newLocation.place_id,
+              location_type: newLocation.types[0],
+              longitude: newLocation.geometry.location.lng.toString(),
+              latitude: newLocation.geometry.location.lat.toString(),
+            })
+            setLocationSelectedType('searchedLocation')
+          }
+        });
+      }, 1000)
     }
   }
 
@@ -157,8 +166,6 @@ const Locations: React.FunctionComponent = () => {
   } else {
     locationInfo = <p> Current Location Displayed </p>;
   }
-
-  // console.log(' ---> locationAlerts', locationAlerts);
 
   return (
     <div className='container_locations'>

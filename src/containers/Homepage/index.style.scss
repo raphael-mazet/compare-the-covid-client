@@ -1,3 +1,5 @@
+@import '../../styling/colors.scss';
+
 .homepage-wrapper {
   display: flex;
   flex-direction: column;
@@ -49,4 +51,8 @@ div .content_container {
 
 .searchbar_title {
   margin-top: 40px;
+}
+
+h2 {
+  text-shadow: 1px 1px 0 $color-white;
 }
