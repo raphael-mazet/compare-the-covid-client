@@ -1,3 +1,5 @@
+@import '../../styling/colors.scss';
+
 .container_locations {
   display: flex;
   flex-direction: column;
@@ -30,6 +32,10 @@
 
 .locations_data_text {
   height: 100px;
+}
+
+.locations_data_alerts {
+  padding: 0px $ruler;
 }
 
 .locations_data_alerts_text_confirmed {
