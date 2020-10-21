@@ -79,11 +79,11 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
         <CloseIcon clickHandler={(e)=>closeIconclickHandler(e)}/>
         <div className="location_container_clickable" onClick={clickHandler}>
         </div>
-        <span style={{ fontWeight: 'bold' }}>{props.location.name}</span>
+        <span>{props.location.name}</span>
         <div className="location_data_container">
-          <p> <span>Alerts:</span> {props.location.events?.length}</p>
-          <p> <span>Last:</span> {latestEvent.created_at ? formattedDate : 'No events'}</p>
-          <p> <span>Sanitary rating:</span> {averageScore}</p>
+          <p> <span>Alerts #</span><br/> {props.location.events?.length}</p>
+          <p> <span>Last Alert</span><br/> {latestEvent.created_at ? formattedDate : 'No events'}</p>
+          <p> <span>Sanitary rating</span><br/> {averageScore}</p>
         </div>
         <div className='location_map_container'> 
           <GoogleMap

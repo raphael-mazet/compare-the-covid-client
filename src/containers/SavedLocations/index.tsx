@@ -5,8 +5,7 @@ import { Event } from '../../interfaces/query.interface'
 import './index.style.scss';
 import { useMutation } from "@apollo/react-hooks";
 import { DELETE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
-import Sorter from '../../components/Sorter'
-import { DateTime } from 'luxon';
+// import { DateTime } from 'luxon';
 
 const SavedLocations = (): JSX.Element => {
   const [events, setEventsCache] = useState<Event[]>();
@@ -78,16 +77,6 @@ const SavedLocations = (): JSX.Element => {
   
   return (
     <div className='saved_locations_container'>
-      <div className='sorter_wrapper'>
-      <Sorter 
-        sortName={'Alerts'}
-        onClick={sortTotalAlert}
-      />
-      <Sorter 
-        sortName={'Last Alert Date'}
-        onClick={sortTotalAlert}
-      />
-      </div>
       <div style={{height: '100%'}}>
         {sortedLocations?.map((location:any)=>
           <SavedLocationItem

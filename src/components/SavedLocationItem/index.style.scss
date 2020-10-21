@@ -10,6 +10,7 @@
   justify-content: center;
   position: relative;
   background-color: white;
+  font-weight:500;
 
   &.safe {
     color: $green;
@@ -51,18 +52,19 @@
 
   p {
     margin: unset;
-    font-size: 16px;
+    font-size: 14px;
     color: $lightGrayFont;
   }
 
   span {
     font-weight: 500;
-    color: $darkGrayFont
+    color: $darkGrayFont;
+    font-size: 12px;
   }
 }
 .location_container_wrapper {
   width: 100%;
-  height: 260px;
+  height: 300px;
   display: flex;
   justify-content: center;
 
