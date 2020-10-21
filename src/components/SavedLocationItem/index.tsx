@@ -34,8 +34,8 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
   console.log(props.location)
 
   const alertScore = props.location.events?.map(event=> event.alertScore);
-  const totalScore = alertScore?.reduce((acc, cv) => Number(acc) + Number(cv));
   const eventsNumber = props.location.events && props.location.events.length
+  const totalScore = (Number(eventsNumber) > 1) ? alertScore?.reduce((acc, cv) => Number(acc) + Number(cv)) : alertScore;
   const averageScore = Number(totalScore)/Number(eventsNumber)
 
   const latestEvent = findLatest(props.location.events)
