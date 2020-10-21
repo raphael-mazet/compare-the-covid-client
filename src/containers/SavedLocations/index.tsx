@@ -52,16 +52,6 @@ const SavedLocations = (): JSX.Element => {
     });
   } 
 
-  const [className, setClassName] = useState<string>('');
-  const [animationFinished, setAnimationFinished] = useState<Boolean>(false);
-
-  const startAnimation = () => {
-    setClassName('animation');
-  }
-  onanimationend = () => {
-    setAnimationFinished(true);
-  }
-
   return (
     <div className='container'>
       <div style={{height: '100%'}}>
@@ -70,8 +60,7 @@ const SavedLocations = (): JSX.Element => {
             key={location.id}
             location={location}
             onDelete={deleteAction}
-            className={className}
-          />
+            />
         )}
       </div>
     </div>

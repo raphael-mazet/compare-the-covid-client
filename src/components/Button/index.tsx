@@ -18,11 +18,10 @@ const ButtonSt = (props: propTypes): JSX.Element => {
 
   const clickHandler = (e: any) => {
     if (props.buttonType === 'back') {
-      console.log('clicked')
       startAnimation();
-      onanimationend = () => {
-        console.log('finished')
-        props.onClick(e);
+      onanimationend = (e) => {
+        if (e.animationName === 'fadeTextout') props.onClick(e);
+        else e.preventDefault();
       }
     } else {
       props.onClick(e);

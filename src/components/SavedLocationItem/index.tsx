@@ -16,7 +16,6 @@ type propTypes = {
 
 const SavedLocationItem = (props: propTypes): JSX.Element => {
 
-  const [animationFinished, setAnimationFinished] = useState<Boolean>(false);
   const [className, setClassName] = useState<string>('');
 
   function findLatest (eventsArr: any) {
