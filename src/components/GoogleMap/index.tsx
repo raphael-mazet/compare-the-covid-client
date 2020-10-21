@@ -41,7 +41,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
 
   const googleMapKey = 'AIzaSyBnQCOZ8iMqtqBFAqpF7w-YdlaOBfeD3lA'
   const mapClick = (mapProps: any) => {
-    console.log(mapProps)
+    console.log('mapsprops',mapProps)
     props.mapClickedAction && props.mapClickedAction({ latitude: mapProps.lat, longitude: mapProps.lng });
   }
 
@@ -50,7 +50,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
       panControl: false,
       mapTypeControl: false,
       fullscreenControl: false,
-      scrollwheel: false,
+      scrollwheel: true,
       zoomControl: false,
       styles: style,
     }

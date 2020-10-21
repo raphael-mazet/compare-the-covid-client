@@ -90,11 +90,11 @@ const Locations: React.FunctionComponent = () => {
 
   const getLocationByGeocode = (coords: any) => {
     //get lat long from map
-    console.log(coords)
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.latitude},${coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
       (response) => response.json()
     ).then((data) => {
       const location = data.results[0];
+      console.log('location',location)
       setSelectedLocation({
         name: location.address_components.find((item: any) => item.types.includes("premise"))?.long_name || "User Selected",
         country: location.address_components.find((item: any) => item.types.includes("country"))?.long_name,
