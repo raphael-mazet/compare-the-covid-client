@@ -1,5 +1,11 @@
-.container {
+.saved_locations_container {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  flex-direction: column;
+}
+
+.sorter_wrapper {
+  display: flex;
+  flex-direction: row;
 }

@@ -137,9 +137,9 @@ const Locations: React.FunctionComponent = () => {
         const cityLength = citySplit.length;
         const cityEdit = citySplit[cityLength - 1];
         const nameEdit = name.replace(' ', '%');
-        await fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${nameEdit}%${cityEdit}&inputtype=textquery&fields=formatted_address,types,name,place_id,geometry&key=${process.env.REACT_APP_GOOGLE_API_KEY}`).then(
-          (response) => response.json()
-        ).then((response) => {
+        await fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${nameEdit}%${cityEdit}&inputtype=textquery&fields=formatted_address,types,name,place_id,geometry&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+        .then((response) => response.json())
+        .then((response) => {
           if (response.candidates) {
             const newLocation = response.candidates[0];
             const addressItemsLength = newLocation.formatted_address.split(', ').length;
