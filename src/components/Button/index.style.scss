@@ -35,8 +35,9 @@
 
   &.cancel {
     color: white;
-    background-color: #f94144;
+    background-color: transparent;
     border: unset;
+    box-shadow: none;
 
     &:hover {
       background-color: #9e0507;

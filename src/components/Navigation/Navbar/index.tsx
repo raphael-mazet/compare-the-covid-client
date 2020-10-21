@@ -25,7 +25,7 @@ const NavBar: React.FC<propsType> = (props: propsType) => {
       {props.route.title !== 'Login' &&
         <div style={{ width: '20%', margin: 'auto', textAlign: 'right' }}>
           <Button
-            content={<LogoutIcon color="black" height="24"/>}
+            content={<LogoutIcon color="#EBECF0" height="22"/>}
             buttonType='logout cancel'
             onClick={(e)=> onLogout(e)}
           />

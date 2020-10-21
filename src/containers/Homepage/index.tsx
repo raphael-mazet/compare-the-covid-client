@@ -75,10 +75,11 @@ const Homepage: React.FunctionComponent = () => {
           { variables: lastCheckedEventsData })
         updateAuthenticatedUserVar()
         }
-      }>
+        }>
         <Alerts/>
       </div>
       </div>
+      <div className="searchbar_title">Is your destination safe?</div>
       <div className='searchbar_container'>
         <Searchbar
           placeholder="Search a location"
@@ -91,7 +92,7 @@ const Homepage: React.FunctionComponent = () => {
       <div className='actions_container'>
         <div className='button-container'>
           <Button
-            content='Log a Covid'
+            content='Report a Covid case'
             onClick={caseRouter}
           />
         </div>
