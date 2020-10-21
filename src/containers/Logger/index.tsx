@@ -98,7 +98,7 @@ const Logger: React.FunctionComponent = () => {
   return (
     <div className='logger-page-wrapper'>
       <div className="logger-explain">
-        <p className="logger-explain-text">Have you tested positive <br/> to Covid  or suspect <br/> your are ill?</p>
+        <p className="logger-explain-text">Have you tested positive <br/> for Covid-19  or suspect <br/> you are ill?</p>
       </div>
       <div className='logger-form-wrapper'>
         <form className='logger-form-container' onSubmit={(e) => onSubmit(e)}>
