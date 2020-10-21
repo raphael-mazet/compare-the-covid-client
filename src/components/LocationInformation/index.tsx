@@ -19,14 +19,14 @@ const LocationInfo = (props: propTypes): JSX.Element => {
     data
   } = props;
   
-  data.location_type = data.location_type.split('_').join(' ');
+  const locationType = data.location_type.replace('_', ' ');
   
   return (  
     <div className='container'>
       <div>
         <p className="location_info_name">{data.name}</p>
         {/* <p className="location_info_data">lat: {parseFloat(data.latitude).toFixed(3)} - long: {parseFloat(data.longitude).toFixed(3)} </p> */}
-        <p className="location_info_data">{data.location_type}</p>
+        <p className="location_info_data">{locationType}</p>
       </div>
     </div>
   );
