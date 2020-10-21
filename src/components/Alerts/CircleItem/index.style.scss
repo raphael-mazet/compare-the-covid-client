@@ -50,11 +50,12 @@ p {
 .alert_text {
   align-self: flex-end;
   justify-self: flex-end;
+  padding: 0 5px;
 }
 
 .number {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .confirmed-unchecked-styles {
