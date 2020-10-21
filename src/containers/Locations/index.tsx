@@ -24,6 +24,8 @@ const initialState = {
   longitude: null
 }
 
+let placeSearch: google.maps.places.PlaceSearchRequest;
+
 const Locations: React.FunctionComponent = () => {
   const [coords, setCoords] = useState<Coords>(initialState);
   const [searchedLocation, setSelectedLocation] = useState<any>({});
