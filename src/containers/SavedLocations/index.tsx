@@ -8,26 +8,30 @@ import { DELETE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 
 const SavedLocations = (): JSX.Element => {
   const [events, setEventsCache] = useState<Event[]>();
-  const savedLocations = savedLocationsVar();
-  const updateLocations = () => {
-    console.log('update locations')
-  }
-  const [deleteLocation] = useMutation(DELETE_SAVED_LOCATION, {
-    onCompleted: updateLocations
-  })
-
-  const savedLocationsWithEvents = savedLocations.map((location) =>
-    Object.assign({}, location, { events: [] })
-  );
+  const [locations, setLocations] = useState<any[]>();
+  
   useEffect(() => {
+    const userLocations = savedLocationsVar();
+    setLocations(userLocations);
     const cachedEvents = userAlertsVar();
     const dataToMap = [...cachedEvents.confirmed, ...cachedEvents.suspected, ...cachedEvents.safe]
     setEventsCache(dataToMap);
   }, [])
+  
+  const updateLocations = () => {
+    savedLocationsVar(locations)
+  }
+  
+  const [deleteLocation] = useMutation(DELETE_SAVED_LOCATION, {
+    onCompleted: updateLocations
+  })
+
+  const savedLocationsWithEvents = locations?.map((location) =>
+    Object.assign({}, location, { events: [] })
+  );
 
   events && events.forEach((event: any )=> {
-    savedLocationsWithEvents.forEach(location => {
-      console.log(event.location_id)
+    savedLocationsWithEvents?.forEach(location => {
       if(location.id === event?.location_id.id) {
         location.events.push(event)
       }
@@ -38,7 +42,9 @@ const SavedLocations = (): JSX.Element => {
 
   const deleteAction = (location_id: number) => {
     const authData = authenticatedUserVar();
-    console.log(location_id, authData)
+    const newLocations = locations?.filter(location => location.id !== location_id);
+    setLocations(newLocations);
+
     deleteLocation({
       variables: {
         user_id: authData.id,
@@ -46,11 +52,11 @@ const SavedLocations = (): JSX.Element => {
       }
     });
   } 
-  
+
   return (
     <div className='container'>
       <div style={{height: '100%'}}>
-        {sortedLocations.map(location=>
+        {sortedLocations?.map(location=>
           <SavedLocationItem
             key={location.id}
             location={location}
