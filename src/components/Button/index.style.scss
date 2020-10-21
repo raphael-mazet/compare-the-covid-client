@@ -85,9 +85,10 @@
     letter-spacing: 0.5px;
     overflow-wrap: unset;
     white-space: nowrap;
+    text-transform: uppercase;
 
-    &:hover {
-      background-color: #313e49;
+    &:focus {
+      color: transparent;
     }
 
     &:disabled {
