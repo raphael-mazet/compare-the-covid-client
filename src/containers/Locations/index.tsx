@@ -185,11 +185,13 @@ const Locations: React.FunctionComponent = () => {
         <div className='locations_data_text'>
           {locationInfo}
         </div>
-        <div className="locations_data_alerts">
-          <p className={`locations_data_alerts_text${locationAlerts ? `_${locationAlerts.alertType}` : ''}`}>{(!locationAlerts || !locationAlerts.alertNumber) ?
-            'There are currently no alerts for this location' : 
-            `${locationAlerts.alertNumber} ${locationAlerts.alertType} covid case${(locationAlerts.alertNumber === 1) ? ' was' : 's were'} reported at this location in the last week`}
-          </p>
+        <div className="locations_alerts_container">
+          <div className={`locations_data_alerts locations_alerts${locationAlerts ? `_${locationAlerts.alertType}` : ''}`}>
+            <p className={'locations_data_alerts_text'}>{(!locationAlerts || !locationAlerts.alertNumber) ?
+              'There are currently no alerts for this location' : 
+              `${locationAlerts.alertNumber} ${locationAlerts.alertType} covid case${(locationAlerts.alertNumber === 1) ? ' was' : 's were'} reported at this location in the last week`}
+            </p>
+          </div>
         </div>
         <div className="locations_actions">
           {

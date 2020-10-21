@@ -1,4 +1,5 @@
 @import '../../styling/colors.scss';
+@import '../../styling/mixins.scss';
 
 .container_locations {
   display: flex;
@@ -34,16 +35,30 @@
   height: 100px;
 }
 
+.locations_alerts_container {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
 .locations_data_alerts {
-  padding: 0px $ruler;
-}
+  background-color: white;
+  border-radius: 8px;;
+  box-sizing: border-box;
+  width: 80%;
+  padding: $ruler;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
-.locations_data_alerts_text_confirmed {
-  color: red;
-}
+    &.locations_alerts_confirmed {
+      box-shadow: 0px 0px 5px 0px $redrgba;
+      @include locations-pulse-animation(confirmed);
+    }
 
-.locations_data_alerts_text_suspected {
-  color: yellow;
+    &.locations_alerts_suspected {
+      box-shadow: 0px 0px 5px 0px $yellowrgba;
+      @include locations-pulse-animation(suspected);
+    }
 }
 
 .locations_actions {
@@ -55,3 +70,6 @@
 .locations_button_container {
   margin-top: 50px;
 }
+
+@include keyframe-alerts-pulse(confirmed, $redrgba);
+@include keyframe-alerts-pulse(suspected, $yellowrgba);
