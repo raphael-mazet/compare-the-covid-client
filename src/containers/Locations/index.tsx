@@ -26,6 +26,8 @@ const Locations: React.FunctionComponent = () => {
   const [searchedLocation, setSelectedLocation] = useState<any>();
   const [locationSelectedType, setLocationSelectedType] = useState<string>('');
 
+  console.log(' ---> searchedLocation', searchedLocation);
+
   const history: any = useHistory();
   
   useEffect(() => {
@@ -117,6 +119,11 @@ const Locations: React.FunctionComponent = () => {
 
   return (
     <div className='container_locations'>
+      
+      <div className="locations_subtitle">
+        <p className="locations_subtitle_text">{searchedLocation?.name ? `You searched for` : `Your location`}</p>
+      </div>
+      
       <div className='locations_map'>
         {(!coords.longitude || !coords.latitude) &&
           <Loading/>
@@ -131,12 +138,12 @@ const Locations: React.FunctionComponent = () => {
         }
       </div>
       <div className='container_locations_data'>
-        <div style={{ height: '300px' }}>
+        <div className='locations_data_text'>
           {locationInfo}
         </div>
         <div className="locations_actions">
           {
-            <div className="button_container">
+            <div className="locations_button_container">
               <Button
                 disabled={!(!!locationSelectedType && !!searchedLocation && locationSelectedType === 'searchedLocation')}
                 content='Save location'
@@ -144,7 +151,7 @@ const Locations: React.FunctionComponent = () => {
               />
             </div>
           }
-          <div className="button_container">
+          <div className="locations_button_container">
             <Button
               content='Locate me'
               onClick={geolocateUser}
