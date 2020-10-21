@@ -9,7 +9,7 @@ const Alerts: React.FunctionComponent = () => {
   
   return (
     <>
-      <h1>Your Alerts</h1>
+      <h2>Your Alerts</h2>
       {dataToMap.map(
         location=> 
           <AlertItem

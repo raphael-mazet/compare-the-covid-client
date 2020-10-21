@@ -1,3 +1,5 @@
+@import '../../styling/colors.scss';
+
 .homepage-wrapper {
   display: flex;
   flex-direction: column;
@@ -45,4 +47,8 @@ div .content_container {
   box-shadow: 0 0 10px 1px #3333;
   margin: 1px 10px 10px 10px;
   padding: 12px 10px 12px 10px;
+}
+
+h2 {
+  text-shadow: 1px 1px 0 $color-white;
 }
