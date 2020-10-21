@@ -40,27 +40,27 @@ const SavedLocations = (): JSX.Element => {
     })
   ));
   
-  // const dateLocations = savedLocationsWithEvents && savedLocationsWithEvents?.map(location => {
-  //   location.events.sort((a:any,b:any) => DateTime.fromISO(b.alertDate).toMillis() - DateTime.fromISO(a.alertDate).toMillis());
-  // });
+  // // const dateLocations = savedLocationsWithEvents && savedLocationsWithEvents?.map(location => {
+  // //   location.events.sort((a:any,b:any) => DateTime.fromISO(b.alertDate).toMillis() - DateTime.fromISO(a.alertDate).toMillis());
+  // // });
   
-  const dateLocations = savedLocationsWithEvents?.map(location=>DateTime.fromISO(location.events[0].alertDate).toMillis())
+  // const dateLocations = savedLocationsWithEvents?.map(location=>DateTime.fromISO(location.events[0].alertDate).toMillis())
   
-  const dateLocations1 = savedLocationsWithEvents?.sort((a:any,b:any)=>DateTime.fromISO(a.events[0].alertDate).toMillis() - DateTime.fromISO(b.events[0].alertDate).toMillis())
+  // const dateLocations1 = savedLocationsWithEvents?.sort((a:any,b:any)=>DateTime.fromISO(a.events[0].alertDate).toMillis() - DateTime.fromISO(b.events[0].alertDate).toMillis())
 
-  console.log(dateLocations)
-  console.log(dateLocations1)
+  // console.log(dateLocations)
+  // console.log(dateLocations1)
 
   const sortTotalAlert = () => {
     return savedLocationsWithEvents?.sort((a, b) => b.events.length - a.events.length);
   }
-  const datesorter = (arg: any) => {
-    return arg?.sort((a:any, b:any) => b[0].alertDate - a[0].alertDate)
-  }
+  // const datesorter = (arg: any) => {
+  //   return arg?.sort((a:any, b:any) => b[0].alertDate - a[0].alertDate)
+  // }
 
-  const sortLastAlert = () => {
-    return datesorter(dateLocations);
-  }
+  // const sortLastAlert = () => {
+  //   return datesorter(dateLocations);
+  // }
 
   const sortedLocations = savedLocationsWithEvents && sortTotalAlert();
 
@@ -75,10 +75,6 @@ const SavedLocations = (): JSX.Element => {
       }
     });
   } 
-
-  // const sortLastAlert = () => {
-  //   return savedLocationsWithEvents?.sort((a, b) => b.events.sort((a,b)) - a.events.sort());
-  // }
   
   return (
     <div className='saved_locations_container'>
