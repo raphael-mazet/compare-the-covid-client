@@ -5,10 +5,13 @@ import Button from '../../components/Button';
 import getGeolocation from '../../helpers/geolocate';
 import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import './index.style.scss';
 import Loading from '../../components/Loading'
+import { GET_EVENTS_BY_LOCATION_ID, GET_LOCATION_BY_URL } from "../../apis/graphQL/queries";
+import filterActiveAndNew from "../../helpers/filterActiveAndNew";
+import { setAlerts } from "../../helpers/setAlerts";
 
 type Coords = {
   latitude: number | null;
@@ -24,9 +27,42 @@ const Locations: React.FunctionComponent = () => {
   const [coords, setCoords] = useState<Coords>(initialState);
   const [searchedLocation, setSelectedLocation] = useState<any>();
   const [locationSelectedType, setLocationSelectedType] = useState<string>('');
+  const [locationAlerts, setLocationAlerts] = useState<any>();
 
   const history: any = useHistory();
+
+  const [getSearchedLocationId, {data: searchedLocatiomDbData}] = useLazyQuery<any>(GET_LOCATION_BY_URL, {
+    onCompleted:LocationAlerts
+  })
+  const [getLocationAlerts, {data: searchedLocationAlertsData}] = useLazyQuery<any>(GET_EVENTS_BY_LOCATION_ID, {
+    onCompleted: filterAlerts
+  })
   
+  function LocationAlerts(data: any) {
+    if (data.getLocationbyURL) {
+      getLocationAlerts({
+        variables: {
+          location_id: data.getLocationbyURL.id
+        }
+      })
+    }
+  }
+
+  function filterAlerts (data: any) {
+    const classifiedAlerts = setAlerts(data.getEventsbyLocation_Id)
+    setLocationAlerts(filterActiveAndNew(classifiedAlerts))
+  }
+
+  useEffect(() => {
+    if (searchedLocation?.googlemap_URL) {
+      getSearchedLocationId({
+        variables: {
+          googlemap_URL: searchedLocation?.googlemap_URL
+        }
+      })
+    }
+  }, [searchedLocation]);
+
   useEffect(() => {
     if (history.location.state !== 'searchbar') {
       geolocateUser();
@@ -114,8 +150,15 @@ const Locations: React.FunctionComponent = () => {
     locationInfo = <p> Current Location Displayed </p>;
   }
 
+  console.log(' ---> locationAlerts', locationAlerts);
+
   return (
     <div className='container_locations'>
+      
+      <div className="locations_subtitle">
+        <p className="locations_subtitle_text">{searchedLocation?.name ? `You searched for` : `Your location`}</p>
+      </div>
+      
       <div className='locations_map'>
         {(!coords.longitude || !coords.latitude) &&
           <Loading/>
@@ -131,12 +174,18 @@ const Locations: React.FunctionComponent = () => {
         }
       </div>
       <div className='container_locations_data'>
-        <div style={{ height: '300px' }}>
+        <div className='locations_data_text'>
           {locationInfo}
+        </div>
+        <div className="locations_data_alerts">
+          <p className={`locations_data_alerts_text${locationAlerts ? `_${locationAlerts.alertType}` : ''}`}>{(!locationAlerts || !locationAlerts.alertNumber) ?
+            'There are currently no alerts for this location' : 
+            `${locationAlerts.alertNumber} ${locationAlerts.alertType} covid case${(locationAlerts.alertNumber === 1) ? ' was' : 's were'} reported at this location in the last week`}
+          </p>
         </div>
         <div className="locations_actions">
           {
-            <div className="button_container">
+            <div className="locations_button_container">
               <Button
                 disabled={!(!!locationSelectedType && !!searchedLocation && locationSelectedType === 'searchedLocation')}
                 content='Save location'
@@ -144,7 +193,7 @@ const Locations: React.FunctionComponent = () => {
               />
             </div>
           }
-          <div className="button_container">
+          <div className="locations_button_container">
             <Button
               content='Locate me'
               onClick={geolocateUser}
