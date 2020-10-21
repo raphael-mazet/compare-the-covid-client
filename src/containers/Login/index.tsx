@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import useWindowSize from '../../helpers/getWindowSize';
 import './index.style.scss'
 import logo from '../../images/logo.png'
-import { authenticatedUserVar, savedLocationsVar, userAlertsVar } from '../../apolloclient/makevar';
+import { authenticatedUserVar, savedLocationsVar, userAlertsVar, userSearchDataVar } from '../../apolloclient/makevar';
 import { SavedLocations, UserAlerts } from '../../apolloclient/localstateinterfaces'
 import { setAlerts } from '../../helpers/setAlerts';
 
@@ -45,6 +45,7 @@ const Login: React.FunctionComponent = (props: any) => {
       }
       authenticatedUserVar(userInfo);
       savedLocationsVar(locationData);
+      userSearchDataVar({});
       const classifiedAlerts = setAlerts(eventData);
       userAlertsVar(classifiedAlerts);
       history.push('/home')

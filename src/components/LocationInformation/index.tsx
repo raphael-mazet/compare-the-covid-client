@@ -18,7 +18,6 @@ const LocationInfo = (props: propTypes): JSX.Element => {
   const {
     data
   } = props;
-  console.log('location info', data)
   return (  
     <div className='container'>
       <div>

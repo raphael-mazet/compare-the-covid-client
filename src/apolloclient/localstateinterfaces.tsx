@@ -2,13 +2,13 @@ import { Location } from '../interfaces/query.interface';
 import { Event } from '../interfaces/query.interface'
 
 export interface UserSearchData {
-  id?: number,
+  id?: number | null,
   name?: string,
   country?: string,
   googlemap_URL?: string,
   location_type?: string,
-  latitude: number,
-  longitude: number,
+  latitude?: number | null,
+  longitude?: number | null,
 }
 
 export interface UserAlerts {

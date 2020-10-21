@@ -18,7 +18,7 @@ interface GoogleMapProps {
   name?: string;
   style?: any[];
   savedLocations?: any[];
-  mapClickedAction?: (e: any) => any;
+  mapClickedAction?: (coords: any, type: string, item: any) => any;
   markerSelectedAction: (e: any) => any;
 }
 
@@ -41,7 +41,7 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
 
   const googleMapKey = 'AIzaSyBnQCOZ8iMqtqBFAqpF7w-YdlaOBfeD3lA'
   const mapClick = (mapProps: any) => {
-    props.mapClickedAction && props.mapClickedAction({ latitude: mapProps.lat, longitude: mapProps.lng });
+    props.mapClickedAction && props.mapClickedAction({ latitude: mapProps.lat, longitude: mapProps.lng }, 'geolocated', null);
   }
 
   const createMapOptions = (maps: any) => {
@@ -57,14 +57,13 @@ const GoogleMap = (props: GoogleMapProps): JSX.Element => {
   }
   
   const markers = props.savedLocations?.map(item => {
-    console.log('item',props.savedLocations)
     return (
       <MapMarker
         key={item.location_id}
         lat={item.latitude}
         lng={item.longitude}
         text={item.name}
-        onClick={props.markerSelectedAction(item)}
+        onClick={()=> props.markerSelectedAction(item)}
       />
     );
   });
