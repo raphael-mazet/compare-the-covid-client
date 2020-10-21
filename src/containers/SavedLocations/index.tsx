@@ -30,13 +30,13 @@ const SavedLocations = (): JSX.Element => {
     Object.assign({}, location, { events: [] })
   );
 
-  events && events.forEach((event: any )=> {
+  events && events.forEach((event: any) => (
     savedLocationsWithEvents?.forEach(location => {
-      if(location.id === event?.location_id.id) {
+      if (location.id === event?.location_id.id) {
         location.events.push(event)
       }
     })
-  });
+  ));
 
   const sortedLocations = savedLocationsWithEvents && savedLocationsWithEvents.sort((a, b) => b.events.length - a.events.length);
 
