@@ -5,7 +5,7 @@ import AlertItem from '../../components/AlertItem'
 const Alerts: React.FunctionComponent = () => {
   
   const data = userAlertsVar();
-  let dataToMap = [...data.confirmed, ...data.suspected, ...data.safe]
+  const dataToMap = [...data.confirmed, ...data.suspected, ...data.safe]
   
   return (
     <>
