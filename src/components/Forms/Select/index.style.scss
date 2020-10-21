@@ -2,6 +2,8 @@
   background-color: rgba(red($color), green($color), blue($color), $alpha);
 }
 
+@import '../../../styling/colors.scss';
+
 .inputSt {
   display: flex;
   flex-direction: column;
@@ -37,7 +39,8 @@
 
     option {
       margin: auto;
-      width: max-content;
+      max-width: 100%;
+      border: 1px solid $brightblue;
     }
 
     &.error {
