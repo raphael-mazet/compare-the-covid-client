@@ -1,72 +1,48 @@
-// import React, { useState } from 'react';
-// import onClickOutside from 'react-onclickoutside';
+// import React, { useState, useEffect } from 'react';
 
-// function Dropdown({ title, items, multiSelect = false }: any) {
-//   const [open, setOpen] = useState(false);
-//   const [selection, setSelection] = useState<any>([]);
-//   const toggle = () => setOpen(!open);
+// const Dropdown = (): JSX.Element => {
+//   const [showMenu, setShowMenu] = useState<boolean>(false)
+//   let dropdownMenu = React.useRef("dropdownMenu")
 
-//   Dropdown.handleClickOutside = () => setOpen(false);
+  
+//   console.log(React.useRef("dropdownMenu"))
 
-//   function handleOnClick(item: any) {
-//     if (!selection.some((current: any) => current.id === item.id)) {
-//       if (!multiSelect) {
-//         setSelection([item]);
-//       } else if (multiSelect) {
-//         setSelection([...selection, item]);
-//       }
-//     } else {
-//       let selectionAfterRemoval = selection;
-//       selectionAfterRemoval = selectionAfterRemoval.filter(
-//         (current:any) => current.id !== item.id
-//       );
-//       setSelection([...selectionAfterRemoval]);
+//   const showTheMenu = (e: any) => {
+//     e.preventDefault();
+//     setShowMenu(!showMenu);
+//     document.addEventListener('click', closeMenu);
+//   }
+  
+//   const closeMenu = (e:any) => {
+//     if (!(dropdownMenu.current.contains(e.target) )) {
+//       setShowMenu(false);
+//       document.removeEventListener('click', closeMenu);
 //     }
 //   }
 
-//   function isItemInSelection(item :any) {
-//     if (selection.some((current:any) => current.id === item.id)) {
-//       return true;
-//     }
-//     return false;
-//   }
-
-//   return (
-//     <div className="dd-wrapper">
-//       <div
-//         tabIndex={0}
-//         className="dd-header"
-//         role="button"
-//         onKeyPress={() => toggle(!open)}
-//         onClick={() => toggle(!open)}
-//       >
-//         <div className="dd-header__title">
-//           <p className="dd-header__title--bold">{title}</p>
-//         </div>
-//         <div className="dd-header__action">
-//           <p>{open ? 'Close' : 'Open'}</p>
-//         </div>
+//     return (
+//       <div>
+//         <button onClick={showTheMenu}>
+//           Show menu
+//         </button>
+        
+//         {
+//           showMenu
+//             ? (
+//               <div className="dropdownMenu" ref="dropdownMenu">
+//                 <button> Menu item 1 </button>
+//                 <button> Menu item 2 </button>
+//                 <button> Menu item 3 </button>
+//               </div>
+//             )
+//             : (
+//               null
+//             )
+//         }
 //       </div>
-//       {open && (
-//         <ul className="dd-list">
-//           {items.map((item:any) => (
-//             <li className="dd-list-item" key={item.id}>
-//               <button type="button" onClick={() => handleOnClick(item)}>
-//                 <span>{item.value}</span>
-//                 <span>{isItemInSelection(item) && 'Selected'}</span>
-//               </button>
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </div>
-//   );
+//     );
 // }
 
-// const clickOutsideConfig = {
-//   handleClickOutside: () => Dropdown.handleClickOutside,
-// };
-
-// export default onClickOutside(Dropdown, clickOutsideConfig);
+// export default Dropdown;
 
 export default {}
