@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { userAlertsVar, selectedLocationsEventsVar } from '../../apolloclient/makevar'
 import AlertItem from '../../components/AlertItem'
 import { useHistory } from 'react-router-dom';
+import './index.style.scss'
 
 const Alerts: React.FunctionComponent = () => {
   const [alerts, setAlerts] = useState<any>();
@@ -28,7 +29,7 @@ const Alerts: React.FunctionComponent = () => {
 
   return (
     <>
-      <h1>Your Alerts</h1>
+      <h2>Your Alerts</h2>
       {alerts && alerts.map(
         (location:any)=> 
           <AlertItem

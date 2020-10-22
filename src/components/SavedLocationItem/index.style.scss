@@ -69,7 +69,7 @@
   justify-content: center;
 
   &.animation {
-    animation: flipInX 0.5s ease-in;
+    animation: rollOut 0.5s ease-in;
   }
 }
 
@@ -87,3 +87,14 @@
     transform: perspective(400px);
   }
 }
+
+@keyframes rollOut {
+  0% {
+     opacity: 1;
+     transform: translateX(0px) rotate(0deg);
+  }
+  100% {
+     opacity: 0;
+     transform: translateX(100%) rotate(120deg);
+  }
+} 
