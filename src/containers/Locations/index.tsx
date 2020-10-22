@@ -58,6 +58,7 @@ const Locations: React.FunctionComponent = () => {
   }
 
   useEffect(() => {
+    setLocationAlerts({});
     if (searchedLocation?.googlemap_URL) {
       getSearchedLocationId({
         variables: {
@@ -108,8 +109,14 @@ const Locations: React.FunctionComponent = () => {
 
   function addSavedLocationToMakeVarHelper (recievedData: any) {
     const existingSavedlocation = savedLocationsVar();
-    const newSavedLocation = recievedData.createSavedLocation.location_id
-    savedLocationsVar([...existingSavedlocation, newSavedLocation])
+    console.log('recieveddata',recievedData)
+    const locationExists = existingSavedlocation.filter(location=>(location.googlemap_URL === recievedData.createSavedLocation.location_id.googlemap_URL))
+    console.log('locationexists',locationExists)
+    if (!locationExists.length) {
+      const newSavedLocation = recievedData.createSavedLocation.location_id
+      console.log('newsavedlocaiton',newSavedLocation)
+      savedLocationsVar([...existingSavedlocation, newSavedLocation])
+    }
   }
   
   const clickHandler = () => {
