@@ -14,10 +14,8 @@ const Alerts: React.FunctionComponent = (): JSX.Element => {
     <div className='alertContainer'>
       <CircleItem
         alerts={filteredAlerts}
+        savedLocations={userLocations}
       />
-      {!userLocations.length ? (
-        <p>You are not following any locations. Save some below to get alerted.</p>
-      ) : null}
     </div>
   );
 };
