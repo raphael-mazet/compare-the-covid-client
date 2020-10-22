@@ -15,7 +15,7 @@ type eventForm = {
   alertLevel: string | undefined;
   alertDate: string | undefined;
   alertLocation: string | undefined;
-  score: number;
+  score: string | undefined;
   searchedLocation: string;
 }
 
@@ -23,7 +23,7 @@ const initialState = {
   alertLevel: undefined,
   alertDate: new Date().toISOString(),
   alertLocation: '',
-  score: 0,
+  score: '0',
   searchedLocation: ''
 }
 
@@ -52,7 +52,7 @@ const Logger: React.FunctionComponent = () => {
     const eventData = {
       alertType: formValues?.alertLevel,
       alertDate: formValues?.alertDate,
-      alertScore: formValues?.score,
+      alertScore: Number(formValues?.score),
       location_id: Number(formValues?.alertLocation),
       created_at: new Date().toISOString(),
       expires_on: new Date(expiryDate).toISOString()
@@ -94,6 +94,14 @@ const Logger: React.FunctionComponent = () => {
       option: 'Confirmed Case'
     }
   ];
+
+  const scoreLevels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(level => (
+    {
+      id: level.toString(),
+      value: level.toString(),
+      option: level.toString()
+    }
+  ));
 
   return (
     <div className='logger-page-wrapper'>
@@ -138,6 +146,18 @@ const Logger: React.FunctionComponent = () => {
                   option: item.name,
                   value: item.id
                 }))}
+                inLineLabel={window.width > 375 ? true : false}
+              />
+            </div>
+            <div className="covid-alert-date">
+              <Select
+                label="Sanitary Rating"
+                required={true}
+                onChange={(e) => handleChange(e.target.value, 'score')}
+                value={formValues?.score}
+                hasDefaultValue={true}
+                placeholder="-- Select Level --"
+                options={scoreLevels}
                 inLineLabel={window.width > 375 ? true : false}
               />
             </div>
