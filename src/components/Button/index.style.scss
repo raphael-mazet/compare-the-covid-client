@@ -20,6 +20,7 @@
 
   &:active {
     box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+    transition: all 0.2s ease-in-out;
   }
 
   &:hover {
@@ -28,8 +29,7 @@
 
   &:disabled {
     cursor: not-allowed;
-    border: 1px solid grey;
-    background-color: transparent;
+    background-color: $color-button-opacity;
     color: grey;
   }
 

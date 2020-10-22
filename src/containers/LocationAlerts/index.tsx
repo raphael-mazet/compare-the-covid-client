@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {selectedLocationsEventsVar} from "../../apolloclient/makevar"; 
 import AlertItem from '../../components/AlertItem'
+import './index.style.scss'
 
 const Alerts: React.FunctionComponent = () => {
   const [alerts, setAlerts] = useState<any>();
@@ -15,7 +16,7 @@ const Alerts: React.FunctionComponent = () => {
     <div>
       {alerts && 
         <>
-        <h1>{alerts.location.name}</h1>
+        <h2>{alerts.location.name}</h2>
         {dataArray && dataArray.map(
           (event:any)=> 
             <AlertItem
