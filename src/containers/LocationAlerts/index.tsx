@@ -16,11 +16,12 @@ const Alerts: React.FunctionComponent = () => {
       {alerts && 
         <>
         <h1>{alerts.location.name}</h1>
-        {dataArray.map(
+        {dataArray && dataArray.map(
           (event:any)=> 
             <AlertItem
               key={event.id}
               alertProps={event}
+              callbackLocationAlerts={()=> null}
             />     
         )}
         </>
