@@ -1,3 +1,5 @@
+import { SavedLocations } from "../../../apolloclient/localstateinterfaces";
+
 export interface FilteredAlerts {
   alertType: string,
   alertNumber: number
@@ -6,4 +8,5 @@ export interface FilteredAlerts {
 
 export interface circleItemProps {
   alerts: FilteredAlerts;
+  savedLocations: SavedLocations;
 }

@@ -92,6 +92,7 @@ const Login: React.FunctionComponent = (props: any) => {
             id='password'
             autoComplete=''
             error=''
+            type='password'
           />
         </form>
         {error && 

@@ -3,15 +3,22 @@ import { circleItemProps } from "./index.interface";
 import "./index.style.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
+import { SavedLocations } from "../../../apolloclient/localstateinterfaces";
 
-const CircleItem = ({alerts}: circleItemProps): JSX.Element | null => {
+const CircleItem = ({alerts, savedLocations}: circleItemProps): JSX.Element | null => {
   const { alertType, alertNumber, isNew } = alerts;
 
   const history = useHistory();
 
-  const displayText = (!isNew) ? 
-  `${alertNumber} covid case${(alertNumber === 1) ? ' was' : 's were'} recently reported in your tracked locations` :
-  `${alertNumber} new ${alertType} case${(alertNumber === 1) ? ' was' : 's were'} reported since you last checked`;
+  let displayText = '';
+
+  if (!savedLocations.length) {
+    displayText = "You are not tracking any locations. Save some below to get alerts"
+  } else if (!isNew) {
+    displayText = `${alertNumber} covid case${(alertNumber === 1) ? ' was' : 's were'} recently reported in your tracked locations`;
+  } else {
+    displayText = `${alertNumber} new ${alertType} case${(alertNumber === 1) ? ' was' : 's were'} reported since you last checked`;
+  }
 
   const clickHandler = () => {
     history.push('/alerts')
