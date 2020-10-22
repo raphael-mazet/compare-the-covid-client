@@ -4,7 +4,7 @@ import LocationInfo from '../../components/LocationInformation';
 import Button from '../../components/Button';
 import getGeolocation from '../../helpers/geolocate';
 // import { addLocation } from '../../helpers/addLocation'
-import { userSearchDataVar, authenticatedUserVar, savedLocationsVar } from '../../apolloclient/makevar'
+import { userSearchDataVar, authenticatedUserVar, savedLocationsVar, userAlertsVar } from '../../apolloclient/makevar'
 import { CREATE_LOCATION, CREATE_SAVED_LOCATION } from '../../apis/graphQL/mutations';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
@@ -40,6 +40,7 @@ const Locations: React.FunctionComponent = () => {
   const [getSearchedLocationId, {data: searchedLocatiomDbData}] = useLazyQuery<any>(GET_LOCATION_BY_URL, {
     onCompleted:LocationAlerts
   })
+
   const [getLocationAlerts, {data: searchedLocationAlertsData}] = useLazyQuery<any>(GET_EVENTS_BY_LOCATION_ID, {
     onCompleted: filterAlerts
   })
@@ -109,12 +110,23 @@ const Locations: React.FunctionComponent = () => {
     });
   } 
 
-  function addSavedLocationToMakeVarHelper (recievedData: any) {
+  async function addSavedLocationToMakeVarHelper (recievedData: any) {
     const existingSavedlocation = savedLocationsVar();
     const locationExists = existingSavedlocation.filter(location=>(location.googlemap_URL === recievedData.createSavedLocation.location_id.googlemap_URL))
     if (!locationExists.length) {
       const newSavedLocation = recievedData.createSavedLocation.location_id
       savedLocationsVar([...existingSavedlocation, newSavedLocation])
+      
+      console.log('recieveddataid',newSavedLocation.id)
+
+      await getLocationAlerts({
+        variables: {
+          location_id: newSavedLocation.id
+        }
+      })
+    
+      const classifiedAlerts = setAlerts(locationAlerts);
+      console.log(classifiedAlerts)
     }
   }
   

@@ -36,7 +36,7 @@ const SavedLocationItem = (props: propTypes): JSX.Element => {
   const alertScore = props.location.events?.map(event=> event.alertScore);
   const eventsNumber = props.location.events && props.location.events.length
   const totalScore = (Number(eventsNumber) > 1) ? alertScore?.reduce((acc, cv) => Number(acc) + Number(cv)) : alertScore;
-  const averageScore = Number(totalScore)/Number(eventsNumber)
+  const averageScore = Math.floor(Number(totalScore)/Number(eventsNumber))
 
   const latestEvent = findLatest(props.location.events)
   const formattedDate = DateTime.fromISO(latestEvent.created_at).toFormat('dd LLL yyyy');

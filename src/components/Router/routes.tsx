@@ -108,6 +108,10 @@ const routes = [
         title: "Home",
         action: "/home",
       },
+      {
+        title: "My Locations",
+        action: "/saved-locations",
+      },
     ],
     component: "LocationAlerts",
   },

@@ -13,6 +13,7 @@ const Alerts: React.FunctionComponent = () => {
     setAlerts(dataToMap);
   },[]);
   
+
   const history = useHistory();
 
   const routeCallback = async (locationData: any) => {
@@ -27,10 +28,12 @@ const Alerts: React.FunctionComponent = () => {
     history.push('/locationalerts');
   }
 
+  const alertsShown = alerts && alerts.filter((alert:any)=>(alert.expires_on > new Date().toISOString()))
+
   return (
     <>
       <h2>Your Alerts</h2>
-      {alerts && alerts.map(
+      {alertsShown && alertsShown.map(
         (location:any)=> 
           <AlertItem
             key={location.id}
