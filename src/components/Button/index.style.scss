@@ -29,8 +29,7 @@
 
   &:disabled {
     cursor: not-allowed;
-    border: 1px solid grey;
-    background-color: transparent;
+    background-color: $color-button-opacity;
     color: grey;
   }
 
