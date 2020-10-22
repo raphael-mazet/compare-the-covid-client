@@ -8,18 +8,22 @@ interface MapMarkerProps {
   text: string;
   onClick?: (e:any) => any;
 }
+const MapMarker = ({ lat, lng, text, onClick }: MapMarkerProps): JSX.Element => {
 
-const MapMarker = ({ lat, lng, text, onClick }: MapMarkerProps): JSX.Element => (
-  <div className='container'>
-    <div className='wrapper'
-      onClick={onClick}
-    >
-      <img className ='alert_icon' src={alert} alt='alerticon'/>
+  const currentLocation = text === 'Current location' ? 'current' : 'alert';
+
+  return (
+    <div className='container'>
+      <div className={['wrapper', currentLocation].join(' ')}
+        onClick={onClick}
+      >
+        {text !== 'Current location' ? <img className='alert_icon' src={alert} alt='alerticon'/> : null}
+      </div>
+      <div className='text'>
+        <p>{text}</p>
+      </div>
     </div>
-    <div className='text'>
-      <p>{text}</p>
-    </div>
-  </div>
-);
+  )
+}
 
 export default MapMarker;
