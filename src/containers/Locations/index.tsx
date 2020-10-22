@@ -13,6 +13,8 @@ import Loading from '../../components/Loading'
 import { GET_EVENTS_BY_LOCATION_ID, GET_LOCATION_BY_URL } from "../../apis/graphQL/queries";
 import filterActiveAndNew from "../../helpers/filterActiveAndNew";
 import { setAlerts } from "../../helpers/setAlerts";
+import useModal from '../../helpers/useModal'
+import Modal from "../../components/Modal";
 
 type Coords = {
   latitude: number | null;
@@ -109,16 +111,15 @@ const Locations: React.FunctionComponent = () => {
 
   function addSavedLocationToMakeVarHelper (recievedData: any) {
     const existingSavedlocation = savedLocationsVar();
-    console.log('recieveddata',recievedData)
     const locationExists = existingSavedlocation.filter(location=>(location.googlemap_URL === recievedData.createSavedLocation.location_id.googlemap_URL))
-    console.log('locationexists',locationExists)
     if (!locationExists.length) {
       const newSavedLocation = recievedData.createSavedLocation.location_id
-      console.log('newsavedlocaiton',newSavedLocation)
       savedLocationsVar([...existingSavedlocation, newSavedLocation])
     }
   }
   
+  const {isShowing, toggleModal, modalText} = useModal();
+
   const clickHandler = () => {
     addLocation(
       {
@@ -131,7 +132,8 @@ const Locations: React.FunctionComponent = () => {
           latitude: searchedLocation.latitude.toString(),
         }
       });
-    alert('location created');
+    const text = 'Your location was added'
+    toggleModal(text)
   }
 
   const getLocationByGeocode = async (coords: any, type: string, item: any) => {
@@ -180,7 +182,7 @@ const Locations: React.FunctionComponent = () => {
     <div className='container_locations'>
       
       <div className="locations_subtitle">
-        <p className="locations_subtitle_text">{searchedLocation?.name ? `You searched for` : `Your location`}</p>
+        <h2 className="locations_subtitle_text">{searchedLocation?.name ? `You searched for` : `Your location`}</h2>
       </div>
       
       <div className='locations_map'>
@@ -198,6 +200,11 @@ const Locations: React.FunctionComponent = () => {
         }
       </div>
       <div className='container_locations_data'>
+      <Modal
+            isShowing={isShowing}
+            hide={toggleModal}
+            text={modalText}
+      />
         <div className='locations_data_text'>
           {locationInfo}
         </div>
