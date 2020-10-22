@@ -22,7 +22,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: green;
+  background-color: white;
   border: 2px solid #fff;
 }
 
@@ -31,6 +31,14 @@
 }
 
 .alert_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid $green;
+}
+
+.first_alert_icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
