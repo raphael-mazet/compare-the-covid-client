@@ -67,12 +67,12 @@ const Login: React.FunctionComponent = (props: any) => {
   }
   
   return (
-    <div className='page-wrapper' >
-      <div className='image-wrapper'>
+    <div className='login_page-wrapper' >
+      <div className='login_image-wrapper'>
         <img src={logo} alt="Logo"/>
       </div>
-      <div className='form-wrapper'>
-        <form className='form-container' onSubmit={(e)=> handleSubmit(e)}>
+      <div className='login_form-wrapper'>
+        <form className='login_form-container' onSubmit={(e)=> handleSubmit(e)}>
           <Input
             label="email"
             required={true}
@@ -97,7 +97,7 @@ const Login: React.FunctionComponent = (props: any) => {
         {error && 
           <span style={{ color: 'red'}}> {error}</span>
         }
-        <div className='button-container'>
+        <div className='login_button-container'>
           <Button
             onClick={(e: any) => handleSubmit(e)}
             content="Submit"
