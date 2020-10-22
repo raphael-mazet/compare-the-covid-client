@@ -166,7 +166,7 @@ const Locations: React.FunctionComponent = () => {
   if (searchedLocation && locationSelectedType === 'searchedLocation') {
     locationInfo = <LocationInfo data={searchedLocation}/>;
   } else {
-    locationInfo = <p> Current Location Displayed </p>;
+    locationInfo = <p> Displaying your current position </p>;
   }
 
   return (

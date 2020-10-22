@@ -1,3 +1,5 @@
+@import '../../../styling/colors.scss';
+
 .wrapper {
   position: absolute;
   top: 50%;
@@ -5,22 +7,30 @@
   width: 20px;
   height: 20px;
   margin-bottom: 5px;
-  background-color: green;
-  border: 2px solid #fff;
+  // background-color: green;
+  // border: 2px solid #fff;
   border-radius: 100%;
   user-select: none;
   cursor: pointer;
   z-index: 4;
   
-  &:hover {
+  &:active {
     z-index: 1;
-    background-color: blue;
+    // background-color: blue;
     animation: bounce 1s;
   };
 }
 
 .text {
   margin-top: 10px;
+}
+
+.alert_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid $redrgba;
 }
 
 @keyframes bounce {
