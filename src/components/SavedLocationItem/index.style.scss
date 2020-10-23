@@ -1,0 +1,100 @@
+@import '../../styling/colors.scss';
+
+.location-container{
+  width: calc(100% - 12px);
+  height: calc(100% - 40px);
+  border-radius: 5px;
+  box-shadow: 0 0 10px 1px #3333;
+  margin: 10px;
+  padding: 10px;
+  justify-content: center;
+  position: relative;
+  background-color: white;
+  font-weight:500;
+
+  &.safe {
+    color: $green;
+  }
+
+  &.mid {
+    color: $yellow;
+  }
+
+  &.high {
+    color: $red;
+  }
+}
+
+.location_container_clickable{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.location_map_container{
+  display: flex;
+  height: 150px;
+  width: 100%;
+  z-index: 2;
+  margin: 0px;
+}
+
+.location_data_container{
+  display: flex;
+  margin: 4px 0 4px 0;
+  padding: 8px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 2;
+
+  p {
+    margin: unset;
+    font-size: 14px;
+    color: $lightGrayFont;
+  }
+
+  span {
+    font-weight: 500;
+    color: $darkGrayFont;
+    font-size: 12px;
+  }
+}
+.location_container_wrapper {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+
+  &.animation {
+    animation: rollOut 0.5s ease-in;
+  }
+}
+
+@keyframes flipInX {
+  0% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  
+  100% {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+@keyframes rollOut {
+  0% {
+     opacity: 1;
+     transform: translateX(0px) rotate(0deg);
+  }
+  100% {
+     opacity: 0;
+     transform: translateX(100%) rotate(120deg);
+  }
+} 

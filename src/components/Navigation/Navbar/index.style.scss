@@ -1,16 +1,21 @@
+@import '../../../styling/colors.scss';
+
 .navbar_container {
   width: calc(100% - 40px);
   height: 60px;
   padding: 5px 20px;
-  background-color: #25BE8B;
+  background-color: $prussianblue;
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  z-index:3;
 }
 
 .navbar_title {
-  color: #23052E;
+  width: 80%;
+  color: white;
   font-size: 30px;
+  font-weight: 600;
   margin: auto;
 }

@@ -1,1 +1,3 @@
-export default (): any => { return null};
+export default (): any => {
+  return null;
+};

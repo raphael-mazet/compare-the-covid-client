@@ -1,0 +1,77 @@
+@import '../../styling/colors.scss';
+@import '../../styling/mixins.scss';
+
+.container_locations {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.locations_subtitle {
+  margin-top: 20px;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.locations_subtitle_text {
+  font-size: 20px;
+}
+
+.locations_map {
+  width: 100%;
+  height: 200px;
+  margin-top: 20px;
+}
+
+.container_locations_data {
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.locations_data_text {
+  height: 100px;
+}
+
+.locations_alerts_container {
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.locations_data_alerts {
+  background-color: white;
+  border-radius: 8px;;
+  box-sizing: border-box;
+  width: 80%;
+  padding: $ruler;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+
+    &.locations_alerts_confirmed {
+      box-shadow: 0px 0px 5px 0px $redrgba;
+      @include locations-pulse-animation(confirmed);
+    }
+
+    &.locations_alerts_suspected {
+      box-shadow: 0px 0px 5px 0px $yellowrgba;
+      @include locations-pulse-animation(suspected);
+    }
+}
+
+.locations_actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.locations_button_container {
+  margin-top: 50px;
+}
+
+@include keyframe-alerts-pulse(confirmed, $redrgba);
+@include keyframe-alerts-pulse(suspected, $yellowrgba);

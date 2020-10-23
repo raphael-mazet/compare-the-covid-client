@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-const GET_LOCATION_BY_URL = gql `
-  query GetLocationbyURL ($googlemap_URL: String!) {
+const GET_LOCATION_BY_URL = gql`
+  query GetLocationbyURL($googlemap_URL: String!) {
     getLocationbyURL(googlemap_URL: $googlemap_URL) {
       id
       name
@@ -12,11 +12,11 @@ const GET_LOCATION_BY_URL = gql `
       latitude
     }
   }
-`
+`;
 
-const GET_LOCATION_BY_ID = gql `
-  query GetLocationbyId ($id: Int!) {
-    getLocationbyId (id: $id) {
+const GET_LOCATION_BY_ID = gql`
+  query GetLocationbyId($id: Int!) {
+    getLocationbyId(id: $id) {
       id
       name
       country
@@ -26,9 +26,6 @@ const GET_LOCATION_BY_ID = gql `
       latitude
     }
   }
-`
+`;
 
-export {
-  GET_LOCATION_BY_URL,
-  GET_LOCATION_BY_ID
-}
+export { GET_LOCATION_BY_URL, GET_LOCATION_BY_ID };

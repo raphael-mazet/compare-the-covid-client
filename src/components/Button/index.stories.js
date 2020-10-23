@@ -1,22 +1,19 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import Button from './index.tsx';
+import React from "react";
+import { action } from "@storybook/addon-actions";
+import Button from "./index.tsx";
 
 export default {
-  title: 'Components/Button',
-  component: Button
+  title: "Components/Button",
+  component: Button,
 };
 
 export const Normal = () => (
-  <Button
-    onClick={action('clicked')}
-    content="text button"
-  />
+  <Button onClick={action("clicked")} content="text button" />
 );
 
 export const Cancel = () => (
   <Button
-    onClick={action('clicked')}
+    onClick={action("clicked")}
     content="text button"
     buttonType="cancel"
   />
@@ -24,16 +21,12 @@ export const Cancel = () => (
 
 export const Confirm = () => (
   <Button
-    onClick={action('clicked')}
+    onClick={action("clicked")}
     content="text button"
     buttonType="confirm"
   />
 );
 
 export const Back = () => (
-  <Button
-    onClick={action('clicked')}
-    content="text button"
-    buttonType="back"
-  />
+  <Button onClick={action("clicked")} content="text button" buttonType="back" />
 );

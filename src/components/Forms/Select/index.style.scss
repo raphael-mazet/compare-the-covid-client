@@ -1,0 +1,75 @@
+@mixin OpaqueBackground($alpha, $color) {
+  background-color: rgba(red($color), green($color), blue($color), $alpha);
+}
+
+@import '../../../styling/colors.scss';
+
+.inputSt {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+  justify-content: center;
+  margin: 4px auto;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: $ruler;
+  background-color:$color-bg;
+  text-shadow: 1px 1px 0 $color-white;
+
+  i {
+    width: 12px;
+    height: 8px;
+    position: absolute;
+    right: 12px;
+    bottom: 24px;
+    pointer-events: none;
+  }
+
+  select {
+    border: 0;
+    padding: $ruler/1.25;
+    border-radius: $ruler*20;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: inset 2px 2px 5px $color-shadow, inset -5px -5px 10px $color-white;
+    background-color:$color-bg;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.2px;
+    font-size: $ruler/1.25;
+    text-shadow: 1px 1px 1px $color-white;
+    background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='24' height='24' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='black'/></g></svg>")
+      no-repeat;
+    background-position: right 5px top 50%;
+
+    option {
+      margin: auto;
+      max-width: 100%;
+      border: 1px solid $brightblue;
+    }
+
+    &.error {
+      border: 2px solid #f94144;
+      @include OpaqueBackground(0.3, #f94144);
+    }
+  }
+
+  &.inLine {
+    flex-direction: row;
+  }
+}
+
+.label {
+  text-transform: uppercase;
+  padding: 5px;
+  margin: auto 1px;
+  padding-left: 20px;
+}
+
+.errorText {
+  margin: 3px auto;
+  color: #f94144;
+  width: max-content;
+}

@@ -1,0 +1,26 @@
+$size: 20px;
+
+.x, .y {
+  width: $size;
+  height: $size;
+}
+
+.x {
+  animation: x 10s linear infinite alternate;
+}
+
+.y {
+  animation: y 7s linear infinite alternate;
+}
+
+@keyframes x {
+  100% {
+    transform: translateX( calc(10vw - #{$size}) );
+  }
+}
+
+@keyframes y {
+  100% {
+    transform: translateY( calc(10vh - #{$size}) );
+  }
+}

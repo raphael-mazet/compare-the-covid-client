@@ -1,32 +1,46 @@
+@import '../../styling/colors.scss';
+
 .button {
-  color: #46AF8F;
-  background-color: transparent;
-  border-radius: 20px;
-  border: 2px solid #46AF8F;
-  padding: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: $ruler;
+  color: $color-button;
+  font-weight: 600;
+  border: 0;
+  outline: 0;
+  font-size: $ruler;
+  border-radius: $ruler*20;
+  padding: $ruler;
+  background-color:$color-bg;
+  text-shadow: 1px 1px 0 $color-white;
+  box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
-  outline: unset;
-  text-transform: capitalize;
+  width: calc(100% - 20px);
+
+  &:active {
+    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+    transition: all 0.2s ease-in-out;
+  }
 
   &:hover {
-    color: #296654;
-    border: 2px solid #2F7560;
-    background-color: transparent;
+    box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
   }
 
   &:disabled {
     cursor: not-allowed;
-    background-color: grey;
+    background-color: $color-button-opacity;
     color: grey;
   }
 
   &.cancel {
     color: white;
-    background-color: #F94144;
+    background-color: transparent;
     border: unset;
+    box-shadow: none;
 
     &:hover {
-      background-color:  #9E0507;
+      background-color: #9e0507;
     }
 
     &:disabled {
@@ -36,13 +50,13 @@
     }
   }
 
-  &.confirm{
+  &.confirm {
     color: white;
-    background-color: #46AF8F;
+    background-color: #46af8f;
     border: unset;
 
     &:hover {
-      background-color: #2F7560;
+      background-color: #2f7560;
     }
 
     &:disabled {
@@ -52,13 +66,30 @@
     }
   }
 
-  &.back{
+  &.back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0px;
     color: white;
-    background-color: #5D7A98;
-    border: unset;
+    text-shadow: none;
+    overflow: visible;
+    text-align: center;
+    opacity: 1;
+    background-color: $color-button-opacity;
+    box-shadow: none;
+    padding: 0;
+    // transition: all 0.5s ease-in-out;
+    letter-spacing: 0.25px;
+    overflow-wrap: unset;
+    white-space: nowrap;
+    text-transform: uppercase;
 
-    &:hover {
-      background-color: #313E49;
+    &.animation {
+      animation: fadeTextout 0.5s; 
     }
 
     &:disabled {
@@ -66,5 +97,14 @@
       background-color: grey;
       color: grey;
     }
+  }
+}
+
+@keyframes fadeTextout {
+  0% {
+    color: white;
+  }
+  100% {
+    color: transparent;
   }
 }
