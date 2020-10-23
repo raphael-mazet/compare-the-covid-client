@@ -1,0 +1,65 @@
+@import '../../../styling/colors.scss';
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+  border-radius: 100%;
+  user-select: none;
+  cursor: pointer;
+  z-index: 4;
+
+  &:active {
+    z-index: 1;
+    animation: bounce 1s;
+  };
+}
+
+.current {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #fff;
+}
+
+.text {
+  margin-top: 10px;
+}
+
+.alert_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid $redrgba;
+}
+
+.first_alert_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid $green;
+}
+
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-5px);
+		transform: translateY(-5px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-2px);
+		transform: translateY(-2px);
+	}
+}

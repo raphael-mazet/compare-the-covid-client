@@ -1,0 +1,53 @@
+@import '../../styling/colors.scss';
+
+.login_form-container {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-evenly;
+}
+
+.login_form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 90px 0;
+  height: 50%;
+}
+
+.login_image-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  max-height: 100px;
+  animation: appear 2s;
+  margin-top: 50px;
+}
+
+.login_page-wrapper {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  height: 100%; 
+  width: 100%;
+  overflow-y: auto;
+  min-height: 300px;
+}
+
+.login_button-container {
+  margin: auto; 
+  margin-top: 20px;
+  width: 200px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}

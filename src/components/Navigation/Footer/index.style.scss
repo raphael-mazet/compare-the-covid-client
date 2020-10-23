@@ -1,12 +1,22 @@
+@import '../../../styling/colors.scss';
+
 .footer_container {
   display: flex;
   flex-direction: row;
   padding: 5px 20px;
   width: calc(100% - 40px);
   height: 60px;
-  justify-content: 'center';
-  background-color: #3BCEAC;
-  position: absolute;
+  justify-content: "center";
+  background-color: $darkGrayFont;
+  position: fixed;
   bottom: 0;
   left: 0;
+  z-index:2;
+}
+
+.actions {
+  width: 170px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }

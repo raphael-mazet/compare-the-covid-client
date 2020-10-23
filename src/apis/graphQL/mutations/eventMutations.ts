@@ -1,13 +1,15 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
+
+//TODO: add an update event mutation
 const CREATE_EVENT = gql `
   mutation CreateEvent (
     $alertType: String!,
-    $alertDate: String!, 
+    $alertDate: DateScalar!, 
     $alertScore: Int!,
     $location_id: Int,
-    $created_at: String!,
-    $expires_on: String!
+    $created_at: DateScalar!,
+    $expires_on: DateScalar!
   ){
     createEvent (
       alertType: $alertType, 
@@ -34,8 +36,6 @@ const CREATE_EVENT = gql `
       expires_on
     }
   }
-`
+`;
 
-export {
-  CREATE_EVENT
-}
+export { CREATE_EVENT };

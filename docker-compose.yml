@@ -6,7 +6,7 @@ services:
     volumes:
       - "/myapp/node_modules"
       - "./:/myapp"
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
     ports:

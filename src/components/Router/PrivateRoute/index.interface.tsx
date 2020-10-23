@@ -1,6 +1,6 @@
 export default interface PrivateRouteProps {
-  component: any
-  isAuthenticated?: boolean
-  exact?: boolean
-  path: string
+  component: any;
+  isAuthenticated?: boolean;
+  exact?: boolean;
+  path: string;
 }

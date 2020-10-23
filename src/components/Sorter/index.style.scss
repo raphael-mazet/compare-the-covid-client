@@ -1,0 +1,18 @@
+@import '../../styling/colors.scss';
+
+.sorter_container {
+  background-color: white;
+  border-radius: 8px;;
+  box-sizing: border-box;
+  width: 80%;
+  padding: $ruler;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.sorter_element {
+  background-color: $honeydew;
+
+  &.active {
+    background-color: blue;
+  }
+}

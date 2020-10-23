@@ -1,0 +1,47 @@
+@import '../../styling/colors.scss';
+
+
+.logger-page-wrapper {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  margin: 0 auto;
+  min-height: 250px;
+  max-width: 700px;
+}
+
+.logger-explain {
+  margin: 20px $ruler;
+}
+
+.logger-explain-text {
+  font-size: 22px;
+  line-height: 150%;
+}
+
+.logger-form-wrapper {
+  margin: 0px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 80%;
+}
+
+.logger-form-container {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.covid-alert-date {
+  margin: 10px 0;
+}
+
+.logger-button-container {
+  margin: auto; 
+  margin-top: 40px;
+  width: 200px;
+}

@@ -1,0 +1,20 @@
+@import '../../styling/colors.scss';
+
+.closeIcon_container {
+  display: flex;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50px;
+  background-color: $prussianblue;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.closeIcon_asset {
+  height: 16px;
+  width: 16px;
+}

@@ -1,87 +1,130 @@
 const routes = [
   {
-    title: 'Home',
-    to: '/home',
+    title: "Home",
+    to: "/home",
     exact: true,
     isPrivate: true,
-    footerActions: [],
-    component: 'Homepage'
+    footerActions: [
+      {
+        title: 'Check-in',
+        action: '/locations'
+      },
+      {
+        title: "My Locations",
+        action: "/saved-locations",
+      }
+    ],
+    component: "Homepage",
   },
   {
-    title: 'Login',
-    to: '/login',
+    title: "Login",
+    to: "/login",
     exact: false,
     isPrivate: false,
     footerActions: [
       {
-        title: 'Sign Up',
-        action: '/sign-up'
+        title: "Sign Up",
+        action: "/sign-up",
       }
     ],
-    component: 'Login'
+    component: "Login",
   },
   {
-    title: 'User Registration',
-    to: '/sign-up',
+    title: "Register",
+    to: "/sign-up",
     exact: false,
     isPrivate: false,
     footerActions: [
       {
-        title: 'Login',
-        action: '/login'
-      }
+        title: "Login",
+        action: "/login",
+      },
     ],
-    component: 'Register'
+    component: "Register",
   },
   {
-    title: 'My Locations',
-    to: '/locations',
+    title: "My Locations",
+    to: "/locations",
     exact: false,
     isPrivate: true,
     footerActions: [
       {
-        title: 'Home',
-        action: '/home'
+        title: "Home",
+        action: "/home",
+      },
+      {
+        title: "Log a Case",
+        action: "/log-case"
       }
     ],
-    component: 'Locations'
+    component: "Locations",
   },
   {
-    title: 'My Alerts',
-    to: '/alerts',
+    title: "My Alerts",
+    to: "/alerts",
     exact: true,
     isPrivate: true,
     footerActions: [
       {
-        title: 'Home',
-        action: '/home'
-      }
+        title: "Home",
+        action: "/home",
+      },
     ],
-    component: 'Alerts'
+    component: "Alerts",
   },
   {
-    title: 'Log a Covid',
-    to: '/log-case',
+    title: "Log a Covid",
+    to: "/log-case",
     exact: true,
     isPrivate: true,
     footerActions: [
       {
-        title: 'Home',
-        action: '/home'
-      }
+        title: "Home",
+        action: "/home",
+      },
     ],
-    component: 'Logger'
+    component: "Logger",
   },
   {
-    title: 'Page Not Found',
-    to: '/404-not-found',
+    title: "My Locations",
+    to: "/saved-locations",
+    exact: true,
+    isPrivate: true,
+    footerActions: [
+      {
+        title: "Home",
+        action: "/home",
+      },
+    ],
+    component: 'SavedLocations'
+  },
+  {
+    title: "Location Alerts",
+    to: "/locationalerts",
+    exact: true,
+    isPrivate: true,
+    footerActions: [
+      {
+        title: "Home",
+        action: "/home",
+      },
+      {
+        title: "My Locations",
+        action: "/saved-locations",
+      },
+    ],
+    component: "LocationAlerts",
+  },
+  {
+    title: "Page Not Found",
+    to: "/404-not-found",
     exact: true,
     isPrivate: false,
     footerActions: [
       {
-        title: 'Home',
-        action: '/home'
-      }
+        title: "Home",
+        action: "/home",
+      },
     ],
     component: '404'
   }

@@ -4,12 +4,11 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-
   lint:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -26,6 +25,6 @@ jobs:
       # Run linter
       - name: Run the linter
         run: npm run lint
-        
+
       - name: Run tests
         run: npm run test
