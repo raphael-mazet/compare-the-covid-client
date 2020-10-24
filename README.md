@@ -36,6 +36,7 @@ npm run build
 * [React Router](https://reactrouter.com/) - routing and navigation for React apps
 * [Apollo client](https://www.apollographql.com/docs/react/) - state management
 * [Storybook](https://storybook.js.org/) - open source tool for developing UI components in isolation
+* [Docker](https://www.docker.com/) - virtualisation service to deliver software in containers
 * [Sass](https://sass-lang.com/) - CSS extension language and preprocessor
 * [Google maps platform](https://developers.google.com/maps/documentation) - geo-location API
 
