@@ -16,6 +16,8 @@ Check if a location is safe to travel to, get alerts if you've been exposed to C
 
 ## Getting started
 
+Run the *Compare the Covid* [backend server](https://github.com/raphael-mazet/compare-the-covid-server)
+
 Run the app in development mode (open http://localhost:3000/login to view in browser) <br/>
 ```
 npm install
